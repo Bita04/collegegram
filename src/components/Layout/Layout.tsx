@@ -1,7 +1,14 @@
-// @flow
+
 import * as React from "react";
 import { Flex } from "@chakra-ui/react";
-type Props = {};
-export const Layout = (props: Props) => {
-  return <Flex width="100%" height="100vh" backgroundColor="#F3F0EE"></Flex>;
+import { Footer } from "../Footer/Footer";
+
+export const Layout = ({children}: {
+  children: React.ReactNode;
+}) => {
+  
+  return <Flex flexDirection='column' justifyContent='flex-end'  width="100%" minHeight='100vh' backgroundColor="#F3F0EE">
+    {children}
+    <Footer />
+  </Flex>;
 };
