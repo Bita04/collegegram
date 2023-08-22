@@ -12,7 +12,6 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       backgroundColor="#F3F0EE"
     >
       {children}
-      <Footer />
     </Flex>
   );
 };
