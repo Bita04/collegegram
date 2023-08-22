@@ -1,7 +1,22 @@
 import { Input, InputGroup, InputLeftElement, Stack } from "@chakra-ui/react";
 import passwordSvg from "../../../../public/assets/images/key.svg";
+type InputTypes =
+  | "text"
+  | "password"
+  | "email"
+  | "number"
+  | "tel"
+  | "url"
+  | "search"
+  | "date"
+  | "time"
+  | "datetime-local"
+  | "month"
+  | "week"
+  | "color";
+
 type Props = {
-  type: string;
+  type: InputTypes;
   icon: string;
   placeHolder: string;
   width: number;
