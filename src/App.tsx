@@ -6,12 +6,18 @@ import { Layout } from "./components/Layout/Layout";
 import { ChakraProvider } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
 import { RtlProvider } from "./components/rtl-provider";
+import { Footer } from "./components/Footer/Footer";
 const theme = extendTheme();
 function App() {
   return (
     <ChakraProvider>
       <RtlProvider>
-        <Layout />
+        <Layout>
+        
+          <Footer />
+        </Layout>
+        
+
       </RtlProvider>
     </ChakraProvider>
   );

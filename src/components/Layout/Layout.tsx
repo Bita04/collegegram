@@ -9,6 +9,5 @@ export const Layout = ({children}: {
   
   return <Flex flexDirection='column' justifyContent='flex-end'  width="100%" minHeight='100vh' backgroundColor="#F3F0EE">
     {children}
-    <Footer />
   </Flex>;
 };
