@@ -5,13 +5,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
 import { RtlProvider } from "./components/rtl-provider";
 import Login from "./pages/Login";
-const theme = extendTheme({
-  colors: {
-    primary: {
-      100: '#C19008",',
-    },
-  },
-});
+const theme = extendTheme();
 function App() {
   return (
     <ChakraProvider>
