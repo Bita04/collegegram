@@ -8,13 +8,8 @@ import Login from "./pages/Login";
 const theme = extendTheme();
 function App() {
   return (
-    <ChakraProvider>
-      <RtlProvider>
-        <Layout>
-          <Login />
-        </Layout>
-      </RtlProvider>
-    </ChakraProvider>
+    <>
+    </>
   );
 }
 
