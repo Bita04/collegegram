@@ -1,5 +1,4 @@
 import { Input, InputGroup, InputLeftElement, Stack } from "@chakra-ui/react";
-import passwordSvg from "../../../../public/assets/images/key.svg";
 type InputTypes =
   | "text"
   | "password"
@@ -20,6 +19,7 @@ type Props = {
   icon: string;
   placeHolder: string;
   width: number;
+  className?: string;
 };
 
 function InputText(props: Props) {
@@ -28,15 +28,15 @@ function InputText(props: Props) {
       <Stack width={props.width} spacing={10}>
         <InputGroup>
           <InputLeftElement pointerEvents="none">
-            <img src={passwordSvg} alt="" />
+            <img src={props.icon} alt="" />
           </InputLeftElement>
           <Input
-            dir="auto"
             backgroundColor={"#fff"}
             borderColor={"#CDCDCD"}
             borderRadius={16}
             type={props.type}
             placeholder={props.placeHolder}
+            className={props.className}
           />
         </InputGroup>
       </Stack>

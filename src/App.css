@@ -119,3 +119,31 @@
 .read-the-docs {
   color: #888;
 }
+
+.margin-bottom-32{
+  margin-bottom: 32px;
+}
+.chakra-checkbox__control{
+  background-color: #fff;
+}
+
+
+.btn-g{
+  border-radius: 16px!important;
+  padding: 8px 26px;
+  font-weight: 400;
+}
+
+.btn-primary{
+  background-color: #C19008!important;
+  color: #fff!important;
+  
+}
+.btn-disabled {
+  color: #A5A5A5!important;
+}
+
+.color-primary{
+  color: #C19008!important;
+}
+

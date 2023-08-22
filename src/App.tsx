@@ -4,14 +4,20 @@ import { Layout } from "./components/Layout/Layout";
 import { ChakraProvider } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
 import { RtlProvider } from "./components/rtl-provider";
-import InputText from "./components/ui/input/inputText";
-const theme = extendTheme();
+import Login from "./pages/Login";
+const theme = extendTheme({
+  colors: {
+    primary: {
+      100: '#C19008",',
+    },
+  },
+});
 function App() {
   return (
     <ChakraProvider>
       <RtlProvider>
         <Layout>
-          <h1>Hello!</h1>
+          <Login />
         </Layout>
       </RtlProvider>
     </ChakraProvider>
