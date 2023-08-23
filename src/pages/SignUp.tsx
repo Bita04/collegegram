@@ -9,6 +9,9 @@ import { Footer } from "../components/Footer/Footer";
 import { Layout } from "../components/Layout/Layout";
 import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form"
+import gmailSignUp from "/assets/images/gmailSignUp.png";
+import memeberSignUp from "/assets/images/memberSignUp.svg";
+import keySignUp from "/assets/images/KeySignUp.svg";
 type Inputs = {
   username: string;
   email: string;
@@ -52,7 +55,7 @@ function SignUp() {
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col" action="">
             <InputText
             register={register("username", { required: true })} 
-              icon={passwordSvg}
+              icon={memeberSignUp}
               placeHolder="نام کاربری"
               type="text"
               width={320}
@@ -60,7 +63,7 @@ function SignUp() {
             />
             <InputText
             register={register("email", { required: true })} 
-              icon={passwordSvg}
+              icon={gmailSignUp}
               placeHolder="ایمیل"
               type="text"
               width={320}
@@ -68,7 +71,7 @@ function SignUp() {
             />
             <InputText
             register={register("password", { required: true })} 
-              icon={passwordSvg}
+              icon={keySignUp}
               placeHolder="رمز عبور"
               type="password"
               width={320}
@@ -77,7 +80,7 @@ function SignUp() {
             />
             <InputText
             register={register("confirmPassword", { required: true })} 
-              icon={passwordSvg}
+              icon={keySignUp}
               placeHolder="تکرار رمز عبور"
               type="password"
               width={320}

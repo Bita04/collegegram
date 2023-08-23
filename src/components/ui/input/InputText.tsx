@@ -24,6 +24,7 @@ type Props = {
   className?: string;
   register: UseFormRegisterReturn; 
   
+  
 }
 
 function InputText(props: Props) {
@@ -32,7 +33,7 @@ function InputText(props: Props) {
       <Stack width={props.width} spacing={10}>
         <InputGroup>
           <InputLeftElement pointerEvents="none">
-            <img src={props.icon} alt="" />
+            <img width={16} height={16} src={props.icon} alt="" />
           </InputLeftElement>
           <Input
 

@@ -2,7 +2,7 @@ import { Container, Checkbox, Divider } from "@chakra-ui/react";
 import logo from "/assets/images/logo.png";
 import InputText from "../components/ui/input/InputText";
 import passwordSvg from "/assets/images/key.svg";
-import mailSvg from "/assets/images/mail.svg";
+import mailPng from "/assets/images/gmail.png";
 import ButtonText from "../components/ui/button/Button";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { HStack } from "@chakra-ui/react";
@@ -50,7 +50,7 @@ function Login() {
           </HStack>
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col" action="">
             <InputText
-              icon={passwordSvg}
+              icon={mailPng}
               placeHolder="نام کاربری یا ایمیل"
               type="text"
               width={320}
@@ -79,9 +79,9 @@ function Login() {
               <ChevronLeftIcon /> رمز عبورم را فراموش کردم
             </a>
 
-            <a href="#" className="my-5 color-primary">
+            <Link to="/signup" className="my-5 color-primary">
               <ChevronLeftIcon /> ثبت نام در کالج گرام
-            </a>
+            </Link>
           </form>
         </Container>
         <Footer />
