@@ -6,6 +6,7 @@ import ButtonText from "../components/ui/button/button";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { HStack } from "@chakra-ui/react";
 import { Footer } from "../components/Footer/Footer";
+import { TreeIcon } from "../icons/TreeIcon";
 
 function Login() {
   return (
@@ -14,7 +15,6 @@ function Login() {
         display={"flex"}
         flexDirection={"column"}
         alignItems={"center"}
-        marginBottom="20"
       >
         <img src={logo} width={68} className="my-10" />
         <HStack borderColor="#587052" height={10} className="mb-10">
@@ -56,7 +56,9 @@ function Login() {
           </a>
         </form>
       </Container>
-      <Footer />
+      <Footer>
+        <TreeIcon />
+      </Footer>
     </>
   );
 }

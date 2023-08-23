@@ -5,13 +5,15 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
 import { RtlProvider } from "./components/rtl-provider";
 import Login from "./pages/Login";
+import Error from "./pages/Error";
+import ForgetPassword from "./pages/ForgetPassword";
 const theme = extendTheme();
 function App() {
   return (
     <ChakraProvider>
       <RtlProvider>
         <Layout>
-          <Login />
+          <ForgetPassword />
         </Layout>
       </RtlProvider>
     </ChakraProvider>
