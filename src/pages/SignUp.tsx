@@ -8,8 +8,24 @@ import { HStack } from "@chakra-ui/react";
 import { Footer } from "../components/Footer/Footer";
 import { Layout } from "../components/Layout/Layout";
 import { Link } from "react-router-dom";
+import { useForm, SubmitHandler } from "react-hook-form"
+type Inputs = {
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+
+  
+}
 
 function SignUp() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>()
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
   return (
     <>
       <Layout>
@@ -33,8 +49,9 @@ function SignUp() {
               ثبت نام در کالج گرام
             </Link>
           </HStack>
-          <form className="flex flex-col" action="">
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col" action="">
             <InputText
+            register={register("username", { required: true })} 
               icon={passwordSvg}
               placeHolder="نام کاربری"
               type="text"
@@ -42,6 +59,7 @@ function SignUp() {
               className="margin-bottom-32"
             />
             <InputText
+            register={register("email", { required: true })} 
               icon={passwordSvg}
               placeHolder="ایمیل"
               type="text"
@@ -49,13 +67,16 @@ function SignUp() {
               className="margin-bottom-32"
             />
             <InputText
+            register={register("password", { required: true })} 
               icon={passwordSvg}
               placeHolder="رمز عبور"
               type="password"
               width={320}
               className="margin-bottom-32"
+              
             />
             <InputText
+            register={register("confirmPassword", { required: true })} 
               icon={passwordSvg}
               placeHolder="تکرار رمز عبور"
               type="password"

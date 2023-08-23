@@ -8,10 +8,23 @@ import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { HStack } from "@chakra-ui/react";
 import { Footer } from "../components/Footer/Footer";
 import { Layout } from "../components/Layout/Layout";
+import { useForm, SubmitHandler } from "react-hook-form"
 
 import { Link } from "react-router-dom";
+type Inputs = {
+  username: string
+  password: string
+}
 
 function Login() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>()
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+  
   return (
     <>
       <Layout>
@@ -35,20 +48,23 @@ function Login() {
               ثبت نام در کالج گرام
             </Link>
           </HStack>
-          <form className="flex flex-col" action="">
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col" action="">
             <InputText
               icon={passwordSvg}
               placeHolder="نام کاربری یا ایمیل"
               type="text"
               width={320}
               className="margin-bottom-32"
+              register={register("username", { required: true })} 
             />
             <InputText
+            
               icon={passwordSvg}
               placeHolder="رمز عبور"
               type="password"
               width={320}
               className="margin-bottom-32"
+              register={register("password", { required: true })} 
             />
             <Checkbox color={"#2B2B2B"}>مرا به خاطر بسپار</Checkbox>
 
