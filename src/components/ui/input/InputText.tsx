@@ -27,23 +27,23 @@ type Props = {
   
 }
 
-function InputText(props: Props) {
+function InputText({type, icon, placeHolder, width, className, register}: Props) {
   return (
     <>
-      <Stack width={props.width} spacing={10}>
+      <Stack width={width} spacing={10}>
         <InputGroup>
           <InputLeftElement pointerEvents="none">
-            <img width={16} height={16} src={props.icon} alt="" />
+            <img width={16} height={16} src={icon} alt="" />
           </InputLeftElement>
           <Input
 
-            {...props.register}
+            {...register}
             backgroundColor={"#fff"}
             borderColor={"#CDCDCD"}
             borderRadius={16}
-            type={props.type}
-            placeholder={props.placeHolder}
-            className={props.className}
+            type={type}
+            placeholder={placeHolder}
+            className={className}
           />
         </InputGroup>
       </Stack>
