@@ -9,20 +9,31 @@ import { HStack } from "@chakra-ui/react";
 import { Footer } from "../components/Footer/Footer";
 import { Layout } from "../components/Layout/Layout";
 import { useForm, SubmitHandler } from "react-hook-form"
-
+import { object, string, number, date, InferType } from "yup";
+import useYupValidationResolver from "../hooks/useYupValidationResolver";
+import * as Yup from "yup";
 import { Link } from "react-router-dom";
 type Inputs = {
   username: string
   password: string
 }
 
+const validationSchema = object({
+  username: string()
+    .min(3)
+    .matches(/^(?:\w+|\w+([+\.-]?\w+)*@\w+([\.-]?\w+)*(\.[a-zA-z]{2,4})+)$/)
+    .required(),
+  password: string().trim().required().min(8).max(20),
+});
+
 function Login() {
+  const resolver = useYupValidationResolver(validationSchema);
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Inputs>()
+  } = useForm<Inputs>({ resolver})
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
   
   return (
@@ -57,6 +68,18 @@ function Login() {
               className="margin-bottom-32"
               register={register("username", { required: true })} 
             />
+            {errors.username && (
+              <span className="text-red-500 mr-4 text-[13px] -mt-4 mb-4">
+                
+                {errors.username.type === "required"
+                  ? "نام کاربری را وارد کنید"
+                  : errors.username.type === "min"
+                  ? "نام کاربری حداقل شامل سه کاراکتر باید باشد"
+                  : errors.username.type === "matches"
+                  ? "نام کاربری یا ایمیل را در فرمت درست وارد کنید"
+                  : ""}
+              </span>
+            )}
             <InputText
             
               icon={passwordSvg}
@@ -66,6 +89,19 @@ function Login() {
               className="margin-bottom-32"
               register={register("password", { required: true })} 
             />
+            {errors.password && (
+              <span className="text-red-500 mr-4 text-[13px] -mt-4 mb-4">
+                
+                {errors.password.type === "required"
+                  ? "رمز عبور را وارد کنید"
+                  : errors.password.type === "min"
+                  ? "رمز عبور حداقل شامل هشت کاراکتر باید باشد"
+                  : errors.password.type === "max"
+                  ? "رمز عبور حداکثر شامل بیست کاراکتر باید باشد"
+                  : errors.password.type}
+              </span>
+            )}
+
             <Checkbox color={"#2B2B2B"}>مرا به خاطر بسپار</Checkbox>
 
             <ButtonText
