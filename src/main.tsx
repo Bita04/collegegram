@@ -8,8 +8,13 @@ import Login from "./pages/Login.tsx";
 import { ChakraProvider } from "@chakra-ui/react";
 import { RtlProvider } from "./components/rtl-provider.tsx";
 import SignUp from "./pages/SignUp.tsx";
+import { NewPost } from "./components/NewPost/NewPost.tsx";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <NewPost />,
+  },
   {
     path: "/login",
     element: <Login />,
