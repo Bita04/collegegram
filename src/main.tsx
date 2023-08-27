@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
@@ -8,6 +7,8 @@ import Login from "./pages/Login.tsx";
 import { ChakraProvider } from "@chakra-ui/react";
 import { RtlProvider } from "./components/rtl-provider.tsx";
 import SignUp from "./pages/SignUp.tsx";
+import ForgetPassword from "./pages/ForgetPassword.tsx";
+import Error from "./pages/Error.tsx";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,14 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
+  },
+  {
+    path: "/forget-password",
+    element: <ForgetPassword />,
+  },
+  {
+    path: "/error",
+    element: <Error title="Not Found" subTitle="test" > It's failed </Error>,
   },
 ]);
 
