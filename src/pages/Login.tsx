@@ -20,10 +20,10 @@ type Inputs = {
 
 const validationSchema = object({
   username: string()
-    .min(3)
-    .matches(/^(?:\w+|\w+([+\.-]?\w+)*@\w+([\.-]?\w+)*(\.[a-zA-z]{2,4})+)$/)
-    .required(),
-  password: string().trim().required().min(8).max(20),
+    .min(3,"نام کاربری حداقل شامل سه کاراکتر باید باشد")
+    .matches(/^(?:\w+|\w+([+\.-]?\w+)*@\w+([\.-]?\w+)*(\.[a-zA-z]{2,4})+)$/, "نام کاربری یا ایمیل را در فرمت درست وارد کنید")
+    .required("نام کاربری را وارد کنید"),
+  password: string().trim().required("رمز عبور را وارد کنید").min(8, "رمز عبور حداقل شامل هشت کاراکتر باید باشد").max(20, "رمز عبور حداکثر شامل بیست کاراکتر باید باشد")
 });
 
 function Login() {

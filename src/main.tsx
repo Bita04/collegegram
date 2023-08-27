@@ -9,7 +9,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { RtlProvider } from "./components/rtl-provider.tsx";
 import SignUp from "./pages/SignUp.tsx";
 import { NewPost } from "./components/NewPost/NewPost.tsx";
-
+import { theme } from './themes/Theme.ts';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <RtlProvider>
         <RouterProvider router={router} />
       </RtlProvider>
