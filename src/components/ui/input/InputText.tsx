@@ -1,4 +1,6 @@
 import { Input, InputGroup, InputLeftElement, Stack } from "@chakra-ui/react";
+import { UseFormRegisterReturn } from "react-hook-form"; // نوع UseFormRegisterReturn را وارد کنید
+
 type InputTypes =
   | "text"
   | "password"
@@ -15,28 +17,31 @@ type InputTypes =
   | "color";
 
 type Props = {
-  type: InputTypes;
-  icon: string;
-  placeHolder: string;
+  type: InputTypes; 
+  icon?: string;
+  placeHolder?: string;
   width: number;
   className?: string;
-};
+  register: UseFormRegisterReturn;
+}
 
-function InputText(props: Props) {
+function InputText({type, icon, placeHolder="", width, className, register}: Props) {
   return (
     <>
-      <Stack width={props.width} spacing={10}>
+      <Stack width={width} spacing={10}>
         <InputGroup>
           <InputLeftElement pointerEvents="none">
-            <img src={props.icon} alt="" />
+            <img width={16} height={16} src={icon} alt="" />
           </InputLeftElement>
           <Input
+
+            {...register}
             backgroundColor={"#fff"}
             borderColor={"#CDCDCD"}
             borderRadius={16}
-            type={props.type}
-            placeholder={props.placeHolder}
-            className={props.className}
+            type={type}
+            placeholder={placeHolder}
+            className={className}
           />
         </InputGroup>
       </Stack>
