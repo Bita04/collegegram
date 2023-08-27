@@ -17,13 +17,13 @@ import useYupValidationResolver from "../hooks/useYupValidationResolver";
 import * as Yup from "yup";
 const validationSchema = object({
   username: string()
-    .min(3)
-    .matches(/^[a-zA-Z0-9][a-zA-Z0-9\_]*$/)
-    .required(),
+    .min(3, "نام کاربری حداقل شامل سه کاراکتر باید باشد")
+    .matches(/^[a-zA-Z0-9][a-zA-Z0-9\_]*$/, "نام کاربری را در فرمت درست وارد کنید")
+    .required("نام کاربری را وارد کنید"),
 
-  email: string().email().required(),
-  password: string().trim().required().min(8).max(20),
-  confirmPassword: string().trim().required().min(8).max(20).oneOf([Yup.ref("password")], "رمز عبور با تکرار آن یکسان نیست"),
+  email: string().email("ایمیل را در فرمت درست وارد کنید").required("ایمیل را وارد کنید"),
+  password: string().trim().required("رمز عبور را وارد کنید").min(8, "رمز عبور حداقل شامل هشت کاراکتر باید باشد").max(20, "رمز عبور حداکثر شامل بیست کاراکتر باید باشد"),
+  confirmPassword: string().trim().required("رمز عبور را وارد کنید").min(8, "رمز عبور حداقل شامل هشت کاراکتر باید باشد").max(20, "رمز عبور حداکثر شامل بیست کاراکتر باید باشد").oneOf([Yup.ref("password")], "رمز عبور با تکرار آن یکسان نیست"),
 });
 
 type Inputs = {
@@ -81,13 +81,7 @@ function SignUp() {
             {errors.username && (
               <span className="text-red-500 mr-4 text-[13px] -mt-4 mb-4">
                 
-                {errors.username.type === "required"
-                  ? "نام کاربری را وارد کنید"
-                  : errors.username.type === "min"
-                  ? "نام کاربری حداقل شامل سه کاراکتر باید باشد"
-                  : errors.username.type === "matches"
-                  ? "نام کاربری را در فرمت درست وارد کنید"
-                  : ""}
+                {errors.username.message}
               </span>
             )}
             <InputText
@@ -100,12 +94,7 @@ function SignUp() {
             />
              {errors.email && (
               <span className="text-red-500 mr-4 text-[13px] -mt-4 mb-4">
-                
-                {errors.email.type === "required"
-                  ? "ایمیل را وارد کنید"
-                  : errors.email.type === "email"
-                  ? "ایمیل را در فرمت درست وارد کنید"
-                  : ""}
+                {errors.email.message}
               </span>
             )}
 
@@ -120,13 +109,7 @@ function SignUp() {
             {errors.password && (
               <span className="text-red-500 mr-4 text-[13px] -mt-4 mb-4">
                 
-                {errors.password.type === "required"
-                  ? "رمز عبور را وارد کنید"
-                  : errors.password.type === "min"
-                  ? "رمز عبور حداقل شامل هشت کاراکتر باید باشد"
-                  : errors.password.type === "max"
-                  ? "رمز عبور حداکثر شامل بیست کاراکتر باید باشد"
-                  : errors.password.type}
+               {errors.password.message}
               </span>
             )}
 
@@ -145,9 +128,7 @@ function SignUp() {
             {errors.confirmPassword && (
               <span className="text-red-500 mr-4 text-[13px] -mt-4 mb-4">
                 
-                {errors.confirmPassword.type === 'oneOf' ?
-                "رمز عبور با تکرار آن یکسان نیست":
-                '' }
+              {errors.confirmPassword.message}
               </span>
             )}
 
