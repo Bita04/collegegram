@@ -10,6 +10,7 @@ import ForgetPassword from "./pages/ForgetPassword";
 const theme = extendTheme();
 function App() {
   return (
+
     <ChakraProvider>
       <RtlProvider>
         <Layout>
@@ -17,6 +18,8 @@ function App() {
         </Layout>
       </RtlProvider>
     </ChakraProvider>
+   
+
   );
 }
 

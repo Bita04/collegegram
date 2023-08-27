@@ -5,10 +5,10 @@ type Props = {
   children: React.ReactNode;
 };
 
-function ButtonText(props: Props) {
+function ButtonText({className, type, children}: Props) {
   return (
-    <button type={props.type} className={props.className}>
-      {props.children}
+    <button type={type} className={className}>
+      {children}
     </button>
   );
 }
