@@ -133,6 +133,7 @@ function SignUp() {
             )}
 
             <ButtonText
+            onClick={() => console.log("clicked")}
               type="submit"
               className="btn-g btn-primary flex self-end"
             >

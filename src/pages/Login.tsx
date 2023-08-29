@@ -3,6 +3,8 @@ import logo from "/assets/images/logo.png";
 import InputText from "../components/ui/input/InputText";
 import passwordSvg from "/assets/images/key.svg";
 import mailPng from "/assets/images/gmail.png";
+
+
 import ButtonText from "../components/ui/button/Button";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { HStack } from "@chakra-ui/react";
@@ -96,6 +98,7 @@ function Login() {
             <Checkbox color={"#2B2B2B"}>مرا به خاطر بسپار</Checkbox>
 
             <ButtonText
+            onClick={() => console.log("clicked")}
               type="submit"
               className="btn-g btn-primary flex self-end"
             >
