@@ -10,6 +10,7 @@ import SignUp from "./pages/SignUp.tsx";
 import { LNavbar } from "./components/LNavbar/LNavbar.tsx";
 import ForgetPassword from "./pages/ForgetPassword.tsx";
 import Error from "./pages/Error.tsx";
+import {UserProfile} from "./pages/UserProfile.tsx";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: "/error",
     element: <Error title="Not Found" subTitle="test" > It's failed </Error>,
+  },
+  {
+    path: "/profile",
+    element: <UserProfile />
   },
 ]);
 
