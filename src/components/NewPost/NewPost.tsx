@@ -24,6 +24,7 @@ import {
     
 };
 import { Switch } from '@chakra-ui/react'
+import ButtonText from '../ui/button/Button';
 
 export const NewPost = (props: Props) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -56,7 +57,7 @@ export const NewPost = (props: Props) => {
               <Text className='text-[16px] text-[#17494D] font-medium'>تگ ها</Text>
               <Input borderColor='#17494D'></Input>
             </Flex>
-            <Flex className='flex  items-center gap-[15px] flex-row-reverse'>
+            <Flex className='flex ml-[30px]  items-center gap-[15px] flex-row-reverse'>
             <Text className='text-[#17494D] text-[14px] font-medium' >فقط نمایش به دوستان نزدیک</Text>
 
             <Switch colorScheme='brand' size='lg' />
@@ -64,12 +65,13 @@ export const NewPost = (props: Props) => {
           </ModalBody>
 
           <ModalFooter>
-          <Button type="submit" onClick={onClose}>
+          <ButtonText className=' rounded-[16px] text-[14px] py-[8px] px-[16px] font-normal ' type="submit" onClick={onClose}>
             پشیمون شدم
 
-           </Button>
-            <Button variant='ghost'>Secondary Action</Button>
-          </ModalFooter>
+           </ButtonText>
+           <ButtonText className='bg-[#C19008] rounded-[16px] text-[14px] py-[8px] px-[16px] font-normal text-[#FFF]' type="submit" onClick={onClose}>
+      ثبت عکس
+           </ButtonText>          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
