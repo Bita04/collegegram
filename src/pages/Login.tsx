@@ -3,10 +3,13 @@ import logo from "/assets/images/logo.png";
 import InputText from "../components/ui/input/InputText";
 import passwordSvg from "/assets/images/key.svg";
 import mailPng from "/assets/images/gmail.png";
+
+
 import ButtonText from "../components/ui/button/Button";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { HStack } from "@chakra-ui/react";
 import { Footer } from "../components/Footer/Footer";
+import { TreeIcon } from "../icons/TreeIcon";
 import { Layout } from "../components/Layout/Layout";
 import { useForm, SubmitHandler } from "react-hook-form"
 import { object, string, number, date, InferType } from "yup";
@@ -38,6 +41,7 @@ function Login() {
   
   return (
     <>
+
       <Layout>
         <Container
           display={"flex"}
@@ -71,13 +75,7 @@ function Login() {
             {errors.username && (
               <span className="text-red-500 mr-4 text-[13px] -mt-4 mb-4">
                 
-                {errors.username.type === "required"
-                  ? "نام کاربری را وارد کنید"
-                  : errors.username.type === "min"
-                  ? "نام کاربری حداقل شامل سه کاراکتر باید باشد"
-                  : errors.username.type === "matches"
-                  ? "نام کاربری یا ایمیل را در فرمت درست وارد کنید"
-                  : ""}
+                {errors.username.message}
               </span>
             )}
             <InputText
@@ -92,24 +90,21 @@ function Login() {
             {errors.password && (
               <span className="text-red-500 mr-4 text-[13px] -mt-4 mb-4">
                 
-                {errors.password.type === "required"
-                  ? "رمز عبور را وارد کنید"
-                  : errors.password.type === "min"
-                  ? "رمز عبور حداقل شامل هشت کاراکتر باید باشد"
-                  : errors.password.type === "max"
-                  ? "رمز عبور حداکثر شامل بیست کاراکتر باید باشد"
-                  : errors.password.type}
+                {errors.password.message}
               </span>
             )}
+
 
             <Checkbox color={"#2B2B2B"}>مرا به خاطر بسپار</Checkbox>
 
             <ButtonText
+            onClick={() => console.log("clicked")}
               type="submit"
               className="btn-g btn-primary flex self-end"
             >
               ورود
             </ButtonText>
+
 
             <a href="#" className="mt-10 color-primary">
               <ChevronLeftIcon /> رمز عبورم را فراموش کردم

@@ -18,16 +18,14 @@ type InputTypes =
 
 type Props = {
   type: InputTypes; 
-  icon: string;
-  placeHolder: string;
+  icon?: string;
+  placeHolder?: string;
   width: number;
   className?: string;
-  register: UseFormRegisterReturn; 
-  
-  
+  register: UseFormRegisterReturn;
 }
 
-function InputText({type, icon, placeHolder, width, className, register}: Props) {
+function InputText({type, icon, placeHolder="", width, className, register}: Props) {
   return (
     <>
       <Stack width={width} spacing={10}>
