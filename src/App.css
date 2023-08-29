@@ -151,3 +151,14 @@
 .color-secondary{
   color: #17494D
 }
+.profile-card{
+  background-color: #F1EBE3 !important;
+  border: 1px solid #CDCDCD!important;
+  border-radius: 0!important;
+  box-shadow: none!important;
+}
+
+.card-divider {
+  border-color: #17494D!important;
+  opacity: 1!important;
+}
