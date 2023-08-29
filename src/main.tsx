@@ -7,10 +7,15 @@ import Login from "./pages/Login.tsx";
 import { ChakraProvider } from "@chakra-ui/react";
 import { RtlProvider } from "./components/rtl-provider.tsx";
 import SignUp from "./pages/SignUp.tsx";
+import { LNavbar } from "./components/LNavbar/LNavbar.tsx";
 import ForgetPassword from "./pages/ForgetPassword.tsx";
 import Error from "./pages/Error.tsx";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LNavbar/>,
+  },
   {
     path: "/login",
     element: <Login />,
