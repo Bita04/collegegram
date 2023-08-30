@@ -28,9 +28,8 @@ import ButtonText from '../ui/button/Button';
 
 export const NewPost = (props: Props) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
-    
-
     return (
+      
         <div>
              <>
       <Button onClick={onOpen}>Open Modal</Button>
