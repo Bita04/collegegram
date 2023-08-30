@@ -1,9 +1,12 @@
 // @flow
 import * as React from "react";
-type Props = {};
-export const TreeIcon = (props: Props) => {
+type Props = {
+  width: number,
+  height: number
+};
+export const TreeIcon = ({width=256, height=288}: Props) => {
   return (
-    <svg width="256" height="288" viewBox="0 0 256 288" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={width} height={height} viewBox="0 0 256 288" fill="none" xmlns="http://www.w3.org/2000/svg">
 <mask id="path-1-inside-1_1_2762" fill="white">
 <path d="M256 238.5C256 251.435 242.907 263.856 219.523 273.105C196.14 282.354 164.323 287.696 130.883 287.987C97.4434 288.279 65.037 283.497 40.5998 274.664C16.1627 265.832 1.6364 253.651 0.129894 240.729L128 238.5H256Z"/>
 </mask>
