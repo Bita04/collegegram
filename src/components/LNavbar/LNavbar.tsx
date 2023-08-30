@@ -6,12 +6,13 @@ import bookmark from '../../../public/assets/images/bookmark.svg';
 import comment from '../../../public/assets/images/comment.svg';
 import bing from '../../../public/assets/images/bing.svg';
 import menu from '../../../public/assets/images/menu.svg';
+import { ClassNames } from '@emotion/react';
 type Props = {
-    
+    className?: string;
 };
 export const LNavbar = (props: Props) => {
     return (
-        <Flex className='w-[104px] gap-[48px] flex flex-col bg-[#F1EBE3] py-[32px] px-[40px]'>
+        <Flex className={`w-[104px] ${props.className} h-[384px] gap-[48px] flex flex-col bg-[#F1EBE3] py-[32px] px-[40px]`}>
             <i>
                 <img src={pin} alt='' />
                 

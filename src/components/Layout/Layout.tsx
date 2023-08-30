@@ -5,6 +5,7 @@ import { Footer } from "../Footer/Footer";
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Flex
+    
       flexDirection="column"
       justifyContent="flex-end"
       width="100%"
