@@ -32,8 +32,9 @@ export const NewPost = (props: Props) => {
       
         <div>
              <>
-      <Button onClick={onOpen}>Open Modal</Button>
-
+             <ButtonText className="w-[110px] px-[10px]  text-[#FFF] text-[14px] font-medium bg-[#C38F00] rounded-[100px] h-[40px]" type="button" onClick={onOpen}>
+                    افزودن عکس
+                </ButtonText>
       <Modal size='xl' isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent backgroundColor='#F3F0EE' className=' rounded-[24px] py-[38px]' >

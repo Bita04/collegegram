@@ -7,6 +7,7 @@ import { ReactNode } from "react";
 import { SearchIcon } from "@chakra-ui/icons";
 import ButtonText from "../components/ui/button/Button.tsx";
 import logo from "/assets/images/logo.png";import { LNavbar } from "../components/LNavbar/LNavbar.tsx";
+import { NewPost } from "../components/NewPost/NewPost.tsx";
 interface Props {
   children: ReactNode;
 }
@@ -40,9 +41,7 @@ export const UserProfile = (props: Props) => {
 
 
             <Flex className="gap-[48px]">
-                <ButtonText className="w-[110px] px-[10px]  text-[#FFF] text-[14px] font-medium bg-[#C38F00] rounded-[100px] h-[40px]" type="button" onClick={() => console.log('')}>
-                    افزودن عکس
-                </ButtonText>
+                <NewPost/>
                 <Flex className=" flex gap-[176px] flex-col items-center">
                 <img className="w-[68px] h-[40px]" src={logo}/>
                 
