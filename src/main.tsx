@@ -14,6 +14,8 @@ import { theme } from './themes/Theme.ts';
 import ForgetPassword from "./pages/ForgetPassword.tsx";
 import Error from "./pages/Error.tsx";
 import {UserProfile} from "./pages/UserProfile.tsx";
+import Post from "./components/Post";
+
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,12 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <UserProfile > </UserProfile>,
+  },
+  {
+    path: "/post",
+    element: <UserProfile>
+      <Post />
+    </UserProfile>,
   },
 ]);
 

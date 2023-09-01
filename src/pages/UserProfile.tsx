@@ -55,8 +55,8 @@ export const UserProfile = (props: Props) => {
         </Flex>
        
        
-        <Flex className=" gap-8   bg-black h-[300px]">
-            <Flex className="w-[800px] h-[300px] bg-white">
+        <Flex className=" gap-8  h-[300px]">
+            <Flex className="w-[800px] h-[300px]">
             {props.children}
             
 
