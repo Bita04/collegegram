@@ -14,7 +14,10 @@ interface Props {
 export const UserProfile = (props: Props) => {
   return (
     <Layout>
-      <Flex className="flex gap-[78px]  flex-row px-[254px] py-[52px]" maxW="2xg">
+      <Flex  className="flex gap-[78px] w-[100%]  flex-row px-[254px] py-[52px]">
+        
+
+        
         <Flex flexDir={"column"}>
           <RightNavbar
             followers={0}
@@ -26,7 +29,7 @@ export const UserProfile = (props: Props) => {
           <TreeIcon width={189} height={213} />
          
         </Flex>
-        <Flex className="flex flex-col gap-[176px]">
+        <Flex className="flex w-[100%] flex-col gap-[176px]">
         <Flex minW='md' className="flex flex-row justify-between">
             <Flex className="flex- flex-col">
             <InputGroup>
@@ -54,23 +57,27 @@ export const UserProfile = (props: Props) => {
 
         </Flex>
        
-       
-        <Flex className=" gap-8  h-[300px]">
-            <Flex className="w-[800px] h-[300px]">
+
+       <Flex className="w-[100%]">
+       <Flex className=" gap-8 w-[100%]  flex flex-row  bg-black h-[300px]">
+            <Flex className="w-[100%] h-[300px] bg-white">
             {props.children}
             
 
             </Flex>
-
-        <LNavbar className="" />
+            <LNavbar className="" />
+      
 
 </Flex>
+
+       </Flex>
+       
 
 
         </Flex>
         
-       
-      </Flex>
+        </Flex>
+     
      
     
     </Layout>
