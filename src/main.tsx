@@ -9,8 +9,6 @@ import { RtlProvider } from "./components/rtl-provider.tsx";
 import SignUp from "./pages/SignUp.tsx";
 import { NewPost } from "./components/NewPost/NewPost.tsx";
 import { theme } from './themes/Theme.ts';
-
-
 import ForgetPassword from "./pages/ForgetPassword.tsx";
 import Error from "./pages/Error.tsx";
 import {UserProfile} from "./pages/UserProfile.tsx";
@@ -38,7 +36,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/profile",
-    element: <UserProfile > </UserProfile>,
+    element: <UserProfile >  </UserProfile>,
   },
 ]);
 
