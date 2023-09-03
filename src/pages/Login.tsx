@@ -11,18 +11,23 @@ import { HStack } from "@chakra-ui/react";
 import { Footer } from "../components/Footer/Footer";
 import { TreeIcon } from "../icons/TreeIcon";
 import { Layout } from "../components/Layout/Layout";
-import { useForm, SubmitHandler } from "react-hook-form"
+import { useForm, SubmitHandler, UseFormRegister } from "react-hook-form"
 import { object, string, number, date, InferType } from "yup";
 import useYupValidationResolver from "../hooks/useYupValidationResolver";
 import * as Yup from "yup";
+import axios from 'axios';
+import { loginUserFn} from "../api/authApi";
+import { useMutation } from "react-query";
 import { Link } from "react-router-dom";
 type Inputs = {
-  username: string
+  authenticator: string
   password: string
 }
 
+
+
 const validationSchema = object({
-  username: string()
+  authenticator: string()
     .min(3,"نام کاربری حداقل شامل سه کاراکتر باید باشد")
     .matches(/^(?:\w+|\w+([+\.-]?\w+)*@\w+([\.-]?\w+)*(\.[a-zA-z]{2,4})+)$/, "نام کاربری یا ایمیل را در فرمت درست وارد کنید")
     .required("نام کاربری را وارد کنید"),
@@ -30,6 +35,9 @@ const validationSchema = object({
 });
 
 function Login() {
+  const {
+    mutate: loginUser
+  } = useMutation((userData: UseFormRegister<Inputs> ) => loginUserFn(userData))
   const resolver = useYupValidationResolver(validationSchema);
   const {
     register,
@@ -37,7 +45,7 @@ function Login() {
     watch,
     formState: { errors },
   } = useForm<Inputs>({ resolver})
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+  const onSubmit: SubmitHandler<Inputs> = (data) => loginUser(data)
   
   return (
     <>
@@ -70,12 +78,12 @@ function Login() {
               type="text"
               width={320}
               className="margin-bottom-32"
-              register={register("username", { required: true })} 
+              register={register("authenticator", { required: true })} 
             />
-            {errors.username && (
+            {errors.authenticator && (
               <span className="text-red-500 mr-4 text-[13px] -mt-4 mb-4">
                 
-                {errors.username.message}
+                {errors.authenticator.message}
               </span>
             )}
             <InputText
@@ -98,9 +106,10 @@ function Login() {
             <Checkbox color={"#2B2B2B"}>مرا به خاطر بسپار</Checkbox>
 
             <ButtonText
-            onClick={() => console.log("clicked")}
+            
               type="submit"
               className="btn-g btn-primary flex self-end"
+              onSubmit={handleSubmit(onSubmit) }
             >
               ورود
             </ButtonText>
@@ -115,7 +124,10 @@ function Login() {
             </Link>
           </form>
         </Container>
-        <Footer />
+        <Footer>
+          <TreeIcon />
+
+        </Footer>
       </Layout>
     </>
   );

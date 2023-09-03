@@ -12,7 +12,7 @@ export const UserProfile = (props: Props) => {
             <Layout>
                 <Container maxW='md'>
             <Flex justifyContent={'space-between'} flexDir={'column'}>
-            <RightNavbar  followers={0} following={0} userName="rahnema" />
+            <RightNavbar  followers={0} following={0} userName="rahnema" avatar={""} />
             <RightMenu className="my-20" />
             <TreeIcon width={189} height={213}  />
             </Flex>

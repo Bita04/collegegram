@@ -4,6 +4,7 @@ type Props = {
   type: buttonTypes;
   children: React.ReactNode;
   onClick?: () => void;
+  onSubmit?: () => void;
 };
 
 function ButtonText({ className, type, children, onClick }: Props) {

@@ -15,6 +15,7 @@ import keySignUp from "/assets/images/KeySignUp.svg";
 import { object, string, number, date, InferType } from "yup";
 import useYupValidationResolver from "../hooks/useYupValidationResolver";
 import * as Yup from "yup";
+import { TreeIcon } from "../icons/TreeIcon";
 const validationSchema = object({
   username: string()
     .min(3, "نام کاربری حداقل شامل سه کاراکتر باید باشد")
@@ -141,7 +142,10 @@ function SignUp() {
             </ButtonText>
           </form>
         </Container>
-        <Footer />
+        <Footer>
+          <TreeIcon/>
+
+        </Footer>
       </Layout>
     </>
   );
