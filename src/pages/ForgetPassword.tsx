@@ -1,8 +1,8 @@
 import { Container, Checkbox, Divider, Flex } from "@chakra-ui/react";
 import logo from "/assets/images/logo.png";
-import InputText from "../components/ui/input/inputText";
+import InputText from "../components/ui/input/InputText";
 import passwordSvg from "/assets/images/key.svg";
-import ButtonText from "../components/ui/button/button";
+import ButtonText from "../components/ui/button/Button";
 import { HStack } from "@chakra-ui/react";
 import { Footer } from "../components/Footer/Footer";
 import { TreeIcon } from "../icons/TreeIcon";
@@ -28,6 +28,7 @@ function ForgetPassword() {
                         type="text"
                         width={320}
                         className="margin-bottom-32"
+                        
                     />
                     <Flex justifyContent="end">
                         <ButtonText onClick={()=> console.log('cancel')} type="button">انصراف</ButtonText>

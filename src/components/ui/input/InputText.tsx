@@ -22,7 +22,7 @@ type Props = {
   placeHolder?: string;
   width: number;
   className?: string;
-  register: UseFormRegisterReturn;
+  register?: UseFormRegisterReturn;
 }
 
 function InputText({type, icon, placeHolder="", width, className, register}: Props) {

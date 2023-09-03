@@ -14,7 +14,8 @@ import {
     Flex,
     Input
   } from '@chakra-ui/react'
-  import plusSvg from "/assets/images/plus.svg";import InputText from '../ui/input/InputText';
+  import plusSvg from "/assets/images/plus.svg";
+  import InputText from '../ui/input/InputText';
   type Props = {
     
 
@@ -37,7 +38,7 @@ export const NewPost = (props: Props) => {
                 </ButtonText>
       <Modal size='xl' isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent backgroundColor='#F3F0EE' className=' rounded-[24px] py-[38px]' >
+        <ModalContent  backgroundColor='#F3F0EE' className=' rounded-[24px] py-[38px]' >
           <ModalHeader className='flex flex-row justify-center text-[#17494D]'>افزودن پست</ModalHeader>
           <ModalCloseButton />
           <ModalBody className='flex flex-col gap-[32px]'>
