@@ -16,6 +16,11 @@ import { object, string, number, date, InferType } from "yup";
 import useYupValidationResolver from "../hooks/useYupValidationResolver";
 import * as Yup from "yup";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
+
+// import { useHistory } from "react-router-dom";
+
 import { loginUserFn} from "../api/authApi";
 import { useMutation } from "react-query";
 import { Link } from "react-router-dom";
@@ -35,9 +40,18 @@ const validationSchema = object({
 });
 
 function Login() {
+  const navigate = useNavigate();
+
   const {
-    mutate: loginUser
-  } = useMutation((userData: UseFormRegister<Inputs> ) => loginUserFn(userData))
+    mutate: loginUser,
+  } = useMutation((userData: Inputs) => loginUserFn(userData.authenticator, userData.password), {
+    onSuccess: (data) => {
+      console.log(data)
+
+      navigate("/profile");
+      
+    }
+  });
   const resolver = useYupValidationResolver(validationSchema);
   const {
     register,
@@ -45,8 +59,39 @@ function Login() {
     watch,
     formState: { errors },
   } = useForm<Inputs>({ resolver})
-  const onSubmit: SubmitHandler<Inputs> = (data) => loginUser(data)
+  const onSubmit: SubmitHandler<Inputs> =  async (data) => {
+    
+   
+    try{
+
+      loginUser(data)
+
+
+      
+    } 
+    catch (error) {
+
+    }   
+    // if (res === 200) {
+    //   // navigate('/profile')
+    //   console.log('e')
+    // }
+    
+      // console.log(res)
+      // localStorage.setItem("accessToken", res.data.accessToken)   
+      // localStorage.setItem("refreshToken", res.data.refreshToken)   
+      // localStorage.setItem("user", JSON.stringify(res.data.userInfo))
+      // history.push("/profile")
+
+
+    
+    
   
+    
+
+
+
+  }
   return (
     <>
 

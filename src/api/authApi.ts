@@ -13,21 +13,27 @@ type Inputs = {
     password: string,
 }
 
+type InputSignUp = {
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
+
 authApi.defaults.headers.common['Content-Type'] = 'application/json';
 
-export const signUpUserFn = async (user: any) => {
+export const signUpUserFn = async (user: InputSignUp) => {
   const response = await authApi.post('user/register', user);
+  console.log(response)
   return response.data;
 };
 
-
-export const loginUserFn = async (user: UseFormRegister<Inputs>) => {
-    console.log(user);
+export const loginUserFn = async (authenticator: string, password: string) => {
+  const user = { authenticator, password };
   const response = await authApi.post('user/login', user);
-  console.log(response);
-    return response.data;
+  return response.data;
 };
-
 
 
 export const verifyEmailFn = async (verificationCode: string) => {
@@ -36,6 +42,7 @@ export const verifyEmailFn = async (verificationCode: string) => {
   );
   return response.data;
 };
+
 
 export const logoutUserFn = async () => {
   const response = await authApi.get('auth/logout');

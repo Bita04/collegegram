@@ -16,6 +16,11 @@ import { object, string, number, date, InferType } from "yup";
 import useYupValidationResolver from "../hooks/useYupValidationResolver";
 import * as Yup from "yup";
 import { TreeIcon } from "../icons/TreeIcon";
+import { signUpUserFn} from "../api/authApi";
+import { useMutation } from "react-query";
+
+import { useNavigate } from "react-router-dom";
+
 const validationSchema = object({
   username: string()
     .min(3, "نام کاربری حداقل شامل سه کاراکتر باید باشد")
@@ -35,6 +40,21 @@ type Inputs = {
 };
 
 function SignUp() {
+  const navigate = useNavigate();
+
+
+
+const {
+  mutate: signUpUser,
+} = useMutation((userData: Inputs) => signUpUserFn(userData), {
+  onSuccess: (data) => {
+    console.log(data)
+    navigate("/profile");
+
+    
+    
+  }
+});
   const resolver = useYupValidationResolver(validationSchema);
   const {
     register,
@@ -42,7 +62,20 @@ function SignUp() {
     watch,
     formState: { errors },
   } = useForm<Inputs>({ resolver });
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    
+   
+    try{
+
+      signUpUser(data)
+      
+
+
+      
+    } 
+    catch (error) {
+
+    }   }
   return (
     <>
       <Layout>
@@ -134,7 +167,7 @@ function SignUp() {
             )}
 
             <ButtonText
-            onClick={() => console.log("clicked")}
+              onSubmit={handleSubmit(onSubmit)}
               type="submit"
               className="btn-g btn-primary flex self-end"
             >
