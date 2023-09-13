@@ -16,20 +16,34 @@ import { object, string, number, date, InferType } from "yup";
 import useYupValidationResolver from "../hooks/useYupValidationResolver";
 import * as Yup from "yup";
 import { TreeIcon } from "../icons/TreeIcon";
-import { signUpUserFn} from "../api/authApi";
 import { useMutation } from "react-query";
 
 import { useNavigate } from "react-router-dom";
+import { AuthAPI } from "../api/authApi";
 
 const validationSchema = object({
   username: string()
     .min(3, "نام کاربری حداقل شامل سه کاراکتر باید باشد")
-    .matches(/^[a-zA-Z0-9][a-zA-Z0-9\_]*$/, "نام کاربری را در فرمت درست وارد کنید")
+    .matches(
+      /^[a-zA-Z0-9][a-zA-Z0-9\_]*$/,
+      "نام کاربری را در فرمت درست وارد کنید"
+    )
     .required("نام کاربری را وارد کنید"),
 
-  email: string().email("ایمیل را در فرمت درست وارد کنید").required("ایمیل را وارد کنید"),
-  password: string().trim().required("رمز عبور را وارد کنید").min(8, "رمز عبور حداقل شامل هشت کاراکتر باید باشد").max(20, "رمز عبور حداکثر شامل بیست کاراکتر باید باشد"),
-  confirmPassword: string().trim().required("رمز عبور را وارد کنید").min(8, "رمز عبور حداقل شامل هشت کاراکتر باید باشد").max(20, "رمز عبور حداکثر شامل بیست کاراکتر باید باشد").oneOf([Yup.ref("password")], "رمز عبور با تکرار آن یکسان نیست"),
+  email: string()
+    .email("ایمیل را در فرمت درست وارد کنید")
+    .required("ایمیل را وارد کنید"),
+  password: string()
+    .trim()
+    .required("رمز عبور را وارد کنید")
+    .min(8, "رمز عبور حداقل شامل هشت کاراکتر باید باشد")
+    .max(20, "رمز عبور حداکثر شامل بیست کاراکتر باید باشد"),
+  confirmPassword: string()
+    .trim()
+    .required("رمز عبور را وارد کنید")
+    .min(8, "رمز عبور حداقل شامل هشت کاراکتر باید باشد")
+    .max(20, "رمز عبور حداکثر شامل بیست کاراکتر باید باشد")
+    .oneOf([Yup.ref("password")], "رمز عبور با تکرار آن یکسان نیست"),
 });
 
 type Inputs = {
@@ -42,40 +56,27 @@ type Inputs = {
 function SignUp() {
   const navigate = useNavigate();
 
-
-
-const {
-  mutate: signUpUser,
-} = useMutation((userData: Inputs) => signUpUserFn(userData), {
-  onSuccess: (data) => {
-    console.log(data)
-    navigate("/profile");
-
-    
-    
-  }
-});
+  const { mutate: signUpUser } = useMutation(
+    (userData: Inputs) => AuthAPI.signup(userData),
+    {
+      onSuccess: (data) => {
+        console.log(data);
+        navigate("/profile");
+      },
+    }
+  );
   const resolver = useYupValidationResolver(validationSchema);
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Inputs>({ resolver });
+  } = useForm({ resolver });
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    
-   
-    try{
-
-      signUpUser(data)
-      
-
-
-      
-    } 
-    catch (error) {
-
-    }   }
+    try {
+      signUpUser(data);
+    } catch (error) {}
+  };
   return (
     <>
       <Layout>
@@ -114,7 +115,6 @@ const {
             />
             {errors.username && (
               <span className="text-red-500 mr-4 text-[13px] -mt-4 mb-4">
-                
                 {errors.username.message}
               </span>
             )}
@@ -126,7 +126,7 @@ const {
               width={320}
               className="margin-bottom-32"
             />
-             {errors.email && (
+            {errors.email && (
               <span className="text-red-500 mr-4 text-[13px] -mt-4 mb-4">
                 {errors.email.message}
               </span>
@@ -142,17 +142,19 @@ const {
             />
             {errors.password && (
               <span className="text-red-500 mr-4 text-[13px] -mt-4 mb-4">
-                
-               {errors.password.message}
+                {errors.password.message}
               </span>
             )}
 
             <InputText
-              register={register("confirmPassword", { required: true, validate: (val: string) => {
-                if (watch('password') != val) {
-                  return "رمز عبور با تکرار آن یکسان نیست";
-                }
-              }, })}
+              register={register("confirmPassword", {
+                required: true,
+                validate: (val: string) => {
+                  if (watch("password") != val) {
+                    return "رمز عبور با تکرار آن یکسان نیست";
+                  }
+                },
+              })}
               icon={keySignUp}
               placeHolder="تکرار رمز عبور"
               type="password"
@@ -161,8 +163,7 @@ const {
             />
             {errors.confirmPassword && (
               <span className="text-red-500 mr-4 text-[13px] -mt-4 mb-4">
-                
-              {errors.confirmPassword.message}
+                {errors.confirmPassword.message}
               </span>
             )}
 
@@ -176,8 +177,7 @@ const {
           </form>
         </Container>
         <Footer>
-          <TreeIcon/>
-
+          <TreeIcon />
         </Footer>
       </Layout>
     </>
