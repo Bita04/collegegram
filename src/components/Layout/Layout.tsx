@@ -8,9 +8,9 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     
       flexDirection="column"
       justifyContent="flex-end"
-      width="100%"
+      width="100"
       minHeight="100vh"
-      backgroundColor="#F3F0EE"
+      backgroundColor="#dc6719"
     >
       {children}
     </Flex>
