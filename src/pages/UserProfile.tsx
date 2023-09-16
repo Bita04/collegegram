@@ -14,7 +14,7 @@ interface Props {
 export const UserProfile = (props: Props) => {
   return (
     <Layout>
-      <Flex  className="flex gap-[78px] w-[100%]  flex-row px-[84px] py-[52px]">
+      <Flex  className="flex  gap-[78px] w-[100%]  flex-row px-[84px] py-[52px]">
         
 
         

@@ -10,7 +10,9 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       justifyContent="flex-end"
       width="100"
       minHeight="100vh"
-      backgroundColor="#dc6719"
+      backgroundColor="#F3F0EE"
+      className=" min-w-max max-w-full"
+
     >
       {children}
     </Flex>
