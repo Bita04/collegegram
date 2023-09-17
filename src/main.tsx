@@ -43,9 +43,7 @@ const router = createBrowserRouter([
   {
     path: "/profile",
 
-    element: <PrivateRoute children={<UserProfile />} auth={{
-      isAuthenticated: true
-    }} />,
+    element: <PrivateRoute children={<UserProfile />}  />,
   },
 ]);
 

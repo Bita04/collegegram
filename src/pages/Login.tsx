@@ -45,15 +45,15 @@ const validationSchema = object({
 function Login() {
   const navigate = useNavigate();
 
-  const { mutate: loginUser } = useMutation(
-    (userData: Inputs) =>
-      AuthAPI.login(userData.authenticator, userData.password),
-    {
-      onSuccess: (data) => {
-        console.log(data);
-
-        navigate("/profile");
-      },
+  const {
+    mutate: loginUser,
+  } = useMutation((userData: Inputs) =>AuthAPI.login(userData.authenticator, userData.password), {
+    onSuccess: (data) => {
+      console.log(data);
+      localStorage.setItem("accessToken", data.accessToken)
+      console.log(localStorage.getItem("accessToken"))
+      // navigate("/profile");
+      
     }
   );
   const resolver = useYupValidationResolver(validationSchema);

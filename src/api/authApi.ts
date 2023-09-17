@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "https://greedy.darkube.app";
+
+const BASE_URL = 'https://collegegram-greedy-test.darkube.app';
 
 export const authApi = axios.create({
   baseURL: BASE_URL,
@@ -26,6 +27,10 @@ export module AuthAPI {
     console.log(response);
     return response.data;
   };
+type Token = {
+  token: string
+};
+authApi.defaults.headers.common['Content-Type'] = 'application/json';
 
   export const login = async (authenticator: string, password: string) => {
     const user = { authenticator, password };
@@ -43,3 +48,10 @@ export module AuthAPI {
     return response.data;
   };
 }
+export const verifyToken = async (token: string) => {
+  const response = await authApi.post('user/verifyToken', {
+    token,
+  });
+  console.log(response)
+  return response.status;
+};
