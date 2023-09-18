@@ -30,6 +30,7 @@ export const PrivateRoute =  ({  children } : {
             setIsLoading(false);
         }).catch((err) => {
             setIsLoading(false);
+            
         });
         
     }, []);

@@ -16,8 +16,10 @@ import ButtonText from "../components/ui/button/Button.tsx";
 import logo from "/assets/images/logo.png";
 import { LNavbar } from "../components/LNavbar/LNavbar.tsx";
 import { NewPost } from "../components/NewPost/NewPost.tsx";
+import { PostContainer } from "../components/PostContainer/PostContainer.tsx";
 interface Props {
   children?: ReactNode;
+  hasLNavbar: boolean;
 }
 export const UserProfile = (props: Props) => {
   return (
@@ -60,24 +62,13 @@ export const UserProfile = (props: Props) => {
           </Flex>
 
           <Flex className="">
-            <Flex className=" gap-8   flex flex-row h-[300px]">
-              <Flex className="w-[100%] max-w-5xl flex-wrap gap-[24px]  h-[300px] bg-white">
+            <Flex className=" gap-8   flex flex-row ">
                 {props.children}
-                <Flex className="w-[232px] h-[232px] bg-black rounded-t-[24px]">
-
-                </Flex>
-                <Flex className="w-[232px] h-[232px] bg-black rounded-t-[24px]">
-
-                </Flex>
-                <Flex className="w-[232px] h-[232px] bg-black rounded-t-[24px]">
-
-                </Flex>
-                <Flex className="w-[232px] h-[232px] bg-black rounded-t-[24px]">
-
-                </Flex> 
+              
                 
-              </Flex>
-              <LNavbar className="" />
+                
+              
+             {props.hasLNavbar ? <LNavbar /> : null}
             </Flex>
           </Flex>
         </Flex>
