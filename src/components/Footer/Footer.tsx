@@ -14,7 +14,7 @@ export const Footer = (props: Props) => {
       width="100%"
       height="440px"
     >
-      {props.children}
+      <TreeIcon width={250} height={250} />
     </Flex>
   );
 };
