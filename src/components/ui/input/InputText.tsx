@@ -23,7 +23,7 @@ type Props = {
   width: number;
   className?: string;
   register?: UseFormRegisterReturn;
-};
+}
 
 function InputText({
   type,
