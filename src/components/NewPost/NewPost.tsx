@@ -17,18 +17,18 @@ import {
   import plusSvg from "/assets/images/plus.svg";
   import InputText from '../ui/input/InputText';
   type Props = {
-    
 
-
-
-
-    
 };
 import { Switch } from '@chakra-ui/react'
 import ButtonText from '../ui/button/Button';
 
 export const NewPost = (props: Props) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const handleFileUpload = () => {
+      const fileInput = document.getElementById('fileInput');
+      fileInput?.click();
+    };
     return (
       
         <div>
@@ -42,9 +42,11 @@ export const NewPost = (props: Props) => {
           <ModalHeader className='flex flex-row justify-center text-[#17494D]'>افزودن پست</ModalHeader>
           <ModalCloseButton />
           <ModalBody className='flex flex-col gap-[32px]'>
-            <Flex className=' items-center gap-[16px] mt-[46px]'>
+            <Flex onClick={handleFileUpload} className=' items-center cursor-pointer max-w-[200px] gap-[16px] mt-[46px]'>
                 <img src={plusSvg} alt='' />
                 <Text className='text-[#C19008] text-[16px] font-bold leading-[20px]'>بارگذاری عکس ها</Text>
+                <input type="file" id="fileInput" style={{ display: 'none' }} />
+
             </Flex>
             <Flex id='images-container'>
 
@@ -72,7 +74,8 @@ export const NewPost = (props: Props) => {
            </ButtonText>
            <ButtonText className='bg-[#C19008] rounded-[16px] text-[14px] py-[8px] px-[16px] font-normal text-[#FFF]' type="submit" onClick={onClose}>
       ثبت عکس
-           </ButtonText>          </ModalFooter>
+           </ButtonText>         
+            </ModalFooter>
         </ModalContent>
       </Modal>
     </>
@@ -80,3 +83,4 @@ export const NewPost = (props: Props) => {
         </div>
     );
 };
+
