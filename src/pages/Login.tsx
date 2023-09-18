@@ -54,8 +54,8 @@ function Login() {
       console.log(localStorage.getItem("accessToken"))
       // navigate("/profile");
       
-    }
-  );
+    }}
+  )
   const resolver = useYupValidationResolver(validationSchema);
 
   const {
