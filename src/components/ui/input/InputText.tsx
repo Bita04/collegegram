@@ -17,7 +17,7 @@ type InputTypes =
   | "color";
 
 type Props = {
-  type: InputTypes; 
+  type: InputTypes;
   icon?: string;
   placeHolder?: string;
   width: number;
@@ -25,7 +25,14 @@ type Props = {
   register?: UseFormRegisterReturn;
 }
 
-function InputText({type, icon, placeHolder="", width, className, register}: Props) {
+function InputText({
+  type,
+  icon,
+  placeHolder = "",
+  width,
+  className,
+  register,
+}: Props) {
   return (
     <>
       <Stack width={width} spacing={10}>
@@ -34,7 +41,6 @@ function InputText({type, icon, placeHolder="", width, className, register}: Pro
             <img width={16} height={16} src={icon} alt="" />
           </InputLeftElement>
           <Input
-
             {...register}
             backgroundColor={"#fff"}
             borderColor={"#CDCDCD"}

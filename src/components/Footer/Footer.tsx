@@ -1,14 +1,10 @@
-
 import { Flex } from "@chakra-ui/react";
 import * as React from "react";
-import { TreeIcon } from "../../icons/TreeIcon";
 
 type Props = {
-
+  children: React.ReactNode;
 };
 export const Footer = (props: Props) => {
-
-
   return (
     <Flex
       marginTop="100px"
@@ -22,4 +18,3 @@ export const Footer = (props: Props) => {
     </Flex>
   );
 };
-

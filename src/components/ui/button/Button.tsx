@@ -3,10 +3,10 @@ type Props = {
   className?: string;
   type: buttonTypes;
   children: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
-function ButtonText({className, type, children, onClick}: Props) {
+function ButtonText({ className, type, children, onClick }: Props) {
   return (
     <button onClick={onClick} type={type} className={className}>
       {children}

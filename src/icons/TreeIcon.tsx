@@ -1,8 +1,8 @@
 // @flow
 import * as React from "react";
 type Props = {
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
 };
 export const TreeIcon = ({ width = 256, height = 288 }: Props) => {
   return (
