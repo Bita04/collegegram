@@ -17,7 +17,7 @@ import logo from "/assets/images/logo.png";
 import { LNavbar } from "../components/LNavbar/LNavbar.tsx";
 import { NewPost } from "../components/NewPost/NewPost.tsx";
 interface Props {
-  children: ReactNode;
+  children?: ReactNode;
 }
 export const UserProfile = (props: Props) => {
   return (

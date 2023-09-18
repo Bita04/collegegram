@@ -7,8 +7,8 @@ import { HStack } from "@chakra-ui/react";
 import { Footer } from "../components/Footer/Footer";
 import { TreeIcon } from "../icons/TreeIcon";
 import { Layout } from "../components/Layout/Layout.tsx";
-import ButtonText from "../components/ui/button/Button.tsx";
-import InputText from "../components/ui/input/InputText.tsx";
+// import ButtonText from "../components/ui/button/Button.tsx";
+// import InputText from "../components/ui/input/InputText.tsx";
 
 function ForgetPassword() {
   return (

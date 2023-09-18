@@ -1,5 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import * as React from "react";
+import { TreeIcon } from "../../icons/TreeIcon";
 
 type Props = {
   children: React.ReactNode;

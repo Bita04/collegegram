@@ -52,7 +52,7 @@ function Login() {
       console.log(data);
       localStorage.setItem("accessToken", data.accessToken)
       console.log(localStorage.getItem("accessToken"))
-      // navigate("/profile");
+      navigate("/profile");
       
     }}
   )
