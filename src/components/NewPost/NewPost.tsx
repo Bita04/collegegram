@@ -40,7 +40,7 @@ export const NewPost = (props: Props) => {
           <ModalHeader className='flex flex-row justify-center text-[#17494D]'>افزودن پست</ModalHeader>
           <ModalCloseButton />
           <ModalBody className='flex flex-col gap-[32px]'>
-            <Flex className=' items-center gap-[16px] mt-[46px]'>
+            <Flex className=' cursor-pointer max-w-[200px] items-center gap-[16px] mt-[46px]'>
                 <img src={plusSvg} alt='' />
                 <Text className='text-[#C19008] text-[16px] font-bold leading-[20px]'>بارگذاری عکس ها</Text>
             </Flex>
