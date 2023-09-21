@@ -16,6 +16,7 @@ import Error from "./pages/Error.tsx";
 import { UserProfile } from "./pages/UserProfile.tsx";
 import { Home } from "./pages/Home.tsx";
 import { PostContainer } from "./components/PostContainer/PostContainer.tsx";
+import { Explore } from "./pages/Explore.tsx";
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: "/forget-password",
     element: <ForgetPassword />,
+  },
+  {
+    path: "/explore",
+    element: <Explore/>
   },
   {
     path: "/error",

@@ -62,7 +62,7 @@ export const UserProfile = (props: Props) => {
           </Flex>
 
           <Flex className="">
-            <Flex className=" gap-8   flex flex-row ">
+            <Flex className=" gap-8 flex flex-row ">
                 {props.children}
               
                 
@@ -76,3 +76,4 @@ export const UserProfile = (props: Props) => {
     </Layout>
   );
 };
+
