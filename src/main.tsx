@@ -13,6 +13,8 @@ import { theme } from './themes/Theme.ts';
 
 import ForgetPassword from "./pages/ForgetPassword.tsx";
 import Error from "./pages/Error.tsx";
+import {UserProfile} from "./pages/UserProfile.tsx";
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,11 @@ const router = createBrowserRouter([
     path: "/error",
     element: <Error title="Not Found" subTitle="test" > It's failed </Error>,
   },
+  {
+    path: "/profile",
+
+    element: <PrivateRoute children={<UserProfile />}  />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -44,5 +51,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <RouterProvider router={router} />
       </RtlProvider>
     </ChakraProvider>
+    </QueryClientProvider>
+
   </React.StrictMode>
 );
