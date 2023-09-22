@@ -53,7 +53,7 @@ export const NewPost = (props: Props) => {
   return (
     <div>
       <>
-        <Button onClick={onOpen}>Open Modal</Button>
+        <Button onClick={onOpen}>افزودن عکس</Button>
 
         <Modal size="xl" isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
