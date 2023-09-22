@@ -59,9 +59,13 @@ function SignUp() {
   const { mutate: signUpUser } = useMutation(
     (userData: Inputs) => AuthAPI.signup(userData),
     {
-      onSuccess: (data) => {
+      onSuccess: (data) => 
+      {
         console.log(data);
-        navigate("/profile");
+      // localStorage.setItem("accessToken", data.accessToken)
+      // console.log(localStorage.getItem("accessToken"))
+        
+        // navigate("/profile");
       },
     }
   );

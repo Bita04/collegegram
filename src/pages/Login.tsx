@@ -3,6 +3,7 @@ import logo from "/assets/images/logo.png";
 import InputText from "../components/ui/input/InputText";
 import passwordSvg from "/assets/images/key.svg";
 import mailPng from "/assets/images/gmail.png";
+import { verifyToken } from "../api/authApi";
 
 import ButtonText from "../components/ui/button/Button";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
@@ -22,6 +23,8 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import { Link } from "react-router-dom";
 import { AuthAPI } from "../api/authApi";
+import { PrivateRoute } from "../components/PrivateRoute/PrivateRoute";
+import { UserProfile } from "./UserProfile";
 type Inputs = {
   authenticator: string;
   password: string;
@@ -44,6 +47,17 @@ const validationSchema = object({
 
 function Login() {
   const navigate = useNavigate();
+  // const validateToken = verifyToken(localStorage.getItem('accessToken')!).then(res => {
+  //   if (res === 200) {
+  //     navigate("/profile")
+  //   }
+   
+  // })
+  if(localStorage.getItem('accessToken')) {
+    return <PrivateRoute>
+      <UserProfile/>
+    </PrivateRoute>
+  }
 
   const {
     mutate: loginUser,
