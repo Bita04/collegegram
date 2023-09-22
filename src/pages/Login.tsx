@@ -53,11 +53,10 @@ function Login() {
   //   }
    
   // })
-  if(localStorage.getItem('accessToken')) {
-    return <PrivateRoute>
-      <UserProfile/>
-    </PrivateRoute>
-  }
+  // if(localStorage.getItem('accessToken')) {
+
+  
+  // }
 
   const {
     mutate: loginUser,
