@@ -14,131 +14,173 @@ import {
   Button,
   FormControl,
   FormLabel,
-  Input,
   WrapItem,
   Avatar,
   Switch,
   Text,
-  Box,
   Flex,
+  createIcon,
 } from "@chakra-ui/react";
 // import plusSvg from "/assets/images/plus.svg";
 // import InputText from "../ui/input/InputText";
 // import { Switch } from "@chakra-ui/react";
-import RightNavbar from "../Profile/RightNavbar";
 import ButtonText from "../ui/button/Button";
 import InputText from "../ui/input/InputText";
+import cras from "/assets/images/cras.svg";
+import memeberSignUp from "/assets/images/memberSignUp.svg";
+import load from "../../../public/assets/images/load.svg";
+import RightNavbar from "../Profile/RightNavbar";
+import { useForm } from "react-hook-form";
 
-type props = {
+type Props = {
   isOpen: boolean;
+  onClose: () => void;
 };
 // const onClose:boolean(isOpen:boolean)=>{
 //   return isOpen(false)
 // }
-export const EditProfile = (props: props) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
+type FormValues = {
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+  confrimPassword: string;
+  private: boolean;
+  bio: string;
+};
+export const EditProfile = (props: Props) => {
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
+  const form = useForm<FormValues>();
+  const { register, handleSubmit } = form;
+
+  const onSubmit = (data: FormValues) => {
+    console.log("Form submitted", data);
+  };
+
   return (
     <div>
       <>
-        <Button onClick={onOpen}></Button>
+        {/* <Button onClick={onOpen} color="#F1EBE3"></Button> */}
 
         <Modal
           size="xl"
           isOpen={props.isOpen}
-          onClose={onClose}
+          onClose={props.onClose}
           isCentered
           initialFocusRef={initialRef}
           finalFocusRef={finalRef}
         >
           <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>ویرایش حساب</ModalHeader>
-
-            <ModalCloseButton />
-            <ModalBody pb={6}>
-              <Flex justifyContent={"center"} alignContent={"center"}>
+          <ModalContent className="bg-[#f3f0ee]" maxHeight={962} maxWidth={375}>
+            <ModalHeader className="flex flex-row justify-center">
+              ویرایش حساب
+            </ModalHeader>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <ModalBody pb={6}>
                 <WrapItem
-                  className="margin-bottom-32 "
+                  className="flex flex-row justify-center margin-bottom-28 "
+                  position={"relative"}
                 >
                   <Avatar size="2xl" name="Segun Adebayo" src={Avatar} />
+                  <img src={load} className="absolute px-14 py-14  " />
                 </WrapItem>
-                <Text>عکس پروفایل</Text>
+                <Text className="flex flex-row justify-center py-2">
+                  عکس پروفایل
+                </Text>
+
+                <Text className="flex flex-row justify-center text-[#C19008] pb-6">
+                  {" "}
+                  <img src={cras} className="pl-2" />
+                  حذف تصویر{" "}
+                </Text>
+
+                <FormControl>
+                  <Flex direction={"column"} alignItems={"center"} gap={6}>
+                    <InputText
+                      placeHolder="ایمیل"
+                      icon={gmailSignUp}
+                      type="email"
+                      width={262}
+                      register={register("email")}
+                    />
+
+                    <InputText
+                      placeHolder="نام"
+                      icon={memeberSignUp}
+                      type="text"
+                      width={262}
+                      register={register("firstname")}
+                    />
+                    <InputText
+                      placeHolder="نام خانوادگی "
+                      icon={memeberSignUp}
+                      type="text"
+                      width={262}
+                      register={register("lastname")}
+                    />
+
+                    <InputText
+                      placeHolder="رمز عبور"
+                      icon={keySignUp}
+                      type="password"
+                      width={262}
+                      register={register("password")}
+                    />
+
+                    <InputText
+                      placeHolder="تکرار رمز عبور"
+                      icon={keySignUp}
+                      type="password"
+                      width={262}
+                      register={register("confrimPassword")}
+                    />
+                  </Flex>
+
+                  <FormControl
+                    display="flex"
+                    alignItems="center"
+                    size="lg"
+                    mt={8}
+                    px={9}
+                  >
+                    <Switch
+                      id="isInvalid"
+                      colorScheme="blackandWhite"
+                      className="pl-2"
+                      {...register("private")}
+                    />
+                    <FormLabel htmlFor="email-alerts" mb="0">
+                      پیچ خصوصی باشه
+                    </FormLabel>
+                  </FormControl>
+                </FormControl>
+              </ModalBody>
+              <Text className="text-[16px] text-[#17494D] font-medium " px={14}>
+                بایو
+              </Text>
+              <Flex direction={"column"} alignItems={"center"} gap={4}>
+                <textarea
+                  className="flex flex-col item-center w-[263px] resize-none h-[88px] border-[1px] border-[#17494D80] rounded-[4px]"
+                  {...register("bio")}
+                />
               </Flex>
-              <FormControl>
-                <InputText
-                  placeHolder="ایمیل"
-                  icon={gmailSignUp}
-                  type="text"
-                  width={320}
-                  className="margin-bottom-32 "
-                />
-              </FormControl>
-
-              <FormControl>
-                <InputText
-                  placeHolder="نام"
-                  icon={gmailSignUp}
-                  type="text"
-                  width={320}
-                  className="margin-bottom-32"
-                />
-              </FormControl>
-
-              <FormControl>
-                <InputText
-                  placeHolder="نام خانوادگی "
-                  icon={gmailSignUp}
-                  type="text"
-                  width={320}
-                  className="margin-bottom-32"
-                />
-              </FormControl>
-
-              <FormControl>
-                <InputText
-                  placeHolder="رمز عبور"
-                  icon={keySignUp}
-                  type="text"
-                  width={320}
-                  className="margin-bottom-32"
-                />
-              </FormControl>
-
-              <FormControl>
-                <InputText
-                  placeHolder="تکرار رمز عبور"
-                  icon={keySignUp}
-                  type="text"
-                  width={320}
-                />
-              </FormControl>
-            </ModalBody>
-
-            <Switch colorScheme="brand" size="lg" />
-            <Text>پیچ خصوصی باشه</Text>
-
-            <Text className="text-[16px] text-[#17494D] font-medium">بایو</Text>
-            <Input borderColor="#17494D"></Input>
-
-            <ModalFooter>
-              <ButtonText
-                className=" rounded-[16px] text-[14px] py-[8px] px-[16px] font-normal "
-                onClick={onClose}
-                type="submit"
-              >
-                پشیمون شدم
-              </ButtonText>
-              <ButtonText
-                className="bg-[#C19008] rounded-[16px] text-[14px] py-[8px] px-[16px] font-normal text-[#FFF]"
-                onClick={onClose}
-                type="submit"
-              >
-                ثبت تغییرات
-              </ButtonText>
-            </ModalFooter>
+              <ModalFooter className="ml-6">
+                <ButtonText
+                  className=" rounded-[16px] text-[14px] py-[8px] px-[16px] font-normal "
+                  onClick={props.onClose}
+                  type="submit"
+                >
+                  پشیمون شدم
+                </ButtonText>
+                <ButtonText
+                  className="bg-[#C19008] rounded-[16px] text-[14px] py-[8px] px-[16px] font-normal text-[#FFF]"
+                  type="submit"
+                >
+                  ثبت تغییرات
+                </ButtonText>
+              </ModalFooter>
+            </form>
           </ModalContent>
         </Modal>
       </>
