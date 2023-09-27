@@ -5,15 +5,35 @@ const BASE_URL = 'https://collegegram-greedy-test.darkube.app';
 
 export const appApi = axios.create({
   baseURL: BASE_URL,
-  headers : {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
-    'refreshToken': localStorage.getItem('refreshToken'),
-  }
+
 
 });
+// axios.get("https://collegegram-greedy-test.darkube.app/post", formData, {
+//   headers: {
+//     'content-type': 'multipart/form-data',
+//     "authorization": localStorage.getItem("accessToken"),
+//     "refresh-token" : localStorage.getItem("refreshToken")
 
-// export const getPosts = async (limit, nextOffset) => {
-//     const response = await appApi.get(`/post/user/1?limit=${limit}&offset=${nextOffset}`);
-//     return response.data;
-//   };
+
+
+
+//   }
+// }).then((res) => {
+
+//   console.log(res);
+// })
+
+export const getPosts = async (limit, nextOffset) => {
+  if(nextOffset === '0') {
+    const response = await appApi.get(`/post/user/1?limit=${limit}`);
+    return response.data;
+    
+
+  }
+  else{
+    const response = await appApi.get(`/post/user/1?limit=${limit}&startTime=${nextOffset}`);
+    return response.data;
+
+  }
+    
+  };

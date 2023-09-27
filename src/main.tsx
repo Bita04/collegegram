@@ -18,6 +18,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.tsx";
 const queryClient = new QueryClient()
 
+
+
 const router = createBrowserRouter([
   {
     path: "/",

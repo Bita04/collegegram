@@ -21,32 +21,86 @@ import { CloseIcon } from "../../icons/CloseIcon";
 type Props = {};
 import { Switch } from "@chakra-ui/react";
 import ButtonText from "../ui/button/Button";
+import { useForm, Controller, useFieldArray } from "react-hook-form";
+import axios from "axios";
+import { set } from "lodash";
 
 export const NewPost = (props: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [images, setImages] = useState([]);
+  const [fileImages, setFileImages] = useState([])
 
+  const submitForm = (fd) => {
+    console.log(fd['post-photos'][0])
+    console.log("##########")
+    console.log(fd['post-photos'])
+    const formData = new FormData()
+    fileImages.forEach(x => formData.append("post-photos",x))
+    formData.append("description", fd['description'])
+    formData.append("tags", fd['tags'])
+    formData.append("closeFriends", fd["closeFriends"])
+    
+   console.log(formData)
+    
+    
+    axios.post("https://collegegram-greedy-test.darkube.app/post", formData, {
+      headers: {
+        'content-type': 'multipart/form-data',
+        "authorization": localStorage.getItem("accessToken"),
+        "refresh-token" : localStorage.getItem("refreshToken")
+
+
+    
+
+      }
+    }).then((res) => {
+
+      console.log(res);
+    })
+  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = useForm();
+  
+  // const [tags, setTags] = useState("");
+  // const [description, setDescription] = useState("");
+// console.log(images)
   const handleFileUpload = () => {
     const fileInput = document.getElementById("fileInput");
     fileInput?.click();
   };
 
+
+
+ 
+
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
+    setFileImages([...fileImages, file])
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
         // Add the image to the state
         setImages([...images, e.target.result]);
+
+        // console.log(images)
       };
       reader.readAsDataURL(file);
     }
+    // formData.append("images", file);
   };
 
   const removeImage = (index) => {
     // Create a copy of the images array without the selected image
+    setFileImages([...fileImages])
     const updatedImages = [...images];
+    const updatedFileImage = [...fileImages]
     updatedImages.splice(index, 1);
+    updatedFileImage.splice(index,1)
+    setFileImages(updatedFileImage)
     setImages(updatedImages);
   };
 
@@ -68,6 +122,7 @@ export const NewPost = (props: Props) => {
             </ModalHeader>
             <ModalCloseButton />
             <ModalBody className="flex flex-col gap-[32px]">
+              
               <Flex
                 onClick={handleFileUpload}
                 className="items-center cursor-pointer max-w-[200px] gap-[16px] mt-[46px]"
@@ -76,12 +131,25 @@ export const NewPost = (props: Props) => {
                 <Text className="text-[#C19008] text-[16px] font-bold leading-[20px]">
                   بارگذاری عکس ها
                 </Text>
-                <input
-                  type="file"
-                  id="fileInput"
-                  style={{ display: "none" }}
-                  onChange={handleImageUpload}
-                />
+                <Controller
+  name="post-photos" //  
+  control={control}
+  render={({ field }) => (
+    <input
+      type="file"
+      multiple
+      id="fileInput"
+      style={{ display: "none" }}
+      onChange={(e) => {
+        
+        field.onChange(e.target.files);
+        handleImageUpload(e);   
+      }}
+    />
+  )}
+/>
+
+
               </Flex>
               <Flex className=" gap-[8px] flex-wrap" id="images-container">
                 {images.map((image, index) => (
@@ -106,21 +174,58 @@ export const NewPost = (props: Props) => {
                 <Text className="text-[16px] text-[#17494D] font-medium">
                   توضیحات
                 </Text>
-                <textarea className="w-[100%] px-[13px] py-[12px] resize-none h-[100px] border-[1px] border-[#17494D] bg-[#F3F0EE] rounded-[8px]"></textarea>
-              </Flex>
+                
+                <Controller
+          name="description"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <textarea
+              {...field}
+              className="w-[100%] px-[13px] py-[12px] resize-none h-[100px] border-[1px] border-[#17494D] bg-[#F3F0EE] rounded-[8px]"
+            ></textarea>
+          )}
+        />              </Flex>
               <Flex className="flex flex-col gap-[8px]">
                 <Text className="text-[16px] text-[#17494D] font-medium">
                   تگ ها
                 </Text>
-                <Input borderColor="#17494D"></Input>
+                <Controller
+  name="tags"
+  control={control}
+  render={({ field }) => (
+    <Input
+      {...field}
+      borderColor="#17494D"
+      onChange={(e) => {
+        field.onChange(e);
+        // می‌توانید داده‌های فرم را به صورت برنامه‌ای تغییر دهید
+        // setValue("tags", e.target.value);
+      }}
+    />
+  )}
+/>
               </Flex>
               <Flex className="flex ml-[30px]  items-center gap-[15px] flex-row-reverse">
                 <Text className="text-[#17494D] text-[14px] font-medium">
                   فقط نمایش به دوستان نزدیک
                 </Text>
 
-                <Switch colorScheme="brand" size="lg" />
+                <Controller
+          name="closeFriends"
+          control={control}
+          defaultValue={false}
+          render={({ field }) => (
+            <Switch
+              {...field}
+              colorScheme="brand"
+              size="lg"
+              id="showToCloseFriends"
+            />
+          )}
+        />
               </Flex>
+              
             </ModalBody>
 
             <ModalFooter>
@@ -134,7 +239,7 @@ export const NewPost = (props: Props) => {
               <ButtonText
                 className="bg-[#C19008] rounded-[16px] text-[14px] py-[8px] px-[16px] font-normal text-[#FFF]"
                 type="submit"
-                onClick={onClose}
+                onClick={handleSubmit(submitForm)}
               >
                 ثبت عکس
               </ButtonText>
