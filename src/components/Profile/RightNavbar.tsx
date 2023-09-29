@@ -9,6 +9,7 @@ import {
   Avatar,
   Flex,
   Center,
+  useDisclosure,
 } from "@chakra-ui/react";
 import "../../App.css";
 import person from "/assets/images/person.png";
@@ -32,14 +33,14 @@ const RightNavbar = ({
   following = 0,
   userName = "@mahmz",
 }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   // const onClose: any(isOpen: any)=>{
   //   return setIsOpen(false)
   // }
   return (
     <>
-      <EditProfile isOpen={isOpen} />
+      <EditProfile isOpen={isOpen} onClose={onClose} />
       <Card maxW="sm" height={403} width={256} className="profile-card">
         <CardBody>
           <Flex
@@ -79,13 +80,11 @@ const RightNavbar = ({
               </Flex>
               <Flex mt={5} alignSelf={"center"}>
                 {/*Changed (a) tag to (Button)*/}
-                <Button>
+                <Button backgroundColor={"inherit"}>
                   <Image
                     className=""
                     src={edit}
-                    onClick={() => {
-                      setIsOpen(!isOpen);
-                    }}
+                    onClick={onOpen}
                   ></Image>
                 </Button>
               </Flex>

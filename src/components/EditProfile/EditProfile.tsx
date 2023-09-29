@@ -49,8 +49,6 @@ type FormValues = {
   bio: string;
 };
 export const EditProfile = (props: Props) => {
-  const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
   const form = useForm<FormValues>();
   const { register, handleSubmit } = form;
 
@@ -68,8 +66,6 @@ export const EditProfile = (props: Props) => {
           isOpen={props.isOpen}
           onClose={props.onClose}
           isCentered
-          initialFocusRef={initialRef}
-          finalFocusRef={finalRef}
         >
           <ModalOverlay />
           <ModalContent className="bg-[#f3f0ee]" maxHeight={962} maxWidth={375}>
@@ -176,6 +172,7 @@ export const EditProfile = (props: Props) => {
                 <ButtonText
                   className="bg-[#C19008] rounded-[16px] text-[14px] py-[8px] px-[16px] font-normal text-[#FFF]"
                   type="submit"
+                  onClick={props.onClose}
                 >
                   ثبت تغییرات
                 </ButtonText>
