@@ -17,6 +17,7 @@ import logo from "/assets/images/logo.png";
 import { LNavbar } from "../components/LNavbar/LNavbar.tsx";
 import { NewPost } from "../components/NewPost/NewPost.tsx";
 import axios from "axios";
+import { PostContainer } from "../components/PostContainer/PostContainer.tsx";
 // import { getPosts } from "../api/appApi.ts";
 interface Props {
   children?: ReactNode;
@@ -66,10 +67,10 @@ export const UserProfile = (props: Props) => {
           </Flex>
 
           <Flex className="">
-            <Flex className=" gap-8   flex flex-row h-[300px]">
-              <Flex className="w-[100%] max-w-5xl flex-wrap gap-[24px]  h-[300px] bg-white">
+            <Flex className=" gap-8   flex flex-row ">
+              <Flex className="w-[100%] max-w-5xl flex-wrap gap-[24px]   bg-white">
                 {props.children}
-                <Flex className="w-[232px] h-[232px] bg-black rounded-t-[24px]">
+                {/* <Flex className="w-[232px] h-[232px] bg-black rounded-t-[24px]">
 
                 </Flex>
                 <Flex className="w-[232px] h-[232px] bg-black rounded-t-[24px]">
@@ -80,7 +81,8 @@ export const UserProfile = (props: Props) => {
                 </Flex>
                 <Flex className="w-[232px] h-[232px] bg-black rounded-t-[24px]">
 
-                </Flex> 
+                </Flex>  */}
+                <PostContainer/>
                 
               </Flex>
               <LNavbar className="" />
