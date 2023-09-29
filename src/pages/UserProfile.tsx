@@ -70,18 +70,7 @@ export const UserProfile = (props: Props) => {
             <Flex className=" gap-8   flex flex-row ">
               <Flex className="w-[100%] max-w-5xl flex-wrap gap-[24px]   bg-white">
                 {props.children}
-                {/* <Flex className="w-[232px] h-[232px] bg-black rounded-t-[24px]">
-
-                </Flex>
-                <Flex className="w-[232px] h-[232px] bg-black rounded-t-[24px]">
-
-                </Flex>
-                <Flex className="w-[232px] h-[232px] bg-black rounded-t-[24px]">
-
-                </Flex>
-                <Flex className="w-[232px] h-[232px] bg-black rounded-t-[24px]">
-
-                </Flex>  */}
+               
                 <PostContainer/>
                 
               </Flex>

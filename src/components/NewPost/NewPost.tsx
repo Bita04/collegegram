@@ -28,35 +28,31 @@ import { set } from "lodash";
 export const NewPost = (props: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [images, setImages] = useState([]);
-  const [fileImages, setFileImages] = useState([])
+  const [fileImages, setFileImages] = useState([]);
 
   const submitForm = (fd) => {
-    console.log(fd['post-photos'][0])
-    console.log("##########")
-    console.log(fd['post-photos'])
-    const formData = new FormData()
-    fileImages.forEach(x => formData.append("post-photos",x))
-    formData.append("description", fd['description'])
-    formData.append("tags", fd['tags'])
-    formData.append("closeFriends", fd["closeFriends"])
-    
-   console.log(formData)
-    
-    
-    axios.post("https://collegegram-greedy-test.darkube.app/post", formData, {
-      headers: {
-        'content-type': 'multipart/form-data',
-        "authorization": localStorage.getItem("accessToken"),
-        "refresh-token" : localStorage.getItem("refreshToken")
+    console.log(fd["post-photos"][0]);
+    console.log("##########");
+    console.log(fd["post-photos"]);
+    const formData = new FormData();
+    fileImages.forEach((x) => formData.append("post-photos", x));
+    formData.append("description", fd["description"]);
+    formData.append("tags", fd["tags"]);
+    formData.append("closeFriends", fd["closeFriends"]);
 
+    console.log(formData);
 
-    
-
-      }
-    }).then((res) => {
-
-      console.log(res);
-    })
+    axios
+      .post("https://collegegram-greedy-test.darkube.app/post", formData, {
+        headers: {
+          "content-type": "multipart/form-data",
+          authorization: localStorage.getItem("accessToken"),
+          "refresh-token": localStorage.getItem("refreshToken"),
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      });
   };
   const {
     register,
@@ -64,22 +60,18 @@ export const NewPost = (props: Props) => {
     formState: { errors },
     control,
   } = useForm();
-  
+
   // const [tags, setTags] = useState("");
   // const [description, setDescription] = useState("");
-// console.log(images)
+  // console.log(images)
   const handleFileUpload = () => {
     const fileInput = document.getElementById("fileInput");
     fileInput?.click();
   };
 
-
-
- 
-
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
-    setFileImages([...fileImages, file])
+    setFileImages([...fileImages, file]);
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -95,21 +87,25 @@ export const NewPost = (props: Props) => {
 
   const removeImage = (index) => {
     // Create a copy of the images array without the selected image
-    setFileImages([...fileImages])
+    setFileImages([...fileImages]);
     const updatedImages = [...images];
-    const updatedFileImage = [...fileImages]
+    const updatedFileImage = [...fileImages];
     updatedImages.splice(index, 1);
-    updatedFileImage.splice(index,1)
-    setFileImages(updatedFileImage)
+    updatedFileImage.splice(index, 1);
+    setFileImages(updatedFileImage);
     setImages(updatedImages);
   };
 
   return (
     <div>
       <>
-      <ButtonText className="w-[110px] px-[10px]  text-[#FFF] text-[14px] font-medium bg-[#C38F00] rounded-[100px] h-[40px]" type="button" onClick={onOpen}>
-                    افزودن عکس
-                </ButtonText>
+        <ButtonText
+          className="w-[110px] px-[10px]  text-[#FFF] text-[14px] font-medium bg-[#C38F00] rounded-[100px] h-[40px]"
+          type="button"
+          onClick={onOpen}
+        >
+          افزودن عکس
+        </ButtonText>
 
         <Modal size="xl" isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
@@ -122,7 +118,6 @@ export const NewPost = (props: Props) => {
             </ModalHeader>
             <ModalCloseButton />
             <ModalBody className="flex flex-col gap-[32px]">
-              
               <Flex
                 onClick={handleFileUpload}
                 className="items-center cursor-pointer max-w-[200px] gap-[16px] mt-[46px]"
@@ -132,24 +127,21 @@ export const NewPost = (props: Props) => {
                   بارگذاری عکس ها
                 </Text>
                 <Controller
-  name="post-photos" //  
-  control={control}
-  render={({ field }) => (
-    <input
-      type="file"
-      multiple
-      id="fileInput"
-      style={{ display: "none" }}
-      onChange={(e) => {
-        
-        field.onChange(e.target.files);
-        handleImageUpload(e);   
-      }}
-    />
-  )}
-/>
-
-
+                  name="post-photos" //
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      type="file"
+                      multiple
+                      id="fileInput"
+                      style={{ display: "none" }}
+                      onChange={(e) => {
+                        field.onChange(e.target.files);
+                        handleImageUpload(e);
+                      }}
+                    />
+                  )}
+                />
               </Flex>
               <Flex className=" gap-[8px] flex-wrap" id="images-container">
                 {images.map((image, index) => (
@@ -174,37 +166,37 @@ export const NewPost = (props: Props) => {
                 <Text className="text-[16px] text-[#17494D] font-medium">
                   توضیحات
                 </Text>
-                
                 <Controller
-          name="description"
-          control={control}
-          defaultValue=""
-          render={({ field }) => (
-            <textarea
-              {...field}
-              className="w-[100%] px-[13px] py-[12px] resize-none h-[100px] border-[1px] border-[#17494D] bg-[#F3F0EE] rounded-[8px]"
-            ></textarea>
-          )}
-        />              </Flex>
+                  name="description"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <textarea
+                      {...field}
+                      className="w-[100%] px-[13px] py-[12px] resize-none h-[100px] border-[1px] border-[#17494D] bg-[#F3F0EE] rounded-[8px]"
+                    ></textarea>
+                  )}
+                />{" "}
+              </Flex>
               <Flex className="flex flex-col gap-[8px]">
                 <Text className="text-[16px] text-[#17494D] font-medium">
                   تگ ها
                 </Text>
                 <Controller
-  name="tags"
-  control={control}
-  render={({ field }) => (
-    <Input
-      {...field}
-      borderColor="#17494D"
-      onChange={(e) => {
-        field.onChange(e);
-        // می‌توانید داده‌های فرم را به صورت برنامه‌ای تغییر دهید
-        // setValue("tags", e.target.value);
-      }}
-    />
-  )}
-/>
+                  name="tags"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      borderColor="#17494D"
+                      onChange={(e) => {
+                        field.onChange(e);
+                        // می‌توانید داده‌های فرم را به صورت برنامه‌ای تغییر دهید
+                        // setValue("tags", e.target.value);
+                      }}
+                    />
+                  )}
+                />
               </Flex>
               <Flex className="flex ml-[30px]  items-center gap-[15px] flex-row-reverse">
                 <Text className="text-[#17494D] text-[14px] font-medium">
@@ -212,20 +204,19 @@ export const NewPost = (props: Props) => {
                 </Text>
 
                 <Controller
-          name="closeFriends"
-          control={control}
-          defaultValue={false}
-          render={({ field }) => (
-            <Switch
-              {...field}
-              colorScheme="brand"
-              size="lg"
-              id="showToCloseFriends"
-            />
-          )}
-        />
+                  name="closeFriends"
+                  control={control}
+                  defaultValue={false}
+                  render={({ field }) => (
+                    <Switch
+                      {...field}
+                      colorScheme="brand"
+                      size="lg"
+                      id="showToCloseFriends"
+                    />
+                  )}
+                />
               </Flex>
-              
             </ModalBody>
 
             <ModalFooter>
