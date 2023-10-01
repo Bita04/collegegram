@@ -7,10 +7,10 @@ export const authApi = axios.create({
   baseURL: BASE_URL,
 
 });
-type Inputs = {
-  authenticator: string;
-  password: string;
-};
+// type Inputs = {
+//   authenticator: string;
+//   password: string;
+// };
 
 type InputSignUp = {
   username: string;
@@ -27,9 +27,9 @@ export module AuthAPI {
     console.log(response);
     return response.data;
   };
-type Token = {
-  token: string
-};
+// type Token = {
+//   token: string
+// };
 authApi.defaults.headers.common['Content-Type'] = 'application/json';
 
   export const login = async (authenticator: string, password: string) => {

@@ -27,10 +27,16 @@ import { set } from "lodash";
 
 export const NewPost = (props: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [images, setImages] = useState([]);
-  const [fileImages, setFileImages] = useState([]);
+  const [images, setImages] = useState<string[]>([]);
+  const [fileImages, setFileImages] = useState<File[]>([]);
 
-  const submitForm = (fd) => {
+  const submitForm = (fd: {
+    "post-photos": FileList,
+    "description": string,
+    "tags": string,
+    "closeFriends": string
+
+  }) => {
     console.log(fd["post-photos"][0]);
     console.log("##########");
     console.log(fd["post-photos"]);
@@ -40,7 +46,7 @@ export const NewPost = (props: Props) => {
     formData.append("tags", fd["tags"]);
     formData.append("closeFriends", fd["closeFriends"]);
 
-    console.log(formData);
+    // console.log(formData);
 
     axios
       .post("https://collegegram-greedy-test.darkube.app/post", formData, {
@@ -59,7 +65,13 @@ export const NewPost = (props: Props) => {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm();
+  } = useForm<{
+    "post-photos": FileList,
+    "description": string,
+    "tags": string,
+    "closeFriends": string
+
+  }>();
 
   // const [tags, setTags] = useState("");
   // const [description, setDescription] = useState("");
@@ -69,23 +81,25 @@ export const NewPost = (props: Props) => {
     fileInput?.click();
   };
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files![0];
     setFileImages([...fileImages, file]);
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
         // Add the image to the state
-        setImages([...images, e.target.result]);
+        if (e.target) {
+          setImages([...images, e.target.result as string]);
+        }
 
-        // console.log(images)
+        console.log(images)
       };
       reader.readAsDataURL(file);
     }
     // formData.append("images", file);
   };
 
-  const removeImage = (index) => {
+  const removeImage = (index:number) => {
     // Create a copy of the images array without the selected image
     setFileImages([...fileImages]);
     const updatedImages = [...images];
@@ -191,8 +205,6 @@ export const NewPost = (props: Props) => {
                       borderColor="#17494D"
                       onChange={(e) => {
                         field.onChange(e);
-                        // می‌توانید داده‌های فرم را به صورت برنامه‌ای تغییر دهید
-                        // setValue("tags", e.target.value);
                       }}
                     />
                   )}
@@ -206,7 +218,7 @@ export const NewPost = (props: Props) => {
                 <Controller
                   name="closeFriends"
                   control={control}
-                  defaultValue={false}
+                  // defaultValue={false}
                   render={({ field }) => (
                     <Switch
                       {...field}

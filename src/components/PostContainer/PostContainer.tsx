@@ -2,11 +2,25 @@ import { Flex } from "@chakra-ui/react";
 import * as React from "react";
 import { getPosts } from "../../api/appApi";
 import { useEffect, useState } from "react";
-type Props = {};
-export const PostContainer = (props: Props) => {
-  const [posts, setPosts] = useState([]);
+type Posts = {
+    "posts": [],
+    "nextOffset": string,
+    
+};
+
+type Post = {
+    "photos": string [],
+    "description" ?: string,
+    "closeFriends": boolean,
+    "createdAt": string,
+    "tags": [
+        
+    ]
+}
+export const PostContainer = () => {
+  const [posts, setPosts] = useState<Post[]>([]);
   useEffect(() => {
-    getPosts(10, "0").then((res) => {
+    getPosts(10, 0, true).then((res) => {
       setPosts(res.posts);
     });
   }, []);
