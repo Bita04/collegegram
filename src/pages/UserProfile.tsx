@@ -21,6 +21,7 @@ import { PostContainer } from "../components/PostContainer/PostContainer.tsx";
 // import { getPosts } from "../api/appApi.ts";
 interface Props {
   children?: ReactNode;
+  Lnavbar?: boolean;
 }
 export const UserProfile = (props: Props) => {
   // useEffect(()=> {
@@ -68,13 +69,14 @@ export const UserProfile = (props: Props) => {
 
           <Flex className="">
             <Flex className=" gap-8   flex flex-row ">
-              <Flex className="w-[100%] max-w-5xl flex-wrap gap-[24px]   bg-white">
+              <Flex className="w-[100%] max-w-5xl  gap-[24px]   bg-white">
                 {props.children}
                
-                <PostContainer/>
+                
                 
               </Flex>
-              <LNavbar className="" />
+              {props.Lnavbar === false ? null : <LNavbar className="" />}
+            
             </Flex>
           </Flex>
         </Flex>

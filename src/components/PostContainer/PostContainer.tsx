@@ -27,7 +27,7 @@ export const PostContainer = () => {
   console.log(posts);
 
   return (
-    <Flex className="w-[100%] max-w-5xl flex-wrap gap-[24px]   bg-white">
+    <Flex className="w-[100%] max-w-5xl flex-wrap gap-[24px]  bg-white">
       {posts?.map((post) => (
         <Flex className="w-[232px] h-[232px] bg-black rounded-t-[24px]">
           <img

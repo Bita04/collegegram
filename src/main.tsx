@@ -16,6 +16,8 @@ import Error from "./pages/Error.tsx";
 import {UserProfile} from "./pages/UserProfile.tsx";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.tsx";
+import { FriendsProfile } from "./pages/FriendsProfile.tsx";
+import { PostContainer } from "./components/PostContainer/PostContainer.tsx";
 const queryClient = new QueryClient()
 
 
@@ -44,7 +46,14 @@ const router = createBrowserRouter([
   {
     path: "/profile",
 
-    element: <PrivateRoute children={<UserProfile />}  />,
+    element: <PrivateRoute children={<UserProfile>
+      <PostContainer/>
+    </UserProfile>}  />,
+  },
+  {
+    path: "/friend",
+
+    element: <PrivateRoute children={<FriendsProfile />}  />,
   },
 ]);
 
