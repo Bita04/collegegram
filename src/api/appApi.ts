@@ -48,9 +48,9 @@ export const getPosts = async (limit, nextOffset) => {
     
   };
 
-  export const getHomePosts = async () => {
+  export const getHomePosts = async (limit: number) => {
     
-      const response = await appApi.post(`/post/home}`,{}, {
+      const response = await appApi.get(`/post/home?limit=${limit}`,{
         headers: {
           
           "authorization": localStorage.getItem("accessToken"),

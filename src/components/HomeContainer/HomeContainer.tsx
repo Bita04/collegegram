@@ -6,16 +6,30 @@ import {Comment} from '../../../public/assets/icons/Comment';
 import {Bookmark} from '../../../public/assets/icons/Bookmark';
 import { Tag } from '../Tag/Tag';
 type Props = {
+    postData : []
     
 };
-export const HomeContainer = (props: Props) => {
+type HomePost = {
+    familyName : {
+        firstName: string,
+        lastName: string
+    },
+    id: number,
+    photos: string[],
+    tags:  {
+        title: string,
+        color: string
+    } []
+}
+export const HomeContainer = ({postData}: {
+    postData: HomePost[]
+}) => {
     return (
         <Flex className="w-[100%] max-w-6xl flex-wrap gap-[24px]   ">
          
-                 
-                 <Flex className="w-[360px] flex-col h-[522px] bg-[#ffffff]  rounded-t-[24px] rounded-b-[16px]">
+                 {postData.map(post => <Flex className="w-[360px] flex-col h-[522px] bg-[#ffffff]  rounded-t-[24px] rounded-b-[16px]">
                     <Flex className='w-[360px] h-[358px] rounded-t-[24px] bg-orange-700'>
-
+                        <img className=' rounded-[24px]' src={post.photos[0]} alt="" />
                     </Flex>
                     <Flex className='gap-[12px] p-[16px]'>
 
@@ -39,15 +53,32 @@ export const HomeContainer = (props: Props) => {
 
                     <Flex className='p-[16px] -mt-3'>
                         <span className='text-[#191919] text-[16px] font-medium'>
-                            امیر محمد مهری
+                            {post.familyName.firstName}
+                        </span>
+                        <span className='text-[#191919] text-[16px] font-medium'>
+                            {post.familyName.lastName}
                         </span>
                     </Flex>
                      <Flex className='p-[16px] -mt-3'>
-                        <Tag title='گیاه' color = "#008753"  />
+                        {post.tags.map(tag => <Tag title={tag.title} color = {tag.color} />
+)}
                      </Flex>
                     
 
-                    </Flex>
+                    </Flex>)}
+                 
+
+
+
+
+
+
+
+
+
+
+
+
                     <Flex className="w-[360px] h-[522px] bg-black rounded-t-[24px]">
                     
 
