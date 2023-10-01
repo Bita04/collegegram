@@ -34,6 +34,7 @@ const RightNavbar = ({
   userName = "@mahmz",
 }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  
 
   // const onClose: any(isOpen: any)=>{
   //   return setIsOpen(false)
