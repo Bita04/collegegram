@@ -51,6 +51,7 @@ function Login() {
     onSuccess: (data) => {
       console.log(data);
       localStorage.setItem("accessToken", data.accessToken)
+      localStorage.setItem("refresh-token", data['refresh-token']) 
       console.log(localStorage.getItem("accessToken"))
       navigate("/profile");
       

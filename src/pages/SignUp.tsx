@@ -59,7 +59,10 @@ function SignUp() {
   const { mutate: signUpUser } = useMutation(
     (userData: Inputs) => AuthAPI.signup(userData),
     {
-      onSuccess: (data) => {
+      onSuccess: (data) => 
+      {
+        localStorage.setItem("accessToken", data.accessToken)
+        localStorage.setItem("refresh-token", data['refresh-token']) 
         console.log(data);
         navigate("/profile");
       },
