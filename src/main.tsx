@@ -16,6 +16,7 @@ import Error from "./pages/Error.tsx";
 import {UserProfile} from "./pages/UserProfile.tsx";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.tsx";
+import MyExpolre from "./pages/MyExpolre.tsx";
 const queryClient = new QueryClient()
 
 
@@ -38,13 +39,22 @@ const router = createBrowserRouter([
     element: <ForgetPassword />,
   },
   {
+    path: "/myExplore",
+    element: <MyExpolre />,
+  },
+  {
     path: "/error",
-    element: <Error title="Not Found" subTitle="test" > It's failed </Error>,
+    element: (
+      <Error title="Not Found" subTitle="test">
+        {" "}
+        It's failed{" "}
+      </Error>
+    ),
   },
   {
     path: "/profile",
 
-    element: <PrivateRoute children={<UserProfile />}  />,
+    element: <PrivateRoute children={<UserProfile hasLNavbar={true} />} />,
   },
 ]);
 

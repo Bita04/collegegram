@@ -21,6 +21,7 @@ import { PostContainer } from "../components/PostContainer/PostContainer.tsx";
 // import { getPosts } from "../api/appApi.ts";
 interface Props {
   children?: ReactNode;
+  hasLNavbar:boolean;
 }
 export const UserProfile = (props: Props) => {
   // useEffect(()=> {
@@ -40,7 +41,7 @@ export const UserProfile = (props: Props) => {
           <RightMenu className="my-20" />
           <TreeIcon width={189} height={213} />
         </Flex>
-        <Flex className="flex  flex-col gap-[176px]">
+        <Flex className="flex  flex-col gap-[3n[2px]">
           <Flex minW="md" className="flex flex-row justify-between">
             <Flex className="flex- flex-col">
               <InputGroup>
@@ -67,14 +68,20 @@ export const UserProfile = (props: Props) => {
           </Flex>
 
           <Flex className="">
+<<<<<<< HEAD
             <Flex className=" gap-8   flex flex-row ">
               <Flex className="w-[100%] max-w-5xl flex-wrap gap-[24px]   bg-white">
                 {props.children}
                
                 <PostContainer/>
+=======
+            <Flex className=" gap-8   flex flex-row h-[300px]">
+                {props.children}
+>>>>>>> 66874aa (just the start)
                 
-              </Flex>
-              <LNavbar className="" />
+                
+              
+              {props.hasLNavbar ? <LNavbar/>:null }
             </Flex>
           </Flex>
         </Flex>
