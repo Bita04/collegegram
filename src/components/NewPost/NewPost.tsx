@@ -141,7 +141,7 @@ export const NewPost = (props: Props) => {
                   بارگذاری عکس ها
                 </Text>
                 <Controller
-                  name="post-photos" //
+                  name="post-photos" 
                   control={control}
                   render={({ field }) => (
                     <input

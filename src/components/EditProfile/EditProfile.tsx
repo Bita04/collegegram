@@ -1,4 +1,4 @@
-import React from "react";
+
 import gmailSignUp from "/assets/images/gmailSignUp.png";
 import keySignUp from "/assets/images/KeySignUp.svg";
 
@@ -30,7 +30,11 @@ import cras from "/assets/images/cras.svg";
 import memeberSignUp from "/assets/images/memberSignUp.svg";
 import load from "../../../public/assets/images/load.svg";
 import RightNavbar from "../Profile/RightNavbar";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import { SetStateAction, useEffect, useState } from "react";
+import person from "/assets/images/person.svg";
+import { getProfile ,setProfile } from "../../api/profile";
+
 
 type Props = {
   isOpen: boolean;
@@ -39,23 +43,46 @@ type Props = {
 // const onClose:boolean(isOpen:boolean)=>{
 //   return isOpen(false)
 // }
-type FormValues = {
-  firstname: string;
-  lastname: string;
+export type FormValues = {
+  Avatar:string,
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   confrimPassword: string;
-  private: boolean;
+  isPrivate: boolean;
   bio: string;
 };
 export const EditProfile = (props: Props) => {
   const form = useForm<FormValues>();
-  const { register, handleSubmit } = form;
+  const { register, handleSubmit ,control ,reset} = form;
+  const [diplaySelectedAvatar, setDiplaySelectedAvatar] = useState<string>("");
 
   const onSubmit = (data: FormValues) => {
     console.log("Form submitted", data);
+    setProfile(data);
+
   };
 
+
+
+const [value, setValue] = useState("");
+useEffect(() => {
+  getProfile().then((response) => setValue(response));
+}, []);
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files![0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (e.target) {
+          setDiplaySelectedAvatar(e.target.result as string);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   return (
     <div>
       <>
@@ -78,14 +105,45 @@ export const EditProfile = (props: Props) => {
                   className="flex flex-row justify-center margin-bottom-28 "
                   position={"relative"}
                 >
-                  <Avatar size="2xl" name="Segun Adebayo" src={Avatar} />
-                  <img src={load} className="absolute px-14 py-14  " />
+                  <Avatar
+                    size="2xl"
+                    name="Segun Adebayo"
+                    src={diplaySelectedAvatar || person}
+                  />
+                  <img
+                    src={load}
+                    className="absolute mx-12 my-12 bg-white rounded-full	px-2 py-2 "
+                    onClick={() => {
+                      const profileFileInput =
+                        document.getElementById("profileFileInput");
+                      reset({ Avatar: "" });
+                      profileFileInput?.click();
+                    }}
+                  />
+                  <Controller
+                    name="Avatar"
+                    control={control}
+                    render={({ field }) => (
+                      <input
+                        type="file"
+                        id="profileFileInput"
+                        style={{ display: "none" }}
+                        onChange={(e) => {
+                          field.onChange(e.target.files![0]);
+                          handleImageUpload(e);
+                        }}
+                      />
+                    )}
+                  />
                 </WrapItem>
                 <Text className="flex flex-row justify-center py-2">
                   عکس پروفایل
                 </Text>
 
-                <Text className="flex flex-row justify-center text-[#C19008] pb-6">
+                <Text className="flex flex-row justify-center text-[#C19008] pb-6" onClick={()=>{
+                   setDiplaySelectedAvatar(person);
+  
+                }}>
                   {" "}
                   <img src={cras} className="pl-2" />
                   حذف تصویر{" "}
@@ -106,14 +164,14 @@ export const EditProfile = (props: Props) => {
                       icon={memeberSignUp}
                       type="text"
                       width={262}
-                      register={register("firstname")}
+                      register={register("firstName")}
                     />
                     <InputText
                       placeHolder="نام خانوادگی "
                       icon={memeberSignUp}
                       type="text"
                       width={262}
-                      register={register("lastname")}
+                      register={register("lastName")}
                     />
 
                     <InputText
@@ -144,7 +202,7 @@ export const EditProfile = (props: Props) => {
                       id="isInvalid"
                       colorScheme="blackandWhite"
                       className="pl-2"
-                      {...register("private")}
+                      {...register("isPrivate")}
                     />
                     <FormLabel htmlFor="email-alerts" mb="0">
                       پیچ خصوصی باشه

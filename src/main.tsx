@@ -21,6 +21,7 @@ import { PostContainer } from "./components/PostContainer/PostContainer.tsx";
 
 const queryClient = new QueryClient()
 
+
 const router = createBrowserRouter([
   {
     path: "/",
