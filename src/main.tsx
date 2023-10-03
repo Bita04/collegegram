@@ -36,6 +36,10 @@ const router = createBrowserRouter([
     element: <ForgetPassword />,
   },
   {
+    path: "/myExplore",
+    element: <MyExpolre />,
+  },
+  {
     path: "/error",
     element: (
       <Error title="Not Found" subTitle="test">

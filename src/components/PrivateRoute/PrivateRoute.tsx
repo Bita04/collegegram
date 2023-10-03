@@ -13,9 +13,11 @@ export const PrivateRoute =  ({  children } : {
     const [isAuthenticated, setIsAuthenticated] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(true);
     useEffect(()=>{
+        // if(localStorage.getItem("accessToken")) {}
         console.log("in effect");
         
         setIsLoading(true);
+       
         verifyToken(localStorage.getItem("accessToken")!).then((res) => {
             if(res === 200) {
                 console.log("success");

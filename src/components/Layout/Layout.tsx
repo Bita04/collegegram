@@ -16,6 +16,8 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       // minHeight="100vh"
        className=' min-w-fit'
       backgroundColor="#F3F0EE"
+      className=" min-w-max max-w-full"
+
     >
       {children}
     </Flex>

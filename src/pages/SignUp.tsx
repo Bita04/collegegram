@@ -64,7 +64,9 @@ function SignUp() {
         localStorage.setItem("accessToken", data.accessToken)
         localStorage.setItem("refresh-token", data['refresh-token']) 
         console.log(data);
-        navigate("/profile");
+      // localStorage.setItem("accessToken", data.accessToken)
+      // console.log(localStorage.getItem("accessToken"))
+      navigate("/profile");
       },
     }
   );

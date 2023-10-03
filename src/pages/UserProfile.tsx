@@ -10,7 +10,7 @@ import { Layout } from "../components/Layout/Layout.tsx";
 import RightMenu from "../components/Profile/RightMenu.tsx";
 import RightNavbar from "../components/Profile/RightNavbar.tsx";
 import { TreeIcon } from "../icons/TreeIcon.tsx";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { SearchIcon } from "@chakra-ui/icons";
 import ButtonText from "../components/ui/button/Button.tsx";
 import logo from "/assets/images/logo.png";
@@ -24,7 +24,10 @@ interface Props {
 export const UserProfile = (props: Props) => {
   return (
     <Layout>
-      <Flex className="flex gap-[78px]   flex-row px-[64px] py-[52px]">
+      <Flex  className="flex  gap-[78px] w-[100%]  flex-row px-[64px] py-[52px]">
+        
+
+        
         <Flex flexDir={"column"}>
           <RightNavbar
             followers={0}
@@ -35,7 +38,8 @@ export const UserProfile = (props: Props) => {
           <RightMenu className="my-20" />
           <TreeIcon width={189} height={213} />
         </Flex>
-        <Flex className="flex  flex-col gap-[176px]">
+
+        <Flex className="flex  flex-col gap-[3n[2px]">
           <Flex minW="md" className="flex flex-row justify-between">
             <Flex className="flex- flex-col">
               <InputGroup>
@@ -72,7 +76,30 @@ export const UserProfile = (props: Props) => {
             </Flex>
           </Flex>
         </Flex>
-      </Flex>
+       
+
+       <Flex className="w-[100%]">
+       <Flex className=" gap-8 w-[100%]  flex flex-row   h-[400px]">
+            <Flex className="w-[100%] h-[400px] ">
+            {props.children}
+            
+
+            </Flex>
+            <LNavbar className="" />
+      
+
+</Flex>
+
+       </Flex>
+       
+
+
+        </Flex>
+        
+        </Flex>
+     
+     
+    
     </Layout>
   );
 };
