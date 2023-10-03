@@ -44,7 +44,7 @@ type Props = {
 //   return isOpen(false)
 // }
 export type FormValues = {
-  Avatar:string,
+  avatar:string,
   firstName: string;
   lastName: string;
   email: string;
@@ -116,12 +116,12 @@ useEffect(() => {
                     onClick={() => {
                       const profileFileInput =
                         document.getElementById("profileFileInput");
-                      reset({ Avatar: "" });
+                      reset({ avatar: "" });
                       profileFileInput?.click();
                     }}
                   />
                   <Controller
-                    name="Avatar"
+                    name="avatar"
                     control={control}
                     render={({ field }) => (
                       <input

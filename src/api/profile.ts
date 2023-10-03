@@ -16,15 +16,15 @@ export const setProfile = async (values:FormValues) => {
     formData.append('bio', values['bio'])
     formData.append('isPrivate', new Boolean(values['isPrivate']).toString())
     formData.append('password', values['password'])
-    formData.append('confrimPassword', values['confrimPassword'])
+    formData.append('confirmPassword', values['confrimPassword'])
     formData.append('email', values['email'])
     formData.append('lastName', values['lastName'])
     formData.append('firstName', values['firstName'])
-    formData.append('Avatar', values['Avatar'])
+    formData.append('avatar', values['avatar'])
 
 
 
-    const response = await appApi.post(`/user/editProfile`, formData,{
+    const response = await appApi.put(`/user/editProfile`, formData,{
 
         headers:{
             'Authorization':`${localStorage.getItem("accessToken")}`,
