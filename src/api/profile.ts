@@ -4,7 +4,12 @@ import { appApi } from "./appApi";
 
 
 export const getProfile = async () => {
-    const response = await appApi.get(`/user/getUser`);
+    const response = await appApi.get(`/user/getUser`, {
+      headers:{
+        'Authorization':`${localStorage.getItem("accessToken")}`,
+        'refresh-token':`${localStorage.getItem("refreshToken")}`,
+    }
+    });
     return response.data;
   };
 

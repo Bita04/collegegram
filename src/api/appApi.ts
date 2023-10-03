@@ -23,13 +23,14 @@ export const appApi = axios.create({
 //   console.log(res);
 // })
 
-export const getPosts = async (limit:number, nextOffset:string) => {
-  if(nextOffset === '0') {
-    const response = await appApi.post(`/post/user?limit=${limit}`,{}, {
+export const getPosts = async (limit:number, nextOffset:string, first: boolean ) => {
+  if(first) {
+    const response = await appApi.get(`/post/user?limit=${limit}`, {
       headers: {
         
         "authorization": localStorage.getItem("accessToken"),
         "refresh-token" : localStorage.getItem("refreshToken")
+
 
 
     
