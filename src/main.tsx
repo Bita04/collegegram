@@ -31,7 +31,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login/>,
+    element: <Login />,
   },
   {
     path: "/signup",
@@ -58,29 +58,20 @@ const router = createBrowserRouter([
   {
     path: "/profile",
 
-    element: <PrivateRoute children={<UserProfile>
-      <PostContainer/>
-    </UserProfile>}  />,
-  },
-  {
-    path: "/friend/:username",
-
-    element: <PrivateRoute children={<FriendsProfile />}  />,
-  },
-  {
-    path: "/profile",
-
-    element: <PrivateRoute children={<UserProfile Lnavbar={true}>
+    element: <PrivateRoute children={<UserProfile hasLNavbar={true}>
       <PostContainer/>
     </UserProfile>} />,
   },
   {
-    path: "/post/:id",
-    element: <UserProfile Lnavbar={false}>
+    path: "/post",
+    element: <UserProfile hasLNavbar={false}>
       <Post />
     </UserProfile>,
   },
-
+  {
+    path: "/home",
+    element: <Home/>
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
