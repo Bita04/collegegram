@@ -1,6 +1,6 @@
 import React from "react";
 import { UserProfile } from "./UserProfile";
-import MyUsersExplore from "../components/MyUsersExplore/MyUsersExplore";
+import MyUsersExplore from "../components/MyUserExplore/MyUserExplore";
 
 const MyExpolre = () => {
   return (
