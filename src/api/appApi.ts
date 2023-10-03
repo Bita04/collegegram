@@ -23,7 +23,7 @@ export const appApi = axios.create({
 //   console.log(res);
 // })
 
-export const getPosts = async (limit, nextOffset) => {
+export const getPosts = async (limit:number, nextOffset:string) => {
   if(nextOffset === '0') {
     const response = await appApi.post(`/post/user?limit=${limit}`,{}, {
       headers: {
@@ -61,6 +61,7 @@ export const getPosts = async (limit, nextOffset) => {
   
         }
       });
+      // console.log(response.data)
       return response.data;
       
   

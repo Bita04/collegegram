@@ -9,10 +9,16 @@ type Props = {
     
 };
 type HomePost = {
-    familyName : string,
+    familyName : {
+        firstName: string,
+        lastName: string
+    },
     id: number,
-    photos: [],
-    tags: []
+    photos: string[],
+    tags:  {
+        title: string,
+        color: string
+    } []
 }
 export const Home = (props: Props) => {
 const [homePost, setHomePost] = useState<HomePost[]>([])

@@ -25,7 +25,7 @@ export const HomeContainer = ({postData}: {
     postData: HomePost[]
 }) => {
     return (
-        <Flex className="w-[100%] max-w-6xl flex-wrap gap-[24px]   ">
+        <Flex className="w-[100%] max-w-5xl flex-wrap gap-[24px]   ">
          
                  {postData.map(post => <Flex className="w-[360px] flex-col h-[522px] bg-[#ffffff]  rounded-t-[24px] rounded-b-[16px]">
                     <Flex className='w-[360px] h-[358px] rounded-t-[24px] bg-orange-700'>
@@ -79,15 +79,15 @@ export const HomeContainer = ({postData}: {
 
 
 
-                    <Flex className="w-[360px] h-[522px] bg-black rounded-t-[24px]">
+                    <Flex className="w-[320px] h-[522px] bg-black rounded-t-[24px]">
                     
 
                     </Flex>
-                    <Flex className="w-[360px] h-[522px] bg-black rounded-t-[24px]">
+                    <Flex className="w-[320px] h-[522px] bg-black rounded-t-[24px]">
                     
 
                     </Flex>
-                    <Flex className="w-[360px] h-[522px] bg-black rounded-t-[24px]">
+                    <Flex className="w-[320px] h-[522px] bg-black rounded-t-[24px]">
                     
 
                     </Flex>
