@@ -13,10 +13,11 @@ import ForgetPassword from "./pages/ForgetPassword.tsx";
 import Error from "./pages/Error.tsx";
 import {UserProfile} from "./pages/UserProfile.tsx";
 import Post from "./components/Post";
-// import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.tsx";
-// import { QueryClient, QueryClientProvider } from "react-query";
+import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.tsx";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { PostContainer } from "./components/PostContainer/PostContainer.tsx";
 import { Home } from "./pages/Home.tsx";
+// import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.tsx";
 
 const queryClient = new QueryClient()
 
