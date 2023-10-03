@@ -14,11 +14,7 @@ import { theme } from './themes/Theme.ts';
 import ForgetPassword from "./pages/ForgetPassword.tsx";
 import Error from "./pages/Error.tsx";
 import {UserProfile} from "./pages/UserProfile.tsx";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.tsx";
-import MyExpolre from "./pages/MyExpolre.tsx";
-const queryClient = new QueryClient()
-
+import Post from "./components/Post";
 
 
 const router = createBrowserRouter([
@@ -55,6 +51,12 @@ const router = createBrowserRouter([
     path: "/profile",
 
     element: <PrivateRoute children={<UserProfile hasLNavbar={true} />} />,
+  },
+  {
+    path: "/post",
+    element: <UserProfile>
+      <Post />
+    </UserProfile>,
   },
 ]);
 
