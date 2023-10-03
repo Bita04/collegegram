@@ -7,7 +7,7 @@ interface Props {
 
 function PostImage({ imageUrl, className}: Props) {
   return (
-    <Image borderRadius={'24px 24px 0 0'} className={className} src={imageUrl} />
+    <Image  borderRadius={'24px 24px 0 0'} className={className} src={imageUrl} />
   )
 }
 

@@ -6,6 +6,8 @@ import Save from '../ui/save/Save';
 import Tags from './Tags';
 import InputText from '../ui/input/InputText';
 import Comment from './Comment';
+import {useState} from 'react'
+import { useForm, SubmitHandler } from "react-hook-form"
 
 
 type comment = string
@@ -16,8 +18,21 @@ interface Props {
     tags: object[];
     comments: comment[];
 }
+type Inputs = {
+  comment: string
+}
 
 function PostDetail({likes, saves, tags, comments}: Props) {
+  const[commentsPost, setCommentsPost] = useState<string[]>([])
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>()
+  const onSubmit: SubmitHandler<Inputs> = (data) => setCommentsPost([...commentsPost, data.comment])
+
+
   return (
     <>
     
@@ -32,16 +47,18 @@ function PostDetail({likes, saves, tags, comments}: Props) {
     <p className='w-[462px] color-secondary mb-[16px] leading-[32px]'>دکوراسیون داخلی به طور کلی به تزیینات و تجهیزات فضای داخلی در خانه‌ها، محل کار، مدارس و فضاهای عمومی گفته می شود.دکوراسیون داخلی مربوط به تمام جنبه‌های نورپردازی،رنگ،بافت،نگارگری،مبلمان و چیدمان،انتخاب کف‌پوش و نصب آن،انتخاب پرده،پنجره‌ها و اکسسوری‌ها می شود.</p>
     <Tags tags={[{name:'طبیعت', color:'green'}, {name:'عاشقانه', color: 'red'}]} />
 
-    <form>
+    <form onSubmit={handleSubmit(onSubmit)}>
     <Stack direction={'row'} alignItems={'center'} spacing={3} className='my-[50px]'>
         <Avatar w={'40px'} h={'40px'} name='Oshigaki Kisame' src='#' />
-        <Input borderRadius={'16px'} backgroundColor={'#fff'} border={'1px solid #CDCDCD'} className='  placeholder-[#CDCDCD]' placeholder='نظر خود را بنویسید' />
-        <button><Image w={'24px'} src={send} /></button>
+        <Input {...register('comment')} borderRadius={'16px'} backgroundColor={'#fff'} border={'1px solid #CDCDCD'} className='  placeholder-[#CDCDCD]' placeholder='نظر خود را بنویسید' />
+        <button ><Image w={'24px'} src={send} /></button>
     </Stack>
     </form>
 
-    <Stack>
-        <Comment username='مهشید منزه' createdAt={new Date()} likes={3} content='خیلی عکس قشنگ و جالبیه. جایی رو می‌شناسی که این دکور رو بسازن؟' />
+    <Stack className=' max-h-52 overflow-auto'>
+  {commentsPost.map(comment => <Comment username='مهشید منزه' createdAt={new Date()} likes={3} content={comment} />  )}
+
+{/* <Comment username='مهشید منزه' createdAt={new Date()} likes={3} content="" /> */}
     </Stack>
     </Flex>
     

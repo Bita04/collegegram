@@ -55,7 +55,7 @@ export const PostContainer = () => {
   <h1 className="text-[#17494D] p-3 text-[20px] font-bold">
     سلام به کالج گرام من خوش اومدی!
   </h1>
-  <Text className="w-[359px] text-[16px] h-[71px] font-normal text-[#17494D]  text-center">
+  <Text className="w-[359px] leading-[25px] text-[16px] h-[71px] font-normal text-[#17494D]  text-center">
   از اینجا به تمام محتواهایی مثل پست، ذخیره‌ها، پیام‌ها و... دسترسی داری کافیه بخش مرتبط رو از منوی سممت چپ انتخاب کنی. :)
   </Text>
   <Text className="mt-[80px] text-[16px] text-[#17494D] font-normal">حالا وقت گذاشتن اولین پست هست:)</Text>
