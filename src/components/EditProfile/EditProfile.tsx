@@ -9,9 +9,6 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-  Button,
   FormControl,
   FormLabel,
   WrapItem,
@@ -19,7 +16,6 @@ import {
   Switch,
   Text,
   Flex,
-  createIcon,
 } from "@chakra-ui/react";
 // import plusSvg from "/assets/images/plus.svg";
 // import InputText from "../ui/input/InputText";
@@ -29,9 +25,8 @@ import InputText from "../ui/input/InputText";
 import cras from "/assets/images/cras.svg";
 import memeberSignUp from "/assets/images/memberSignUp.svg";
 import load from "../../../public/assets/images/load.svg";
-import RightNavbar from "../Profile/RightNavbar";
 import { Controller, useForm } from "react-hook-form";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import person from "/assets/images/person.svg";
 import { getProfile ,setProfile } from "../../api/profile";
 
@@ -44,7 +39,7 @@ type Props = {
 //   return isOpen(false)
 // }
 export type FormValues = {
-  avatar:string,
+  avatar:FileList,
   firstName: string;
   lastName: string;
   email: string;
@@ -54,9 +49,9 @@ export type FormValues = {
   bio: string;
 };
 export const EditProfile = (props: Props) => {
-  const form = useForm<FormValues>();
-  const { register, handleSubmit ,control ,reset} = form;
+  const { register, handleSubmit, control} = useForm<FormValues>();
   const [diplaySelectedAvatar, setDiplaySelectedAvatar] = useState<string>("");
+  const fileInputRef =useRef<HTMLInputElement>(null);
 
   const onSubmit = (data: FormValues) => {
     console.log("Form submitted", data);
@@ -116,7 +111,7 @@ useEffect(() => {
                     onClick={() => {
                       const profileFileInput =
                         document.getElementById("profileFileInput");
-                      reset({ avatar: "" });
+                      // reset({ avatar: [] })
                       profileFileInput?.click();
                     }}
                   />
@@ -125,10 +120,14 @@ useEffect(() => {
                     control={control}
                     render={({ field }) => (
                       <input
+                      ref={fileInputRef}
                         type="file"
                         id="profileFileInput"
                         style={{ display: "none" }}
+                        // value={field.value}
+                        
                         onChange={(e) => {
+                          console.log(field.value)
                           field.onChange(e.target.files![0]);
                           handleImageUpload(e);
                         }}
@@ -142,9 +141,9 @@ useEffect(() => {
 
                 <Text className="flex flex-row justify-center text-[#C19008] pb-6" onClick={()=>{
                    setDiplaySelectedAvatar(person);
-  
+                  if (fileInputRef.current) fileInputRef.current.value = ""; 
                 }}>
-                  {" "}
+                  
                   <img src={cras} className="pl-2" />
                   حذف تصویر{" "}
                 </Text>
@@ -200,7 +199,7 @@ useEffect(() => {
                   >
                     <Switch
                       id="isInvalid"
-                      colorScheme="blackandWhite"
+                      colorScheme="gray"
                       className="pl-2"
                       {...register("isPrivate")}
                     />
