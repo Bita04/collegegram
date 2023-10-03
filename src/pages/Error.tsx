@@ -2,7 +2,7 @@ import { Container } from "@chakra-ui/react";
 import React from "react";
 import { TreeIconWithoutLeaf } from "../icons/TreeIconWithoutLeaf";
 import { Footer } from "../components/Footer/Footer";
-import ButtonText from "../components/ui/button/button";
+import ButtonText from "../components/ui/button/Button";
 
 type Props = {
   title: string;

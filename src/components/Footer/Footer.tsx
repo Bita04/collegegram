@@ -1,10 +1,11 @@
 
 import { Flex } from "@chakra-ui/react";
 import * as React from "react";
+
 import { TreeIcon } from "../../icons/TreeIcon";
 
 type Props = {
-
+  children: React.ReactNode;
 };
 export const Footer = (props: Props) => {
 
@@ -18,7 +19,7 @@ export const Footer = (props: Props) => {
       width="100%"
       height="440px"
     >
-      <TreeIcon />
+      <TreeIcon width={250} height={250} />
     </Flex>
   );
 };
