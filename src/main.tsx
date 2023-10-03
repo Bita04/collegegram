@@ -18,6 +18,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { PostContainer } from "./components/PostContainer/PostContainer.tsx";
 import { Home } from "./pages/Home.tsx";
 // import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.tsx";
+import Block from "./pages/Block.tsx"
 
 const queryClient = new QueryClient()
 
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login/>,
+    element: <Login />,
   },
   {
     path: "/signup",
@@ -55,19 +56,31 @@ const router = createBrowserRouter([
   {
     path: "/profile",
 
-    element: <PrivateRoute children={<UserProfile hasLNavbar={true}>
-      <PostContainer/>
-    </UserProfile>} />,
+    element: (
+      <PrivateRoute
+        children={
+          <UserProfile hasLNavbar={true}>
+            <PostContainer />
+          </UserProfile>
+        }
+      />
+    ),
   },
   {
     path: "/post",
-    element: <UserProfile hasLNavbar={false}>
-      <Post />
-    </UserProfile>,
+    element: (
+      <UserProfile hasLNavbar={false}>
+        <Post />
+      </UserProfile>
+    ),
   },
   {
     path: "/home",
-    element: <Home/>
+    element: <Home />,
+  },
+  {
+    path: "/blocked",
+    element: <Block />,
   },
 ]);
 
