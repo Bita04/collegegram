@@ -16,9 +16,7 @@ import ButtonText from "../components/ui/button/Button.tsx";
 import logo from "/assets/images/logo.png";
 import { LNavbar } from "../components/LNavbar/LNavbar.tsx";
 import { NewPost } from "../components/NewPost/NewPost.tsx";
-import axios from "axios";
 import { PostContainer } from "../components/PostContainer/PostContainer.tsx";
-// import { getPosts } from "../api/appApi.ts";
 interface Props {
   children?: ReactNode;
   hasLNavbar: boolean;
@@ -69,13 +67,12 @@ export const UserProfile = (props: Props) => {
 
           <Flex className="">
             <Flex className=" gap-8   flex flex-row ">
-              <Flex className="w-[100%] max-w-5xl flex-wrap gap-[24px]   bg-white">
                 {props.children}
-
-                <PostContainer />
-
-                {props.hasLNavbar ? <LNavbar /> : null}
-              </Flex>
+              
+                
+                
+              
+             {props.hasLNavbar ? <LNavbar /> : null}
             </Flex>
           </Flex>
         </Flex>

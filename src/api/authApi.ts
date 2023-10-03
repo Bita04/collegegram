@@ -5,7 +5,7 @@ const BASE_URL = 'https://collegegram-greedy-test.darkube.app';
 
 export const authApi = axios.create({
   baseURL: BASE_URL,
-
+  
 });
 // type Inputs = {
 //   authenticator: string;

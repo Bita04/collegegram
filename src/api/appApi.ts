@@ -23,50 +23,48 @@ export const appApi = axios.create({
 //   console.log(res);
 // })
 
-export const getPosts = async (limit: number, nextOffset:number, first: boolean) => 
-{
-  if(first) {
-    const response = await appApi.get(`/post/user?limit=${limit}`, {
-          headers: {
-            
-            "authorization": localStorage.getItem("accessToken"),
-            "refresh-token" : localStorage.getItem("refreshToken")
-    
-    
+export const getPosts = async (limit, nextOffset) => {
+  if(nextOffset === '0') {
+    const response = await appApi.post(`/post/user?limit=${limit}`,{}, {
+      headers: {
         
+        "authorization": localStorage.getItem("accessToken"),
+        "refresh-token" : localStorage.getItem("refreshToken")
+
+
     
-          }
-        });
-        return response.data
+
+      }
+    });
+    return response.data;
     
 
   }
-  else {
-    const response = await appApi.post(`/post/user?limit=${limit}&startTime=${new Date(nextOffset).getTime()}`);
+  else{
+    const response = await appApi.post(`/post/user?limit=${limit}&startTime=${nextOffset}`);
     return response.data;
 
   }
-  
-  console.log(new Date(nextOffset).getTime())
-  // if(nextOffset === '0') {
-  //   const response = await appApi.get(`/post/user?limit=${limit}`, {
-  //     headers: {
-        
-  //       "authorization": localStorage.getItem("accessToken"),
-  //       "refresh-token" : localStorage.getItem("refreshToken")
-
-
-    
-
-  //     }
-  //   });
-  //   return response.data;
-    
-
-  // }
-  // else{
-    
-
-  // }
     
   };
+
+  export const getHomePosts = async (limit: number) => {
+    
+      const response = await appApi.get(`/post/home?limit=${limit}`,{
+        headers: {
+          
+          "authorization": localStorage.getItem("accessToken"),
+          "refresh-token" : localStorage.getItem("refreshToken")
+  
+  
+      
+  
+        }
+      });
+      return response.data;
+      
+  
+    
+
+      
+    };

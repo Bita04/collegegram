@@ -8,14 +8,15 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { RtlProvider } from "./components/rtl-provider.tsx";
 import SignUp from "./pages/SignUp.tsx";
 import { NewPost } from "./components/NewPost/NewPost.tsx";
-import { theme } from './themes/Theme.ts';
-
-
+import { theme } from "./themes/Theme.ts";
+import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.tsx";
+import { QueryClient, QueryClientProvider } from "react-query";
 import ForgetPassword from "./pages/ForgetPassword.tsx";
 import Error from "./pages/Error.tsx";
-import {UserProfile} from "./pages/UserProfile.tsx";
-import Post from "./components/Post";
-
+import { UserProfile } from "./pages/UserProfile.tsx";
+import { Home } from "./pages/Home.tsx";
+import { PostContainer } from "./components/PostContainer/PostContainer.tsx";
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -50,25 +51,31 @@ const router = createBrowserRouter([
   {
     path: "/profile",
 
-    element: <PrivateRoute children={<UserProfile hasLNavbar={true} />} />,
+    element: (
+      <PrivateRoute
+        children={
+          <UserProfile hasLNavbar={true}>
+            <PostContainer />
+          </UserProfile>
+        }
+      />
+    ),
   },
   {
-    path: "/post",
-    element: <UserProfile>
-      <Post />
-    </UserProfile>,
+    path: "/home",
+
+    element: <Home />,
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-    <ChakraProvider theme={theme}>
-      <RtlProvider>
-        <RouterProvider router={router} />
-      </RtlProvider>
-    </ChakraProvider>
+      <ChakraProvider theme={theme}>
+        <RtlProvider>
+          <RouterProvider router={router} />
+        </RtlProvider>
+      </ChakraProvider>
     </QueryClientProvider>
-
   </React.StrictMode>
 );
