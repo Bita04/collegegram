@@ -47,13 +47,15 @@ const validationSchema = object({
 
 function Login() {
   const navigate = useNavigate();
-  // const validateToken = verifyToken(localStorage.getItem('accessToken')!).then(res => {
+ 
+  // if(localStorage.getItem('accessToken')) {
+  //    const validateToken = verifyToken(localStorage.getItem('accessToken')!).then(res => {
   //   if (res === 200) {
   //     navigate("/profile")
   //   }
    
   // })
-  // if(localStorage.getItem('accessToken')) {
+
 
   
   // }

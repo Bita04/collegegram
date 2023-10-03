@@ -13,10 +13,13 @@ import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.tsx";
 import { QueryClient, QueryClientProvider } from "react-query";
 import ForgetPassword from "./pages/ForgetPassword.tsx";
 import Error from "./pages/Error.tsx";
-import { UserProfile } from "./pages/UserProfile.tsx";
-import { Home } from "./pages/Home.tsx";
+import {UserProfile} from "./pages/UserProfile.tsx";
+import Post from "./components/Post";
+import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.tsx";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { PostContainer } from "./components/PostContainer/PostContainer.tsx";
-const queryClient = new QueryClient();
+
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -25,7 +28,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login />,
+    element: <Login/>,
   },
   {
     path: "/signup",
@@ -35,10 +38,10 @@ const router = createBrowserRouter([
     path: "/forget-password",
     element: <ForgetPassword />,
   },
-  {
-    path: "/myExplore",
-    element: <MyExpolre />,
-  },
+  // {
+  //   path: "/myExplore",
+  //   element: <MyExpolre />,
+  // },
   {
     path: "/error",
     element: (
@@ -51,20 +54,15 @@ const router = createBrowserRouter([
   {
     path: "/profile",
 
-    element: (
-      <PrivateRoute
-        children={
-          <UserProfile hasLNavbar={true}>
-            <PostContainer />
-          </UserProfile>
-        }
-      />
-    ),
+    element: <PrivateRoute children={<UserProfile hasLNavbar={true}>
+      <PostContainer/>
+    </UserProfile>} />,
   },
   {
-    path: "/home",
-
-    element: <Home />,
+    path: "/post",
+    element: <UserProfile hasLNavbar={false}>
+      <Post />
+    </UserProfile>,
   },
 ]);
 
