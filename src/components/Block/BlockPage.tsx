@@ -1,0 +1,24 @@
+import { Flex ,Text} from '@chakra-ui/react';
+import React from 'react';
+import UsersCard from '../UsersCard/UsersCard';
+
+const BlockPage = () => {
+    return (
+      <>
+        <Flex className="w-[100%] max-w-4xl flex-wrap gap-[24px]">
+          <Flex className="flex-col w-[359px] justify-center items-center">
+            <h1 className="text-[#17494D] p-3 text-[20px] font-bold">
+              مثل اینکه بلاک شدی!
+            </h1>
+            <Text className="w-[300px] leading-[30px] text-[16px] h-[160px] font-normal text-[#17494D]  text-center">
+              متاسفانه متین دیگه دوست نداره پست‌ها و استوری‌هاش رو باهات به
+              اشتراک بذاره. برو دنبال دوست جدید بگرد :)
+            </Text>
+          </Flex>
+        </Flex>
+        <UsersCard/>
+      </>
+    );
+};
+
+export default BlockPage;
