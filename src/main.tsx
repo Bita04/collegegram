@@ -19,6 +19,7 @@ import { PostContainer } from "./components/PostContainer/PostContainer.tsx";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { HomeContainer } from "./components/HomeContainer/HomeContainer.tsx";
 import { Home } from "./pages/Home.tsx";
+
 const queryClient = new QueryClient()
 
 // const queryClient = new QueryClient()
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <Home/>
+  },
+  {
+    path: "/private",
+    element: <Private />,
   },
 ]);
 
