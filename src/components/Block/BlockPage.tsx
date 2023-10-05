@@ -7,7 +7,7 @@ const BlockPage = () => {
     return (
       <>
         <Flex className="w-[100%] gap-[24px]  ">
-          <Flex className="flex-col w-full justify-center items-center">
+          <Flex className="flex-col w-[70%] justify-center items-center">
             <h1 className="text-[#17494D] p-3 text-[20px] font-bold">
               مثل اینکه بلاک شدی!
             </h1>
