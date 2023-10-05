@@ -22,6 +22,7 @@ const BlockPage = () => {
             followers={0}
             following={0}
             posts={0}
+            bottomNavigationColor='#456243'
           />
         </Flex>
       </>

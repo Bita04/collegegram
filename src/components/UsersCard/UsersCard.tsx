@@ -1,12 +1,21 @@
-import { Avatar, Card, Center, Divider, Flex, PropsOf, WrapItem ,Text } from '@chakra-ui/react';
-import React from 'react';
-import { number } from 'yup';
-import ButtonText from '../ui/button/Button';
-import post from "../../../public/assets/images/post.svg"
-import block from "../../../public/assets/images/block.svg"
-import pv from "../../../public/assets/images/pv.svg"
-import closeFriend from "../../../public/assets/images/closeFriend.svg"
-
+import {
+  Avatar,
+  Card,
+  Center,
+  Divider,
+  Flex,
+  PropsOf,
+  WrapItem,
+  Text,
+} from "@chakra-ui/react";
+import React from "react";
+import { number } from "yup";
+import ButtonText from "../ui/button/Button";
+import post from "../../../public/assets/images/post.svg";
+import block from "../../../public/assets/images/block.svg";
+import pv from "../../../public/assets/images/pv.svg";
+import closeFriend from "../../../public/assets/images/closeFriend.svg";
+import CloseFriendIcon from "../ui/svg/CloseFriendIcon";
 
 interface Props {
   name: string;
@@ -14,6 +23,8 @@ interface Props {
   followers: number;
   following: number;
   posts: number;
+  buttonText?: string;
+  bottomNavigationColor?: string;
 }
 const UsersCard = (props: Props) => {
   return (
@@ -55,7 +66,7 @@ const UsersCard = (props: Props) => {
             className="bg-[#C19008] rounded-[16px] text-[14px] w-[100px]  h-[30px] font-normal text-[#FFF] mb-10"
             type="submit"
           >
-            لغو درخواست
+            {props.buttonText ?? "لغو درخواست"}
           </ButtonText>
         </Flex>
         <Flex justifyContent={"center"} backgroundColor={"inherit"}>
@@ -72,8 +83,15 @@ const UsersCard = (props: Props) => {
             justifyContent={"center"}
             className="my-[66px] border border-[#CDCDCD]"
           >
-            <Flex direction={"row"} backgroundColor={"inherit"} gap={6}>
-              <img src={closeFriend} width={23} height={23} />
+            <Flex direction={"row"} backgroundColor={"inherit"} gap={6} alignItems={"center"}>
+              {/* <img src={closeFriend} width={23} height={23} /> */}
+              <CloseFriendIcon
+                fillColor={
+                  props.bottomNavigationColor
+                    ? props.bottomNavigationColor
+                    : undefined
+                }
+              />
               <img src={pv} width={23} height={23} />
               <img src={block} width={23} height={23} />
             </Flex>
