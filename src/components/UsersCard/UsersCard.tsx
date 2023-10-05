@@ -7,6 +7,7 @@ import {
   PropsOf,
   WrapItem,
   Text,
+  Button,
 } from "@chakra-ui/react";
 import React from "react";
 import { number } from "yup";
@@ -14,8 +15,9 @@ import ButtonText from "../ui/button/Button";
 import post from "../../../public/assets/images/post.svg";
 import block from "../../../public/assets/images/block.svg";
 import pv from "../../../public/assets/images/pv.svg";
-import closeFriend from "../../../public/assets/images/closeFriend.svg";
-import CloseFriendIcon from "../ui/svg/CloseFriendIcon";
+import CloseFriendIcon from "../../../public/assets/icons/CloseFriendIcon";
+import BlockIcon from "../../../public/assets/icons/BlockIcon";
+import PVIcon from "../../../public/assets/icons/PVIcon";
 
 interface Props {
   name: string;
@@ -24,7 +26,7 @@ interface Props {
   following: number;
   posts: number;
   buttonText?: string;
-  bottomNavigationColor?: string;
+  colorScheme?: string;
 }
 const UsersCard = (props: Props) => {
   return (
@@ -62,12 +64,15 @@ const UsersCard = (props: Props) => {
           </Text>
         </Flex>
         <Flex justifyContent={"center"} backgroundColor={"inherit"}>
-          <ButtonText
-            className="bg-[#C19008] rounded-[16px] text-[14px] w-[100px]  h-[30px] font-normal text-[#FFF] mb-10"
+          <Button
+            className="bg-[#C19008] rounded-[60px] text-[14px] w-[116px]  h-[40px] font-normal mb-10"
             type="submit"
+            borderRadius={60}
+            backgroundColor={props.colorScheme}
+            color={"white"}
           >
             {props.buttonText ?? "لغو درخواست"}
-          </ButtonText>
+          </Button>
         </Flex>
         <Flex justifyContent={"center"} backgroundColor={"inherit"}>
           <Flex direction={"column"}>
@@ -83,17 +88,22 @@ const UsersCard = (props: Props) => {
             justifyContent={"center"}
             className="my-[66px] border border-[#CDCDCD]"
           >
-            <Flex direction={"row"} backgroundColor={"inherit"} gap={6} alignItems={"center"}>
+            <Flex
+              direction={"row"}
+              backgroundColor={"inherit"}
+              gap={6}
+              alignItems={"center"}
+            >
               {/* <img src={closeFriend} width={23} height={23} /> */}
               <CloseFriendIcon
-                fillColor={
-                  props.bottomNavigationColor
-                    ? props.bottomNavigationColor
-                    : undefined
-                }
+                fillColor={props.colorScheme ? props.colorScheme : undefined}
               />
-              <img src={pv} width={23} height={23} />
-              <img src={block} width={23} height={23} />
+              <BlockIcon
+                fillColor={props.colorScheme ? props.colorScheme : undefined}
+              />
+              <PVIcon
+                fillColor={props.colorScheme ? props.colorScheme : undefined}
+              />
             </Flex>
           </Flex>
         </Flex>

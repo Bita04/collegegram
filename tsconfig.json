@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "public/assets/icons/BlockIcon.tsx", "public/assets/icons/CloseFriendIcon.tsx", "public/assets/icons/PVIcon.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
