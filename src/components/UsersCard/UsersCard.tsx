@@ -1,6 +1,5 @@
 import { Avatar, Card, Center, Divider, Flex, PropsOf, WrapItem ,Text } from '@chakra-ui/react';
 import React from 'react';
-import person from "/assets/images/person.svg";
 import { number } from 'yup';
 import ButtonText from '../ui/button/Button';
 import post from "../../../public/assets/images/post.svg"
@@ -10,45 +9,49 @@ import closeFriend from "../../../public/assets/images/closeFriend.svg"
 
 
 interface Props {
+  name: string;
   avatar: string;
-  name:string;
   followers: number;
   following: number;
-  posts:number;
+  posts: number;
 }
-const UsersCard = ({
-  avatar = person,
-  name = "متین دهقان",
-  followers = 0,
-  following = 0,
-  posts=81,
-}: Props) => {
+const UsersCard = (props: Props) => {
   return (
     <>
       <Card
         height={487}
         width={360}
-        backgroundColor={"#F1EBE3"}
-        className="border border--gray-300	border-[#CDCDCD]"
+        className="profile-card"
       >
-        <WrapItem className="overflow-visible flex justify-center bg-[inherit]">
-          <Avatar size="2xl" name="Segun Adebayo" backgroundColor={"Red"} />
+        <WrapItem className="overflow-visible flex  justify-center bg-[inherit] ">
+          <Avatar
+            size="xl"
+            name="Segun Adebayo"
+            backgroundColor={"Red"}
+            className="z-10 -translate-y-1/2"
+          />
         </WrapItem>
+        <Text className="flex justify-center -mt-6 mb-4">{props.name}</Text>
         <Flex
           fontSize={14}
           flexDirection={"row"}
           justifyContent={"center"}
           backgroundColor={"inherit"}
+          className="mb-8"
         >
-          <Text className={"color-secondary"}>{following} دنبال کننده</Text>
+          <Text className={"color-secondary"}>
+            {props.following} دنبال کننده
+          </Text>
           <Center height={15}>
             <Divider mx={3} className={"card-divider"} orientation="vertical" />
           </Center>
-          <Text className={"color-secondary"}>{followers} دنبال شونده</Text>
+          <Text className={"color-secondary"}>
+            {props.followers} دنبال شونده
+          </Text>
         </Flex>
         <Flex justifyContent={"center"} backgroundColor={"inherit"}>
           <ButtonText
-            className="bg-[#C19008] rounded-[16px] text-[14px] w-[100px]  h-[30px] font-normal text-[#FFF] "
+            className="bg-[#C19008] rounded-[16px] text-[14px] w-[100px]  h-[30px] font-normal text-[#FFF] mb-10"
             type="submit"
           >
             لغو درخواست
@@ -56,27 +59,25 @@ const UsersCard = ({
         </Flex>
         <Flex justifyContent={"center"} backgroundColor={"inherit"}>
           <Flex direction={"column"}>
-            <img src={post} width={25} height={25} />
-            {posts}
+            <img src={post} width={25} height={25} className="flex-col mb-2" />
+            <text className="mx-auto">{props.posts}</text>
           </Flex>
         </Flex>
-        <WrapItem
-          backgroundColor={"yellow"}
-          width={"212px"}
-          height={"72px"}
-          justifyContent={"center"}
-          alignItems={"center"}
-        >
+        <Flex justifyContent={"center"}>
           <Flex
-            direction={"row"}
+            backgroundColor={"#F3F0EE"}
+            width={"212px"}
+            height={"72px"}
             justifyContent={"center"}
-            backgroundColor={"inherit"}
+            className="my-[66px] border border-[#CDCDCD]"
           >
-            <img src={closeFriend} width={23} height={23} />
-            <img src={pv} width={23} height={23} />
-            <img src={block} width={23} height={23} />
+            <Flex direction={"row"} backgroundColor={"inherit"} gap={6}>
+              <img src={closeFriend} width={23} height={23} />
+              <img src={pv} width={23} height={23} />
+              <img src={block} width={23} height={23} />
+            </Flex>
           </Flex>
-        </WrapItem>
+        </Flex>
       </Card>
     </>
   );

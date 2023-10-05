@@ -1,12 +1,13 @@
-import { Flex ,Text} from '@chakra-ui/react';
+import { Flex ,Text, WrapItem} from '@chakra-ui/react';
 import React from 'react';
 import UsersCard from '../UsersCard/UsersCard';
+import person from "/assets/images/person.svg";
 
 const BlockPage = () => {
     return (
       <>
-        <Flex className="w-[100%] max-w-4xl flex-wrap gap-[24px]">
-          <Flex className="flex-col w-[359px] justify-center items-center">
+        <Flex className="w-[100%] gap-[24px]  ">
+          <Flex className="flex-col w-full justify-center items-center">
             <h1 className="text-[#17494D] p-3 text-[20px] font-bold">
               مثل اینکه بلاک شدی!
             </h1>
@@ -15,8 +16,14 @@ const BlockPage = () => {
               اشتراک بذاره. برو دنبال دوست جدید بگرد :)
             </Text>
           </Flex>
+          <UsersCard
+            name={"متین دهقان"}
+            avatar={person}
+            followers={0}
+            following={0}
+            posts={0}
+          />
         </Flex>
-        <UsersCard/>
       </>
     );
 };
