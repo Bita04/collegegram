@@ -19,6 +19,7 @@ import { PostContainer } from "./components/PostContainer/PostContainer.tsx";
 import { Home } from "./pages/Home.tsx";
 // import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.tsx";
 import Block from "./pages/Block.tsx"
+import Private from "./pages/Private.tsx";
 
 const queryClient = new QueryClient()
 
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
   {
     path: "/blocked",
     element: <Block />,
+  },
+  {
+    path: "/private",
+    element: <Private />,
   },
 ]);
 
