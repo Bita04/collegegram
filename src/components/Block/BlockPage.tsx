@@ -22,7 +22,8 @@ const BlockPage = () => {
           followers={0}
           following={0}
           posts={0}
-          bottomNavigationColor="#456243"
+          colorScheme="#A89F87"
+          buttonText="دنبال کردن"
         />
       </Flex>
     </>
