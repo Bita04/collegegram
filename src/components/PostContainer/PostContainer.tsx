@@ -1,7 +1,12 @@
 import { Flex, Text} from "@chakra-ui/react";
 import * as React from "react";
 import { getPosts } from "../../api/appApi";
-
+import {
+  useQuery,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "react-query";
 import { useEffect, useState } from "react";
 type Posts = {
     "posts": [],
@@ -19,16 +24,19 @@ type Post = {
     ]
 }
 export const PostContainer = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
+  // const [posts, setPosts] = useState<Post[]>([]);
   // const [isLoading, setIsLoading] = useState(false)
-  useEffect(() => {
+
+  const  { status, data, error, isFetching, isLoading } = useQuery("posts", () => getPosts(20, "0", true));
+
+  // useEffect(() => {
     
-    getPosts(10, 0, true).then((res) => {
-      setPosts(res.posts);
+  //   getPosts(10, "0", true).then((res) => {
+  //     setPosts(res.posts);
       
-    });
-  }, []);
-  console.log(posts);
+  //   });
+  // }, []);
+  console.log(data);
 
   return (
     <Flex className="w-[100%] max-w-4xl flex-wrap gap-[24px]">
@@ -48,7 +56,8 @@ export const PostContainer = () => {
 <Flex className="w-[200px] bg-black">
 
 </Flex> */}
-<Flex className=" min-w-[850px] justify-center items-center">
+
+{data?.posts?.length === 0 || isLoading ? <Flex className=" min-w-[850px] justify-center items-center">
 
 
 <Flex className="flex-col w-[359px] justify-center items-center">
@@ -61,16 +70,20 @@ export const PostContainer = () => {
   <Text className="mt-[80px] text-[16px] text-[#17494D] font-normal">حالا وقت گذاشتن اولین پست هست:)</Text>
   
 </Flex>
-</Flex>
-      {/* {  posts?.map((post) => (
-        <Flex className="w-[232px] h-[232px] bg-black rounded-t-[24px]">
-          <img
-            className="w-[232px] rounded-t-[24px] h-[232px]"
-            src={post.photos[0]}
-            alt=""
-          />
-        </Flex>
-      ))} */}
+</Flex>: 
+   data?.posts?.map((post) => (
+  <Flex className="w-[232px] h-[232px] bg-black rounded-t-[24px]">
+    <img
+      className="w-[232px] rounded-t-[24px] h-[232px]"
+      src={post.photos[0]}
+      alt=""
+    />
+  </Flex>
+))
+
+}
+
+     
       
      
     </Flex>
