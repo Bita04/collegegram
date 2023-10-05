@@ -1,91 +1,111 @@
-import { Flex, Text} from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import * as React from "react";
 import { getPosts } from "../../api/appApi";
-import {
-  useQuery,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "react-query";
-import { useEffect, useState } from "react";
-type Posts = {
-    "posts": [],
-    "nextOffset": string,
-    
-};
+import { useInfiniteQuery } from "react-query";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-type Post = {
-    "photos": string [],
-    "description" ?: string,
-    "closeFriends": boolean,
-    "createdAt": string,
-    "tags": [
-        
-    ]
-}
 export const PostContainer = () => {
-  // const [posts, setPosts] = useState<Post[]>([]);
-  // const [isLoading, setIsLoading] = useState(false)
+  const [offset, setOffset] = React.useState("");
+  const [hasMore, setHasMore] = React.useState(false);
+  const [first, setFirst] = React.useState(true);
+  const [orginalData, setOrginalData] = React.useState([]);
 
-  const  { status, data, error, isFetching, isLoading } = useQuery("posts", () => getPosts(20, "0", true));
-
-  // useEffect(() => {
-    
-  //   getPosts(10, "0", true).then((res) => {
-  //     setPosts(res.posts);
-      
-  //   });
-  // }, []);
-  console.log(data);
+  const {
+    status,
+    data,
+    error,
+    isFetching,
+    isLoading,
+    fetchNextPage,
+  } = useInfiniteQuery(
+    "posts",
+    ({ pageParam  }) => getPosts(3, pageParam, first),
+    {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+      onSuccess: (data) => {
+        // console.log(data.pages[data.pages.length-1])
+        console.log(data.pages)
+        // setOrginalData((prev) => [...prev, ...data.pages[data.pages.length-1]?.posts]);
+        if (data.pages[data.pages.length-1].hasMore) {
+          // console.log(data.pages[data.pages.length-1].nextOffset)
+          
+          // setOffset();
+          setHasMore(true);
+          setFirst(false)
+          
+        } else {
+          setHasMore(false);
+        }
+      },
+      // enabled: hasMore,
+    }
+  );
 
   return (
     <Flex className="w-[100%] max-w-4xl flex-wrap gap-[24px]">
-
-      {/* <Flex className="w-[200px] bg-black">
-
-      </Flex>
-      <Flex className="w-[200px] bg-black">
-
-</Flex>
-<Flex className="w-[200px] bg-black">
-
-</Flex>
-<Flex className="w-[200px] bg-black">
-
-</Flex>
-<Flex className="w-[200px] bg-black">
-
-</Flex> */}
-
-{data?.posts?.length === 0 || isLoading ? <Flex className=" min-w-[850px] justify-center items-center">
+      {false || isLoading ? (
+        <Flex className=" min-w-[850px] justify-center items-center">
+          <Flex className="flex-col w-[359px] justify-center items-center">
+            <h1 className="text-[#17494D] p-3 text-[20px] font-bold">
+              سلام به کالج گرام من خوش اومدی!
+            </h1>
+            <Text className="w-[359px] leading-[25px] text-[16px] h-[71px] font-normal text-[#17494D] text-center">
+              از اینجا به تمام محتواهایی مثل پست، ذخیره‌ها، پیام‌ها و... دسترسی داری کافیه بخش مرتبط رو از منوی سممت چپ انتخاب کنی. :)
+            </Text>
+            <Text className="mt-[80px] text-[16px] text-[#17494D] font-normal">
+              حالا وقت گذاشتن اولین پست هست:)
+            </Text>
+          </Flex>
+        </Flex>
+      ) : (
+       
 
 
-<Flex className="flex-col w-[359px] justify-center items-center">
-  <h1 className="text-[#17494D] p-3 text-[20px] font-bold">
-    سلام به کالج گرام من خوش اومدی!
-  </h1>
-  <Text className="w-[359px] leading-[25px] text-[16px] h-[71px] font-normal text-[#17494D]  text-center">
-  از اینجا به تمام محتواهایی مثل پست، ذخیره‌ها، پیام‌ها و... دسترسی داری کافیه بخش مرتبط رو از منوی سممت چپ انتخاب کنی. :)
-  </Text>
-  <Text className="mt-[80px] text-[16px] text-[#17494D] font-normal">حالا وقت گذاشتن اولین پست هست:)</Text>
-  
-</Flex>
-</Flex>: 
-   data?.posts?.map((post) => (
-  <Flex className="w-[232px] h-[232px] bg-black rounded-t-[24px]">
-    <img
-      className="w-[232px] rounded-t-[24px] h-[232px]"
-      src={post.photos[0]}
-      alt=""
-    />
-  </Flex>
-))
 
-}
+<InfiniteScroll
+className="flex-row max-w-5xl"
+    next={() => fetchNextPage({ pageParam: data?.pages[data.pages.length-1].nextOffset })}
+    hasMore={hasMore}
+    loader={<Text>Loading...</Text>}
+    dataLength={
+        data?.pages.reduce((total, page) => total + page.posts.length, 0) ||
+        0
+    }
+>
+<Flex className="w-[100%] max-w-4xl flex-wrap gap-[24px]">
 
-     
-      
-     
+{
+
+          
+          data?.pages?.map((page, index) => (
+            page.posts.map((post, index) => (
+              post.photos.map((photo, index) => (
+                <Flex
+                key={index}
+                className="w-[232px] h-[232px] bg-black rounded-t-[24px]"
+              >
+                <img
+                  className="w-[232px] rounded-t-[24px] h-[232px]"
+                  src={photo}
+                  alt=""
+                />
+              </Flex>
+
+              ))
+            ))
+           
+          ))
+          
+
+        }
+        </Flex>
+</InfiniteScroll>
+
+        
+         
+       
+      )}
     </Flex>
   );
 };

@@ -58,7 +58,8 @@ export const NewPost = (props: Props) => {
         },
       })
       .then((res) => {
-        queryClient.invalidateQueries('posts')
+        // queryClient.fetchInfiniteQuery('posts')
+        queryClient.refetchQueries('posts')
         onClose()
       });
   };
