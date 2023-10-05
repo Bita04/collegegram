@@ -61,7 +61,7 @@ export const UserProfile = (props: Props) => {
           <RightMenu className="my-20" />
           <TreeIcon width={189} height={213} />
         </Flex>
-        <Flex className="flex  flex-col gap-[176px]">
+        <Flex className="flex  flex-col gap-[176px] w-full">
           <Flex minW="md" className="flex flex-row justify-between">
             <Flex className="flex- flex-col">
               <InputGroup>
@@ -87,9 +87,9 @@ export const UserProfile = (props: Props) => {
             </Flex>
           </Flex>
 
-          <Flex className="">
-            <Flex className=" gap-8   flex flex-row ">
-              <Flex className="w-[100%] max-w-5xl  gap-[24px]   bg-white">
+          <Flex className="w-full">
+            <Flex className=" gap-8 flex flex-row w-full">
+              {/* <Flex className="w-[100%] max-w-5xl flex-wrap gap-[24px] "> */}
                 {props.children}
                
                 

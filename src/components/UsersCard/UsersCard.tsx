@@ -20,8 +20,9 @@ const UsersCard = (props: Props) => {
     <>
       <Card
         height={487}
-        width={360}
-        className="profile-card"
+        maxWidth={320}
+        minWidth={280}
+        className="profile-card w-2/5"
       >
         <WrapItem className="overflow-visible flex  justify-center bg-[inherit] ">
           <Avatar
