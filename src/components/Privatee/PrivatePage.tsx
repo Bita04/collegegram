@@ -1,23 +1,42 @@
 import React from 'react';
-import PrivateLayout from './PrivateLayout';
-import { Flex } from '@chakra-ui/react';
+import { Flex, WrapItem } from '@chakra-ui/react';
 import UsersCard from '../UsersCard/UsersCard';
+import person from "../../../public/assets/images/person.svg";
 
-export const PrivatePage = ({data}:{data :[number]}) => {
+export const PrivatePage = ({data}:{data :number}) => {
     return (
       <>
-        <Flex className="w-<[50%] h-[50%] gap-[26px]">
-          <Flex className="w-[25%] h-[355px] gap-x-[13px]">
-            <PrivateLayout />
+        <WrapItem className="w-full h-full">
+          <Flex
+            overflowY={"hidden"}
+            maxWidth={950}
+            direction={"row"}
+            flexWrap={"wrap"}
+            flex={"0 ,0 ,50%"}
+          >
+            {Array(data)
+              .fill(0)
+              .map((post) => (
+                <Flex
+                  backgroundColor={"rgba(196, 196, 196, 0.5)"}
+                  className="w-[360px] h-[355px] rounded-t-[10%] rounded-b-[10px] blur-sm  mr-[24px] mb-[24px]"
+                />
+              ))}
           </Flex>
-          <Flex className="w-[25%] h-[355px] gap-x-[13px]">
-            <PrivateLayout />
-          </Flex>
-          <Flex className="w-[25%] h-[355px] gap-x-[13px]">
-            <PrivateLayout />
-          </Flex>
-        </Flex>
+        
+            <UsersCard
+              colorScheme="#C38F00"
+              name={"بیتا بهادری"}
+              avatar={person}
+              followers={0}
+              following={0}
+              posts={0}
+            />
+        </WrapItem>
       </>
     );
 };
+
+
+
 
