@@ -77,6 +77,10 @@ const router = createBrowserRouter([
     path: "/private",
     element: <Private />,
   },
+  {
+    path: "/public",
+    element: <Public />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
