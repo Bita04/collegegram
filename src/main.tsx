@@ -20,6 +20,7 @@ import { Home } from "./pages/Home.tsx";
 // import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.tsx";
 import Block from "./pages/Block.tsx"
 import Private from "./pages/Private.tsx";
+import Public from "./pages/Public.tsx"
 
 const queryClient = new QueryClient()
 
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
   {
     path: "/private",
     element: <Private />,
+  },
+  {
+    path: "/public",
+    element: <Public />,
   },
 ]);
 
