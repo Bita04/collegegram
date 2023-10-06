@@ -8,7 +8,11 @@ import InputText from '../ui/input/InputText';
 import Comment from './Comment';
 import {useState} from 'react'
 import { useForm, SubmitHandler } from "react-hook-form"
+import { useInfiniteQuery, useMutation, useQuery } from 'react-query';
+import { AuthAPI } from '../../api/authApi';
+import { getComments } from '../../api/appApi';
 
+import InfiniteScroll from "react-infinite-scroll-component";
 
 type comment = string
 type tags = {
@@ -20,14 +24,14 @@ interface Props {
     likes: number;
     saves: number;
     tags: tags[];
-    comments: comment[];
+    id: number;
     description: string
 }
 type Inputs = {
   comment: string
 }
 
-function PostDetail({likes, saves, tags, comments, description}: Props) {
+function PostDetail({likes, saves, tags, id, description}: Props) {
   const[commentsPost, setCommentsPost] = useState<string[]>([])
   const {
     register,
@@ -35,9 +39,61 @@ function PostDetail({likes, saves, tags, comments, description}: Props) {
     watch,
     formState: { errors },
   } = useForm<Inputs>()
+  // const {
+  //   mutate: loginUser,
+  // } = useMutation((userData: Inputs) =>AuthAPI.login(userData.authenticator, userData.password), {
+  //   onSuccess: (data) => {
+  //     console.log(data);
+  //     localStorage.setItem("accessToken", data.accessToken)
+  //     localStorage.setItem("refresh-token", data['refresh-token']) 
+  //     console.log(localStorage.getItem("accessToken"))
+  //     navigate("/profile");
+      
+  //   }}
+  // )
+  
+
+  // const {data} = useQuery()
   const onSubmit: SubmitHandler<Inputs> = (data) => setCommentsPost([...commentsPost, data.comment])
 
+  const [first, setFirst] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
 
+  const [commentData, setCommentData] = useState([])
+  const {
+    status,
+    data:comments,
+    error,
+    isFetching,
+    isLoading,
+    fetchNextPage,
+  } = useInfiniteQuery(
+    "comments",
+    ({ pageParam  }) => getComments(+id!,3,pageParam, first),
+    {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+      onSuccess: (data) => {
+        // console.log(data.pages[data.pages.length-1])
+        // console.log(data.pages)
+        // setOrginalData((prev) => [...prev, ...data.pages[data.pages.length-1]?.posts]);
+        if (data.pages[data.pages.length-1].hasMore) {
+          // console.log(data.pages[data.pages.length-1].nextOffset)
+          // setCommentData((prev) => [...prev, ...data?.pages[data.pages.length-1]?.comments])
+          // setOffset();
+          // console.log(commentData)
+          setHasMore(true);
+          setFirst(false)
+          
+        } else {
+          setHasMore(false);
+        }
+      },
+      // enabled: hasMore,
+    }
+  );
+
+  console.log(comments)
   return (
     <>
     
@@ -60,11 +116,36 @@ function PostDetail({likes, saves, tags, comments, description}: Props) {
     </Stack>
     </form>
 
-    <Stack className=' max-h-52 overflow-auto'>
-  {commentsPost.map(comment => <Comment username='مهشید منزه' createdAt={new Date()} likes={3} content={comment} />  )}
+    
+    <InfiniteScroll
+className="flex-row max-w-5xl"
+    next={() => fetchNextPage({ pageParam: comments?.pages[comments.pages.length-1].nextOffset })}
+    hasMore={hasMore}
+    loader={<p>Loading...</p>}
+    dataLength={
+        comments?.pages.reduce((total, page) => total + page?.comments?.length, 0) ||
+        0
+    }
+>
+<Stack className=' max-h-52 overflow-auto'>
+    {
+       comments?.pages?.map((page, index) => (
+        page?.comments?.map((comment, index) => <Comment username={comment.userName} createdAt={comment.createdAt} likes={3} content={comment.content} /> 
+          
+          // console.log(comment)
+          // comment?.map((c, index) => (
+          //   <Comment username={c.userName} createdAt={c.createdAt} likes={3} content={c.content} /> 
 
+
+          // ))
+        )
+       
+      ))
+    }
+  </Stack>
+  </InfiniteScroll>
 {/* <Comment username='مهشید منزه' createdAt={new Date()} likes={3} content="" /> */}
-    </Stack>
+   
     </Flex>
     
     </>

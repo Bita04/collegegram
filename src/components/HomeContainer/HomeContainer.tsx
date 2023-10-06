@@ -5,6 +5,10 @@ import {Like} from '../../../public/assets/icons/Like';
 import {Comment} from '../../../public/assets/icons/Comment';
 import {Bookmark} from '../../../public/assets/icons/Bookmark';
 import { Tag } from '../Tag/Tag';
+import { getHomePosts } from '../../api/appApi';
+import InfiniteScroll from "react-infinite-scroll-component";
+
+import { useInfiniteQuery } from 'react-query';
 type Props = {
     postData : []
     
@@ -21,77 +25,178 @@ type HomePost = {
         color: string
     } []
 }
-export const HomeContainer = ({postData}: {
-    postData: HomePost[]
-}) => {
+export const HomeContainer = () => {
+
+    const [hasMore, setHasMore] = React.useState(false);
+  const [first, setFirst] = React.useState(true);
+
+    const {
+        status,
+        data,
+        error,
+        isFetching,
+        isLoading,
+        fetchNextPage,
+      } = useInfiniteQuery(
+        "homePosts",
+        ({ pageParam  }) => getHomePosts(3, pageParam, first),
+        {
+          keepPreviousData: true,
+          refetchOnWindowFocus: false,
+          onSuccess: (data) => {
+            // console.log(data.pages[data.pages.length-1])
+            console.log(data.pages)
+            // setOrginalData((prev) => [...prev, ...data.pages[data.pages.length-1]?.posts]);
+            if (data.pages[data.pages.length-1].hasMore) {
+              // console.log(data.pages[data.pages.length-1].nextOffset)
+              
+              // setOffset();
+              setHasMore(true);
+              setFirst(false)
+              
+            } else {
+              setHasMore(false);
+            }
+          },
+          // enabled: hasMore,
+        }
+      );
+
+    console.log(data?.pages)
     return (
-        <Flex className="w-[100%] max-w-5xl flex-wrap gap-[24px]   ">
+        data?.pages?.length === 0 ? <p>پستی وجود ندارد</p> :
+        <InfiniteScroll
+className="flex-row max-w-5xl"
+    next={() => fetchNextPage({ pageParam: data?.pages[data.pages.length-1].nextOffset })}
+    hasMore={hasMore}
+    loader={<p>Loading...</p>}
+    dataLength={
+        data?.pages.reduce((total, page) => total + page?.posts?.length, 0) ||
+        0
+    }
+>
+
+<Flex className="w-[100%] max-w-5xl flex-wrap gap-[24px]">
+
+
+{
+
+          
+data?.pages?.map((page, index) => (
+  page.posts.map((post, index) => ( post.photos.length === 1 ?
+    
+    post.photos.map((photo, index) => (
+      <Flex
+      onClick={() => handleClick(post.id)}
+      key={index}
+      className="w-[232px] cursor-pointer h-[232px] bg-black rounded-t-[24px]"
+    >
+      <img
+        className="w-[232px] rounded-t-[24px] h-[232px]"
+        src={photo}
+        alt=""
+      />
+    </Flex>
+
+    )) : 
+    
+      <Flex
+    onClick={() => handleClick(post.id)}
+    key={index}
+    className="w-[232px] flex justify-start cursor-pointer h-[232px] bg-black rounded-t-[24px]"
+  >
+    <Flex className="w-[64px] absolute z-10 bg-black h-[64px]">
+      
+    </Flex>
+      <img
+        className="min-w-[80px] rounded-[24px]  "
+        src={post.photos[0]}
+        alt=""
+      />
+   
+   </Flex>
+
+    
+    
+  ))
+ 
+))
+
+
+}
+
+  
          
-                 {postData.map(post => <Flex className="w-[360px] flex-col h-[522px] bg-[#ffffff]  rounded-t-[24px] rounded-b-[16px]">
-                    <Flex className='w-[360px] h-[358px] rounded-t-[24px] bg-orange-700'>
-                        <img className=' rounded-[24px]' src={post.photos[0]} alt="" />
-                    </Flex>
-                    <Flex className='gap-[12px] p-[16px]'>
 
-                        <Flex className='gap-[8px] items-center text-[#C38F00]'>
-                           <i><Like/></i>
-                           <span className='text-[14px] font-medium'>۱۳۸</span>
+         {/* {postData.map(post => <Flex className="w-[360px] flex-col h-[522px] bg-[#ffffff]  rounded-t-[24px] rounded-b-[16px]">
+            <Flex className='w-[360px] h-[358px] rounded-t-[24px] bg-orange-700'>
+                <img className=' rounded-[24px]' src={post.photos[0]} alt="" />
+            </Flex>
+            <Flex className='gap-[12px] p-[16px]'>
 
-                        </Flex>
-                        <Flex className='gap-[8px] items-center text-[#C38F00]'>
-                           <i><Bookmark/></i>
-                           <span className='text-[14px] font-medium'>۱۳۸</span>
+                <Flex className='gap-[8px] items-center text-[#C38F00]'>
+                   <i><Like/></i>
+                   <span className='text-[14px] font-medium'>۱۳۸</span>
 
-                        </Flex>
-                        <Flex className='gap-[8px] items-center text-[#C38F00]'>
-                           <i><Comment/></i>
-                           <span className='text-[14px] font-medium'>۱۳۸</span>
+                </Flex>
+                <Flex className='gap-[8px] items-center text-[#C38F00]'>
+                   <i><Bookmark/></i>
+                   <span className='text-[14px] font-medium'>۱۳۸</span>
 
-                        </Flex>
+                </Flex>
+                <Flex className='gap-[8px] items-center text-[#C38F00]'>
+                   <i><Comment/></i>
+                   <span className='text-[14px] font-medium'>۱۳۸</span>
 
-                    </Flex>
+                </Flex>
 
-                    <Flex className='p-[16px] -mt-3'>
-                        <span className='text-[#191919] text-[16px] font-medium'>
-                            {post.familyName.firstName}
-                        </span>
-                        <span className='text-[#191919] text-[16px] font-medium'>
-                            {post.familyName.lastName}
-                        </span>
-                    </Flex>
-                     <Flex className='p-[16px] -mt-3'>
-                        {post.tags.map(tag => <Tag title={tag.title} color = {tag.color} />
+            </Flex>
+
+            <Flex className='p-[16px] -mt-3'>
+                <span className='text-[#191919] text-[16px] font-medium'>
+                    {post.familyName.firstName}
+                </span>
+                <span className='text-[#191919] text-[16px] font-medium'>
+                    {post.familyName.lastName}
+                </span>
+            </Flex>
+             <Flex className='p-[16px] -mt-3'>
+                {post.tags.map(tag => <Tag title={tag.title} color = {tag.color} />
 )}
-                     </Flex>
-                    
-
-                    </Flex>)}
-                 
-
-
-
-
-
-
-
-
-
-
-
-
-                    <Flex className="w-[320px] h-[522px] bg-black rounded-t-[24px]">
-                    
-
-                    </Flex>
-                    <Flex className="w-[320px] h-[522px] bg-black rounded-t-[24px]">
-                    
-
-                    </Flex>
-                    <Flex className="w-[320px] h-[522px] bg-black rounded-t-[24px]">
-                    
-
-                    </Flex>
+             </Flex>
             
-        </Flex>
+
+            </Flex>)} */}
+         
+
+
+
+
+
+
+
+
+
+
+
+
+            {/* <Flex className="w-[320px] h-[522px] bg-black rounded-t-[24px]">
+            
+
+            </Flex> */}
+            {/* <Flex className="w-[320px] h-[522px] bg-black rounded-t-[24px]">
+            
+
+            </Flex> */}
+            {/* <Flex className="w-[320px] h-[522px] bg-black rounded-t-[24px]">
+            
+
+            </Flex> */}
+    
+</Flex>
+
+
+</InfiniteScroll>
+        
     );
 };

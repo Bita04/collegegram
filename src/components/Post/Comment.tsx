@@ -19,7 +19,7 @@ function Comment({username, createdAt, likes, content, parentId}: Props) {
         <Flex justifyContent={'space-between'} flexDir={'row'}>
             <div>
                 <span className="text-[12px] font-bold color-secondary">{username}</span>
-                <small className="mr-2">{createdAt.getFullYear()}</small>
+                <small className="mr-2">{createdAt}</small>
             </div>
             <Flex justifyContent={'space-between'}>
                 <Flex>

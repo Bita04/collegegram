@@ -30,6 +30,7 @@ export const PostContainer = () => {
     {
       keepPreviousData: true,
       refetchOnWindowFocus: false,
+
       onSuccess: (data) => {
         // console.log(data.pages[data.pages.length-1])
         console.log(data.pages)
@@ -86,7 +87,8 @@ className="flex-row max-w-5xl"
 
           
           data?.pages?.map((page, index) => (
-            page.posts.map((post, index) => (
+            page.posts.map((post, index) => ( post.photos.length === 1 ?
+              
               post.photos.map((photo, index) => (
                 <Flex
                 onClick={() => handleClick(post.id)}
@@ -100,7 +102,26 @@ className="flex-row max-w-5xl"
                 />
               </Flex>
 
-              ))
+              )) : 
+              
+                <Flex
+              onClick={() => handleClick(post.id)}
+              key={index}
+              className="w-[232px] flex justify-start cursor-pointer h-[232px] bg-black rounded-t-[24px]"
+            >
+              <Flex className="w-[64px] absolute z-10 bg-black h-[64px]">
+                
+              </Flex>
+                <img
+                  className="min-w-[80px] rounded-[24px]  "
+                  src={post.photos[0]}
+                  alt=""
+                />
+             
+             </Flex>
+          
+              
+              
             ))
            
           ))

@@ -22,14 +22,15 @@ type HomePost = {
 }
 export const Home = (props: Props) => {
 const [homePost, setHomePost] = useState<HomePost[]>([])
-    useEffect(()=>{
-        getHomePosts(10).then(res => setHomePost(res))
+
+    // useEffect(()=>{
+    //     getHomePosts(10).then(res => setHomePost(res))
         
 
-    }, [])
+    // }, [])
     return (
         <UserProfile hasLNavbar={false}>
-            <HomeContainer postData = {homePost} />
+            <HomeContainer  />
               {/* <PostContainer/> */}
 
         </UserProfile>
