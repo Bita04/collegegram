@@ -8,6 +8,7 @@ import {
   WrapItem,
   Text,
   Button,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
 import { number } from "yup";
@@ -18,6 +19,7 @@ import pv from "../../../public/assets/images/pv.svg";
 import CloseFriendIcon from "../../../public/assets/icons/CloseFriendIcon";
 import BlockIcon from "../../../public/assets/icons/BlockIcon";
 import PVIcon from "../../../public/assets/icons/PVIcon";
+import BlockModal from "../Block/BlockModal";
 
 interface Props {
   name: string;
@@ -28,9 +30,12 @@ interface Props {
   buttonText?: string;
   colorScheme?: string;
 }
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
 const UsersCard = (props: Props) => {
   return (
     <>
+      <BlockModal isOpen={isOpen} onClose={onClose} />
       <Card
         height={487}
         maxWidth={320}
@@ -98,9 +103,13 @@ const UsersCard = (props: Props) => {
               <CloseFriendIcon
                 fillColor={props.colorScheme ? props.colorScheme : undefined}
               />
-              <BlockIcon
-                fillColor={props.colorScheme ? props.colorScheme : undefined}
-              />
+              <i
+                onClick={onOpen}
+              >
+                <BlockIcon
+                  fillColor={props.colorScheme ? props.colorScheme : undefined}
+                />
+              </i>
               <PVIcon
                 fillColor={props.colorScheme ? props.colorScheme : undefined}
               />
