@@ -17,7 +17,6 @@ import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.tsx";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { PostContainer } from "./components/PostContainer/PostContainer.tsx";
 import { Home } from "./pages/Home.tsx";
-// import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.tsx";
 import Block from "./pages/Block.tsx"
 import Private from "./pages/Private.tsx";
 import Public from "./pages/Public.tsx"
@@ -82,15 +81,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/blocked",
-    element: <Block />,
+    element: <PrivateRoute children={<Block />} />,
   },
   {
     path: "/private",
-    element: <Private />,
+    element: <PrivateRoute children={<Private />} />,
   },
   {
     path: "/public",
-    element: <Public />,
+    element: <PrivateRoute children={<Public />} />,
   },
 ]);
 
