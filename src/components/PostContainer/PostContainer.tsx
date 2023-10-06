@@ -3,13 +3,16 @@ import * as React from "react";
 import { getPosts } from "../../api/appApi";
 import { useInfiniteQuery } from "react-query";
 import InfiniteScroll from "react-infinite-scroll-component";
-
+import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export const PostContainer = () => {
+  const navigate = useNavigate()
   const [offset, setOffset] = React.useState("");
   const [hasMore, setHasMore] = React.useState(false);
   const [first, setFirst] = React.useState(true);
   const [orginalData, setOrginalData] = React.useState([]);
   const handleClick = (postID) => {
+    navigate(`/post/${postID}`)
     
 
   }
@@ -86,9 +89,9 @@ className="flex-row max-w-5xl"
             page.posts.map((post, index) => (
               post.photos.map((photo, index) => (
                 <Flex
-                onClick={() => handleClick()}
+                onClick={() => handleClick(post.id)}
                 key={index}
-                className="w-[232px] h-[232px] bg-black rounded-t-[24px]"
+                className="w-[232px] cursor-pointer h-[232px] bg-black rounded-t-[24px]"
               >
                 <img
                   className="w-[232px] rounded-t-[24px] h-[232px]"
