@@ -1,10 +1,16 @@
 import { Flex, Text, WrapItem } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import UsersCard from "../UsersCard/UsersCard";
 import person from "/assets/images/person.svg";
+import { getOthersProfile } from "../../api/profile";
 
 const BlockPage = () => {
+  const [value, setValue] = useState("");
+  useEffect(() => {
+    getOthersProfile().then((response) => setValue(response));
+  }, []);
   return (
+    
     <>
       <Flex className="w-[100%] gap-[24px]  ">
         <Flex className="flex-col w-[70%] justify-center items-center overflow-y-scroll">
