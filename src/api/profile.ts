@@ -43,4 +43,19 @@ export const setProfile = async (values:FormValues) => {
 
 
 
+  export const getOthersProfile = async () => {
+      console.log("hello")
+      const response = await appApi.post(`/user/getUserProfile`, {userName:""} ,{
+      
+      headers:{
+        'Authorization':`${localStorage.getItem("accessToken")}`,
+        'refresh-token':`${localStorage.getItem("refreshToken")}`,
+    }
+    });
+    console.log("byyyyyyyyyyy")
+    return response.data;
+  };
+
+
+
     // profilePhoto.forEach((photo) => formData.append("Avatar", photo));
