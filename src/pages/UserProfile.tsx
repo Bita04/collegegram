@@ -18,12 +18,33 @@ import { LNavbar } from "../components/LNavbar/LNavbar.tsx";
 import { NewPost } from "../components/NewPost/NewPost.tsx";
 import axios from "axios";
 import { PostContainer } from "../components/PostContainer/PostContainer.tsx";
+import { useQuery } from "react-query";
+import { getInfoUser } from "../api/appApi.ts";
+import React from "react";
 // import { getPosts } from "../api/appApi.ts";
 interface Props {
   children?: ReactNode;
   Lnavbar?: boolean;
 }
+type User = {
+  avatar: string;
+  bio:  string;
+  firstName: string;
+  followerCount: number;
+  followingCount: number;
+  isPrivate: boolean;
+  lastName: string;
+  postCount: number;
+  username: string;
+};
 export const UserProfile = (props: Props) => {
+  const [userData, setUserData] = React.useState<User>();
+  const query = useQuery("user", () => getInfoUser(), {
+    onSuccess: (data) => {
+      console.log(data);
+      setUserData(data);
+    },
+  });
   // useEffect(()=> {
   //  getPosts()
 
@@ -33,10 +54,10 @@ export const UserProfile = (props: Props) => {
       <Flex className="flex gap-[78px]   flex-row px-[64px] py-[52px]">
         <Flex flexDir={"column"}>
           <RightNavbar
-            followers={0}
-            following={0}
-            userName="rahnema"
-            avatar={""}
+            followers={userData?.followerCount!}
+            following={userData?.followingCount!}
+            userName={userData?.username!}
+            avatar={userData?.avatar!}
           />
           <RightMenu className="my-20" />
           <TreeIcon width={189} height={213} />

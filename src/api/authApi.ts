@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const BASE_URL = 'https://collegegram-greedy-test.darkube.app';
+const BASE_URL = 'https://collegegramgreedy.darkube.app';
 
 export const authApi = axios.create({
   baseURL: BASE_URL,

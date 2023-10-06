@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const BASE_URL = 'https://collegegram-greedy-test.darkube.app';
+const BASE_URL = 'https://collegegramgreedy.darkube.app';
 
 export const appApi = axios.create({
   baseURL: BASE_URL,
@@ -70,3 +70,35 @@ export const getPosts = async (limit: number, nextOffset:number, first: boolean)
   // }
     
   };
+
+  export const getByUserName = async (username: string) => {
+   const response = await appApi.post("/user/getUserProfile", {
+      userName : username
+    }, {
+  headers: {
+    "authorization": localStorage.getItem("accessToken"),
+    "refresh-token" : localStorage.getItem("refreshToken")
+
+
+
+
+  }
+})
+return response.data
+
+  }
+
+  export const getInfoUser = async () => {
+    const response = await appApi.get("/user/getUser",  {
+   headers: {
+     "authorization": localStorage.getItem("accessToken"),
+     "refresh-token" : localStorage.getItem("refreshToken")
+ 
+ 
+ 
+ 
+   }
+ })
+ return response.data
+ 
+   }
