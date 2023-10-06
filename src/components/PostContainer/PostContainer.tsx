@@ -18,6 +18,13 @@ type Post = {
     ]
 }
 export const PostContainer = () => {
+
+  const handlePost = (postId) => {
+    
+
+    
+
+  }
   const [posts, setPosts] = useState<Post[]>([]);
   useEffect(() => {
     getPosts(10, 0, true).then((res) => {
