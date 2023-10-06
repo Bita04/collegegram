@@ -26,8 +26,8 @@ type User = {
 export const FriendsProfile = (props: Props) => {
   const { username } = useParams();
   const [userData, setUserData] = React.useState<User>();
-  console.log(username);
-  const query = useQuery("user", () => getByUserName(username!), {
+  // console.log(username);
+  const query = useQuery("anotherUser", async () => await getByUserName(username!), {
     onSuccess: (data) => {
       console.log(data);
       setUserData(data);

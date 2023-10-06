@@ -47,7 +47,7 @@ export const getPosts = async (limit: number, nextOffset:number, first: boolean)
 
   }
   
-  console.log(new Date(nextOffset).getTime())
+  // console.log(new Date(nextOffset).getTime())
   // if(nextOffset === '0') {
   //   const response = await appApi.get(`/post/user?limit=${limit}`, {
   //     headers: {
@@ -72,6 +72,7 @@ export const getPosts = async (limit: number, nextOffset:number, first: boolean)
   };
 
   export const getByUserName = async (username: string) => {
+    // console.log(username)
    const response = await appApi.post("/user/getUserProfile", {
       userName : username
     }, {
