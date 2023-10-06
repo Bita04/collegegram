@@ -79,42 +79,133 @@ className="flex-row max-w-5xl"
 <Flex className="w-[100%] max-w-5xl flex-wrap gap-[24px]">
 
 
+{/* {postData.map(post => <Flex className="w-[360px] flex-col h-[522px] bg-[#ffffff]  rounded-t-[24px] rounded-b-[16px]">
+                    <Flex className='w-[360px] h-[358px] rounded-t-[24px] bg-orange-700'>
+                        <img className=' rounded-[24px]' src={post.photos[0]} alt="" />
+                    </Flex>
+                    <Flex className='gap-[12px] p-[16px]'>
+
+                        <Flex className='gap-[8px] items-center text-[#C38F00]'>
+                           <i><Like/></i>
+                           <span className='text-[14px] font-medium'>۱۳۸</span>
+
+                        </Flex>
+                        <Flex className='gap-[8px] items-center text-[#C38F00]'>
+                           <i><Bookmark/></i>
+                           <span className='text-[14px] font-medium'>۱۳۸</span>
+
+                        </Flex>
+                        <Flex className='gap-[8px] items-center text-[#C38F00]'>
+                           <i><Comment/></i>
+                           <span className='text-[14px] font-medium'>۱۳۸</span>
+
+                        </Flex>
+
+                    </Flex>
+
+                    <Flex className='p-[16px] -mt-3'>
+                        <span className='text-[#191919] text-[16px] font-medium'>
+                            {post.familyName.firstName}
+                        </span>
+                        <span className='text-[#191919] text-[16px] font-medium'>
+                            {post.familyName.lastName}
+                        </span>
+                    </Flex>
+                     <Flex className='p-[16px] -mt-3'>
+                        {post.tags.map(tag => <Tag title={tag.title} color = {tag.color} />
+)}
+                     </Flex>
+                    
+
+                    </Flex>)} */}
+
+
+
 {
 
           
 data?.pages?.map((page, index) => (
   page.posts.map((post, index) => ( post.photos.length === 1 ?
     
-    post.photos.map((photo, index) => (
-      <Flex
-      onClick={() => handleClick(post.id)}
-      key={index}
-      className="w-[232px] cursor-pointer h-[232px] bg-black rounded-t-[24px]"
-    >
-      <img
-        className="w-[232px] rounded-t-[24px] h-[232px]"
-        src={photo}
-        alt=""
-      />
+    <Flex className="w-[360px] flex-col h-[522px] bg-[#ffffff]  rounded-t-[24px] rounded-b-[16px]">
+    <Flex className='w-[360px] h-[358px] rounded-t-[24px] bg-orange-700'>
+        <img className=' rounded-[24px]' src={post.photos[0]} alt="" />
+    </Flex>
+    <Flex className='gap-[12px] p-[16px]'>
+
+        <Flex className='gap-[8px] items-center text-[#C38F00]'>
+           <i><Like/></i>
+           <span className='text-[14px] font-medium'>۱۳۸</span>
+
+        </Flex>
+        <Flex className='gap-[8px] items-center text-[#C38F00]'>
+           <i><Bookmark/></i>
+           <span className='text-[14px] font-medium'>۱۳۸</span>
+
+        </Flex>
+        <Flex className='gap-[8px] items-center text-[#C38F00]'>
+           <i><Comment/></i>
+           <span className='text-[14px] font-medium'>۱۳۸</span>
+
+        </Flex>
+
     </Flex>
 
-    )) : 
-    
-      <Flex
-    onClick={() => handleClick(post.id)}
-    key={index}
-    className="w-[232px] flex justify-start cursor-pointer h-[232px] bg-black rounded-t-[24px]"
-  >
-    <Flex className="w-[64px] absolute z-10 bg-black h-[64px]">
-      
+    <Flex className='p-[16px] -mt-3'>
+        <span className='text-[#191919] text-[16px] font-medium'>
+            {post.familyName.firstName}
+        </span>
+        <span className='text-[#191919] text-[16px] font-medium'>
+            {post.familyName.lastName}
+        </span>
     </Flex>
-      <img
-        className="min-w-[80px] rounded-[24px]  "
-        src={post.photos[0]}
-        alt=""
-      />
-   
-   </Flex>
+     <Flex className='p-[16px] -mt-3'>
+        {post.tags.map(tag => <Tag title={tag.title} color = {tag.color} />
+)}
+     </Flex>
+    
+
+    </Flex> : 
+    
+    <Flex className="w-[360px] flex-col h-[522px] bg-[#ffffff]  rounded-t-[24px] rounded-b-[16px]">
+    <Flex className='w-[360px] h-[358px] rounded-t-[24px] bg-orange-700'>
+        <img className=' rounded-[24px]' src={post.photos[0]} alt="" />
+    </Flex>
+    <Flex className='gap-[12px] p-[16px]'>
+
+        <Flex className='gap-[8px] items-center text-[#C38F00]'>
+           <i><Like/></i>
+           <span className='text-[14px] font-medium'>۱۳۸</span>
+
+        </Flex>
+        <Flex className='gap-[8px] items-center text-[#C38F00]'>
+           <i><Bookmark/></i>
+           <span className='text-[14px] font-medium'>۱۳۸</span>
+
+        </Flex>
+        <Flex className='gap-[8px] items-center text-[#C38F00]'>
+           <i><Comment/></i>
+           <span className='text-[14px] font-medium'>۱۳۸</span>
+
+        </Flex>
+
+    </Flex>
+
+    <Flex className='p-[16px] -mt-3'>
+        <span className='text-[#191919] text-[16px] font-medium'>
+            {post.familyName.firstName}
+        </span>
+        <span className='text-[#191919] text-[16px] font-medium'>
+            {post.familyName.lastName}
+        </span>
+    </Flex>
+     <Flex className='p-[16px] gap-2 -mt-3'>
+        {post.tags.map(tag => <Tag title={tag.title} color = {tag.color} />
+)}
+     </Flex>
+    
+
+    </Flex>
 
     
     
