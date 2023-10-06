@@ -9,6 +9,10 @@ export const PostContainer = () => {
   const [hasMore, setHasMore] = React.useState(false);
   const [first, setFirst] = React.useState(true);
   const [orginalData, setOrginalData] = React.useState([]);
+  const handleClick = (postID) => {
+    
+
+  }
 
   const {
     status,
@@ -82,6 +86,7 @@ className="flex-row max-w-5xl"
             page.posts.map((post, index) => (
               post.photos.map((photo, index) => (
                 <Flex
+                onClick={() => handleClick()}
                 key={index}
                 className="w-[232px] h-[232px] bg-black rounded-t-[24px]"
               >

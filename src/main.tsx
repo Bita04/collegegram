@@ -60,11 +60,17 @@ const router = createBrowserRouter([
     </UserProfile>} />,
   },
   {
-    path: "/post",
+    path: "/post/:id",
     element: <UserProfile hasLNavbar={false}>
       <Post />
     </UserProfile>,
   },
+  // {
+  //   path: "/post/:id",
+  //   element: <UserProfile hasLNavbar={false}>
+  //     <Post  />
+  //   </UserProfile>,
+  // },
   {
     path: "/home",
     element: <Home/>

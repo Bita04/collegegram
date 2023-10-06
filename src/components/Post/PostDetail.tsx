@@ -11,18 +11,23 @@ import { useForm, SubmitHandler } from "react-hook-form"
 
 
 type comment = string
+type tags = {
+  title: string,
+  color: string
+}
 
 interface Props {
     likes: number;
     saves: number;
-    tags: object[];
+    tags: tags[];
     comments: comment[];
+    description: string
 }
 type Inputs = {
   comment: string
 }
 
-function PostDetail({likes, saves, tags, comments}: Props) {
+function PostDetail({likes, saves, tags, comments, description}: Props) {
   const[commentsPost, setCommentsPost] = useState<string[]>([])
   const {
     register,
@@ -44,8 +49,8 @@ function PostDetail({likes, saves, tags, comments}: Props) {
 
 
     <span className='my-[24px] color-secondary text-sm/[11px]'>۵ ماه پیش</span>
-    <p className='w-[462px] color-secondary mb-[16px] leading-[32px]'>دکوراسیون داخلی به طور کلی به تزیینات و تجهیزات فضای داخلی در خانه‌ها، محل کار، مدارس و فضاهای عمومی گفته می شود.دکوراسیون داخلی مربوط به تمام جنبه‌های نورپردازی،رنگ،بافت،نگارگری،مبلمان و چیدمان،انتخاب کف‌پوش و نصب آن،انتخاب پرده،پنجره‌ها و اکسسوری‌ها می شود.</p>
-    <Tags tags={[{name:'طبیعت', color:'green'}, {name:'عاشقانه', color: 'red'}]} />
+    <p className='w-[462px] color-secondary mb-[16px] leading-[32px]'>{description} </p>
+    <Tags tags={tags} />
 
     <form onSubmit={handleSubmit(onSubmit)}>
     <Stack direction={'row'} alignItems={'center'} spacing={3} className='my-[50px]'>

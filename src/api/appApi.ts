@@ -81,3 +81,26 @@ export const getPosts = async (limit:number, nextOffset:string, first: boolean )
 
       
     };
+
+
+    export const getPost = async (id: number ) => {
+    
+      const response = await appApi.get(`/post/${id}`,{
+        headers: {
+          
+          "authorization": localStorage.getItem("accessToken"),
+          "refresh-token" : localStorage.getItem("refreshToken")
+  
+  
+      
+  
+        }
+      });
+      // console.log(response.data)
+      return response.data;
+      
+  
+    
+
+      
+    };
