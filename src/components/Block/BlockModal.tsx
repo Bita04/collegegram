@@ -1,39 +1,62 @@
-import { useDisclosure, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter ,Text } from '@chakra-ui/react';
-import React from 'react';
-import BlockIcon from '../../../public/assets/icons/BlockIcon';
+import { useDisclosure, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Flex ,Text, WrapItem, Avatar } from "@chakra-ui/react";
+import BlockIcon from "../../../public/assets/icons/BlockIcon";
 
 
-type Props = {
-  isOpen: boolean;
-  onClose: () => void;
-};
-const BlockModal = (props:Props) => {
+type Props={
+    name?:string;
+    followers?:number;
+    isOpen:boolean;
+    onClose:()=>void;
+}
+export const BlockModal = (props:Props)=> {
+
   return (
     <>
-      <Button onClick={props.onClose}>Open Modal</Button>
+      {/* <Button onClick={onOpen}>Open Modal</Button> */}
 
       <Modal isOpen={props.isOpen} onClose={props.onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader className='flex-col flex justify-center'>
-            <BlockIcon/>
-            <Text>بلاک</Text>
+          <ModalHeader className="flex justify-normal">
+            <Flex direction={"column"}>
+              <BlockIcon />
+              <Text>بلاک</Text>
+            </Flex>
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            
+            <WrapItem>
+              <Avatar size="xl" name="Profile" backgroundColor={"pink"} />
+              <Text>{props.name}</Text>
+              <Text>`${props.followers} دنبال‌کننده`</Text>
+            </WrapItem>
+            <WrapItem>
+              <h1>مطمئنی می‌خوای متین رو بلاک کنی؟</h1>
+              <Text>
+                اگر بلاکش کنی دیگه نمی‌تونه بهت پیام بده و پست‌هات رو ببینه.
+                قابلیت لایک کردن و کامنت گذاشتن زیر پست‌های تو هم براش مسدود
+                میشه.
+              </Text>
+            </WrapItem>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={props.onClose}>
-              Close
+            <Button
+              className=" rounded-[16px] text-[14px] py-[8px] px-[16px] font-normal "
+              mr={3}
+              onClick={props.onClose}
+            >
+              نه پشیمونم
             </Button>
-            <Button variant="ghost">Secondary Action</Button>
+            <Button
+              variant="ghost"
+              className="bg-[#C19008] rounded-[16px] text-[14px] py-[8px] px-[16px] font-normal " color={"white"}
+            >
+              آره، حتما
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
     </>
-  )
-};
-
-export default BlockModal;
+  );
+}

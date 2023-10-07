@@ -4,23 +4,17 @@ import {
   Center,
   Divider,
   Flex,
-  PropsOf,
   WrapItem,
   Text,
   Button,
   useDisclosure,
+
 } from "@chakra-ui/react";
-import React from "react";
-import { number } from "yup";
-import ButtonText from "../ui/button/Button";
 import post from "../../../public/assets/images/post.svg";
-import block from "../../../public/assets/images/block.svg";
-import pv from "../../../public/assets/images/pv.svg";
 import CloseFriendIcon from "../../../public/assets/icons/CloseFriendIcon";
 import BlockIcon from "../../../public/assets/icons/BlockIcon";
 import PVIcon from "../../../public/assets/icons/PVIcon";
-import BlockModal from "../Block/BlockModal";
-
+import { BlockModal } from "../Block/BlockModal";
 interface Props {
   name: string;
   avatar: string;
@@ -30,9 +24,9 @@ interface Props {
   buttonText?: string;
   colorScheme?: string;
 }
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
 const UsersCard = (props: Props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
       <BlockModal isOpen={isOpen} onClose={onClose} />
@@ -103,16 +97,14 @@ const UsersCard = (props: Props) => {
               <CloseFriendIcon
                 fillColor={props.colorScheme ? props.colorScheme : undefined}
               />
-              <i
-                onClick={onOpen}
-              >
-                <BlockIcon
-                  fillColor={props.colorScheme ? props.colorScheme : undefined}
-                />
-              </i>
               <PVIcon
                 fillColor={props.colorScheme ? props.colorScheme : undefined}
               />
+              <Button onClick={onOpen} backgroundColor={"inherit"}>
+                <BlockIcon
+                  fillColor={props.colorScheme ? props.colorScheme : undefined}
+                />
+              </Button>
             </Flex>
           </Flex>
         </Flex>

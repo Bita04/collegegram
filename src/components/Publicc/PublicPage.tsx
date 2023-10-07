@@ -1,4 +1,3 @@
-import React from "react";
 import { Flex, WrapItem } from "@chakra-ui/react";
 import UsersCard from "../UsersCard/UsersCard";
 import person from "../../../public/assets/images/person.svg";
@@ -16,7 +15,7 @@ const PrivatePage = ({ data }: { data: number }) => {
         >
           {Array(data)
             .fill(0)
-            .map((post) => (
+            .map((posts) => (
               <Flex
                 className="w-[360px] h-[355px] rounded-t-[10%] rounded-b-[10px] blur-sm  mr-[24px] mb-[24px]"
               />
