@@ -16,9 +16,10 @@ import Post from "./components/Post";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.tsx";
 import { FriendsProfile } from "./pages/FriendsProfile.tsx";
 import { PostContainer } from "./components/PostContainer/PostContainer.tsx";
+import { QueryClient, QueryClientProvider } from "react-query";
 const queryClient = new QueryClient()
 
-const queryClient = new QueryClient()
+// const queryClient = new QueryClient()
 
 
 const router = createBrowserRouter([
@@ -63,6 +64,20 @@ const router = createBrowserRouter([
 
     element: <PrivateRoute children={<FriendsProfile />}  />,
   },
+  {
+    path: "/profile",
+
+    element: <PrivateRoute children={<UserProfile Lnavbar={true}>
+      <PostContainer/>
+    </UserProfile>} />,
+  },
+  {
+    path: "/post/:id",
+    element: <UserProfile Lnavbar={false}>
+      <Post />
+    </UserProfile>,
+  },
+
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
