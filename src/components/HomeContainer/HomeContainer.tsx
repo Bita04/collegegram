@@ -66,7 +66,7 @@ export const HomeContainer = () => {
     return (
         data?.pages?.length === 0 ? <p>پستی وجود ندارد</p> :
         <InfiniteScroll
-className="flex-row max-w-5xl"
+className="flex-row max-w-4xl"
     next={() => fetchNextPage({ pageParam: data?.pages[data.pages.length-1].nextOffset })}
     hasMore={hasMore}
     loader={<p>Loading...</p>}
@@ -128,8 +128,8 @@ data?.pages?.map((page, index) => (
   page.posts.map((post, index) => ( post.photos.length === 1 ?
     
     <Flex className="w-[360px] flex-col h-[522px] bg-[#ffffff]  rounded-t-[24px] rounded-b-[16px]">
-    <Flex className='w-[360px] h-[358px] rounded-t-[24px] bg-orange-700'>
-        <img className=' rounded-[24px]' src={post.photos[0]} alt="" />
+    <Flex className='w-[360px] overflow-hidden h-[358px] rounded-t-[24px] bg-orange-700'>
+        <img className=' object-cover h-full w-full' src={post.photos[0]} alt="" />
     </Flex>
     <Flex className='gap-[12px] p-[16px]'>
 

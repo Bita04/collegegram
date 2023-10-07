@@ -50,7 +50,7 @@ export const UserProfile = (props: Props) => {
   // }, [])
   return (
     <Layout>
-      <Flex className="flex gap-[78px]   flex-row px-[64px] py-[52px]">
+      <Flex className="flex place-content-center gap-[78px]   flex-row px-[64px] py-[52px]">
         <Flex flexDir={"column"}>
           <RightNavbar
             followers={userData?.followerCount!}
@@ -89,7 +89,7 @@ export const UserProfile = (props: Props) => {
 
           <Flex className="">
             <Flex className=" gap-8   flex flex-row ">
-              <Flex className="w-[100%] max-w-5xl  gap-[24px]   bg-white">
+              <Flex className="w-[100%] max-w-5xl  gap-[24px]">
                 {props.children}
                
                 
