@@ -153,3 +153,23 @@ export const getPosts = async (limit:number, nextOffset:string, first: boolean )
       };
 
       
+      export const getByUserName = async (username: string) => {
+        // console.log(username)
+        const response = await appApi.get(`/user/getUserProfile/${username}`, {
+          headers: {
+            authorization: localStorage.getItem("accessToken"),
+            "refresh-token": localStorage.getItem("refreshToken"),
+          },
+        });
+        return response.data;
+      };
+      
+      export const getInfoUser = async () => {
+        const response = await appApi.get("/user/getUser", {
+          headers: {
+            authorization: localStorage.getItem("accessToken"),
+            "refresh-token": localStorage.getItem("refreshToken"),
+          },
+        });
+        return response.data;
+      };
