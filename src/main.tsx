@@ -17,6 +17,8 @@ import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.tsx";
 import { FriendsProfile } from "./pages/FriendsProfile.tsx";
 import { PostContainer } from "./components/PostContainer/PostContainer.tsx";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { HomeContainer } from "./components/HomeContainer/HomeContainer.tsx";
+import { Home } from "./pages/Home.tsx";
 const queryClient = new QueryClient()
 
 // const queryClient = new QueryClient()
@@ -39,10 +41,11 @@ const router = createBrowserRouter([
     path: "/forget-password",
     element: <ForgetPassword />,
   },
-  // {
-  //   path: "/myExplore",
-  //   element: <MyExpolre />,
-  // },
+  {
+    path: "/home",
+    element: <Home/>
+  },
+
   {
     path: "/error",
     element: (
