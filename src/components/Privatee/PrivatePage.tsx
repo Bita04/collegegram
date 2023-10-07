@@ -5,10 +5,7 @@ import { useState, useEffect } from 'react';
 import { getOthersProfile } from '../../api/profile';
 
 export const PrivatePage = ({data}:{data :number}) => {
-    const [value, setValue] = useState("");
-    useEffect(() => {
-      getOthersProfile().then((response) => setValue(response));
-    }, []);
+
     return (
       <>
         <WrapItem className="w-full h-full">
@@ -30,12 +27,7 @@ export const PrivatePage = ({data}:{data :number}) => {
           </Flex>
         
             <UsersCard
-              colorScheme="#C38F00"
-              name={"بیتا بهادری"}
-              avatar={person}
-              followers={0}
-              following={0}
-              posts={0}
+              // colorScheme="#C38F00"
             />
         </WrapItem>
       </>

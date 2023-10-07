@@ -1,15 +1,39 @@
-import { useDisclosure, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Flex ,Text, WrapItem, Avatar } from "@chakra-ui/react";
+import {
+  useDisclosure,
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  Flex,
+  Text,
+  WrapItem,
+  Avatar,
+} from "@chakra-ui/react";
 import BlockIcon from "../../../public/assets/icons/BlockIcon";
+import { OthersProfile } from "../UsersCard/UsersCard";
+import { useMutation } from "react-query";
+import { blockApi } from "../../api/blockApi";
+import { useNavigate } from "react-router-dom";
 
-
-type Props={
-    name?:string;
-    followers?:number;
-    isOpen:boolean;
-    onClose:()=>void;
-}
-export const BlockModal = (props:Props)=> {
-
+type Props = {
+  name?: string;
+  followers?: number;
+  isOpen: boolean;
+  onClose: () => void;
+  profileData: OthersProfile;
+};
+export const BlockModal = (props: Props) => {
+    const navigate = useNavigate();
+    const blockMutation = useMutation({
+        mutationFn: blockApi,
+        onSuccess(data) {
+            navigate(`/profile/${props.profileData.username}`)
+        },
+    })
   return (
     <>
       {/* <Button onClick={onOpen}>Open Modal</Button> */}
@@ -27,8 +51,8 @@ export const BlockModal = (props:Props)=> {
           <ModalBody>
             <WrapItem className="flex-row">
               <Flex direction={"column"}>
-                <Text className="flex-row">{"بیتا بهادری"}</Text>
-                <Text className="flex-row">{10} دنبال‌کننده</Text>
+                <Text className="flex-row">{`${props.profileData.firstName} ${props.profileData.lastName}`}</Text>
+                <Text className="flex-row">{`دنبال کننده ${props.profileData.followerCount}`}</Text>
               </Flex>
               <Avatar
                 size="xl"
@@ -59,6 +83,7 @@ export const BlockModal = (props:Props)=> {
               variant="ghost"
               className="bg-[#C19008] rounded-[16px] text-[14px] py-[8px] px-[16px] font-normal "
               color={"white"}
+              onClick={() => blockMutation.mutate(props.profileData.username)}
             >
               آره، حتما
             </Button>
@@ -67,4 +92,4 @@ export const BlockModal = (props:Props)=> {
       </Modal>
     </>
   );
-}
+};

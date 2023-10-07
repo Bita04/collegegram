@@ -5,10 +5,7 @@ import person from "/assets/images/person.svg";
 import { getOthersProfile } from "../../api/profile";
 
 const BlockPage = () => {
-  const [value, setValue] = useState("");
-  useEffect(() => {
-    getOthersProfile().then((response) => setValue(response));
-  }, []);
+
   return (
     
     <>
@@ -23,11 +20,6 @@ const BlockPage = () => {
           </Text>
         </Flex>
         <UsersCard
-          name={"متین دهقان"}
-          avatar={person}
-          followers={0}
-          following={0}
-          posts={0}
           colorScheme="#A89F87"
           buttonText="دنبال کردن"
         />

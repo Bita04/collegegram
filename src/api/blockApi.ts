@@ -1,9 +1,7 @@
 import { appApi } from "./appApi";
 
-
-
-export const getProfile = async () => {
-    const response = await appApi.post(`/user/block`,{userName: ""} ,{
+export const blockApi = async (userName: string) => {
+    const response = await appApi.post(`/user/block`,{userName},{
       headers:{
         'Authorization':`${localStorage.getItem("accessToken")}`,
         'refresh-token':`${localStorage.getItem("refreshToken")}`,
@@ -11,3 +9,4 @@ export const getProfile = async () => {
     });
     return response.data;
   };
+ 
