@@ -152,6 +152,9 @@ export const getPosts = async (limit:number, nextOffset:string, first: boolean )
         
       };
 
+
+
+
       
       export const getByUserName = async (username: string) => {
         // console.log(username)
@@ -163,6 +166,42 @@ export const getPosts = async (limit:number, nextOffset:string, first: boolean )
         });
         return response.data;
       };
+      export const getByUserNamePosts = async (username:string ,limit:number, nextOffset:string, first: boolean ) => {
+        if(first) {
+          const response =  await appApi.get(`/post/user/${username}?limit=${limit}`, {
+            headers: {
+              
+              "authorization": localStorage.getItem("accessToken"),
+              "refresh-token" : localStorage.getItem("refreshToken")
+      
+      
+      
+          
+      
+            }
+          });
+          return response.data;
+          
+      
+        }
+        else{
+          const response = await appApi.get(`/post/user?limit=${limit}&startTime=${nextOffset}`, {
+            headers: {
+              
+              "authorization": localStorage.getItem("accessToken"),
+              "refresh-token" : localStorage.getItem("refreshToken")
+      
+      
+      
+          
+      
+            }
+          } );
+          return response.data;
+      
+        }
+          
+        };
       
       export const getInfoUser = async () => {
         const response = await appApi.get("/user/getUser", {

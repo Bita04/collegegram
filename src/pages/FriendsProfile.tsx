@@ -9,8 +9,9 @@ import { Favorite } from "../icons/Favorite";
 import { Comment } from "../icons/Comment";
 import { Block } from "../icons/Block";
 import { useParams } from "react-router-dom";
-import { useQuery } from "react-query";
-import { getByUserName } from "../api/appApi";
+import { useInfiniteQuery, useQuery } from "react-query";
+import { getByUserName, getByUserNamePosts } from "../api/appApi";
+import InfiniteScroll from "react-infinite-scroll-component";
 type Props = {};
 type User = {
   avatar: string;
@@ -23,9 +24,12 @@ type User = {
   postCount: number;
   username: string;
 };
+
 export const FriendsProfile = (props: Props) => {
   const { username } = useParams();
   const [userData, setUserData] = React.useState<User>();
+  const [hasMore, setHasMore] = React.useState(false);
+  const [first, setFirst] = React.useState(true);
   // console.log(username);
   const query = useQuery("anotherUser", async () => await getByUserName(username!), {
     onSuccess: (data) => {
@@ -33,14 +37,106 @@ export const FriendsProfile = (props: Props) => {
       setUserData(data);
     },
   });
+  const {
+    status,
+    data,
+    error,
+    isFetching,
+    isLoading,
+    fetchNextPage,
+  } = useInfiniteQuery(
+    "posts",
+    ({ pageParam  }) => getByUserNamePosts(username!,3, pageParam, first),
+    
+    {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+
+      onSuccess: (data) => {
+        // console.log(data.pages[data.pages.length-1])
+        console.log(data.pages)
+        // setOrginalData((prev) => [...prev, ...data.pages[data.pages.length-1]?.posts]);
+        if (data.pages[data.pages.length-1].hasMore) {
+          // console.log(data.pages[data.pages.length-1].nextOffset)
+          
+          // setOffset();
+          setHasMore(true);
+          setFirst(false)
+          
+        } else {
+          setHasMore(false);
+        }
+      },
+      // enabled: hasMore,
+    }
+  );
+  console.log(data)
 
   return (
     <UserProfile Lnavbar={false}>
-      <Flex className="w-[100%] max-w-5xl flex-wrap gap-[24px]   bg-white">
-        <Flex className="w-[310px] h-[354.5px] bg-black rounded-t-[24px]"></Flex>
+      <InfiniteScroll
+className="flex-row max-w-5xl"
+    next={() => fetchNextPage({ pageParam: data?.pages[data.pages.length-1].nextOffset })}
+    hasMore={hasMore}
+    loader={<p>Loading...</p>}
+    dataLength={
+        data?.pages.reduce((total, page) => total + page.posts.length, 0) ||
+        0
+    }
+>
+<Flex className="w-[100%] max-w-5xl flex-wrap gap-[24px]   bg-white">
+{
+
+          
+data?.pages?.map((page, index) => (
+  page.posts.map((post, index) => ( post.photos.length === 1 ?
+    
+    post.photos.map((photo, index) => (
+      <Flex
+      onClick={() => handleClick(post.id)}
+      key={index}
+      className="w-[232px] cursor-pointer h-[232px] bg-black rounded-t-[24px]"
+    >
+      <img
+        className="w-[232px] rounded-t-[24px] h-[232px]"
+        src={photo}
+        alt=""
+      />
+    </Flex>
+
+    )) : 
+    
+      <Flex
+    onClick={() => handleClick(post.id)}
+    key={index}
+    className="w-[310px] h-[354.5px] bg-black rounded-t-[24px] flex justify-start cursor-pointer"
+  >
+    <Flex className="w-[64px] absolute z-10 bg-black h-[64px]">
+      
+    </Flex>
+      <img
+        className="min-w-[80px] rounded-[24px]  "
+        src={post.photos[0]}
+        alt=""
+      />
+   
+   </Flex>
+
+    
+    
+  ))
+ 
+))
+
+
+} 
+ 
+        
 
         <Flex className="w-[310px] h-[354.5px] bg-black rounded-t-[24px]"></Flex>
       </Flex>
+</InfiniteScroll>
+     
       <Flex className="w-[400px] gap-8 flex-col items-center h-[487px] bg-[#F1EBE3] border-[#CDCDCD]">
         <Flex className="flex-col gap-6 -mt-12 justify-center items-center">
           <Flex>
