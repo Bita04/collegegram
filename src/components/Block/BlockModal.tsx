@@ -17,7 +17,7 @@ export const BlockModal = (props:Props)=> {
       <Modal isOpen={props.isOpen} onClose={props.onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader className="flex justify-normal">
+          <ModalHeader className="flex justify-center">
             <Flex direction={"column"}>
               <BlockIcon />
               <Text>بلاک</Text>
@@ -25,10 +25,17 @@ export const BlockModal = (props:Props)=> {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <WrapItem>
-              <Avatar size="xl" name="Profile" backgroundColor={"pink"} />
-              <Text>{props.name}</Text>
-              <Text>`${props.followers} دنبال‌کننده`</Text>
+            <WrapItem className="flex-row">
+              <Flex direction={"column"}>
+                <Text className="flex-row">{"بیتا بهادری"}</Text>
+                <Text className="flex-row">{10} دنبال‌کننده</Text>
+              </Flex>
+              <Avatar
+                size="xl"
+                name="Profile"
+                backgroundColor={"pink"}
+                className="mr-[60%] "
+              />
             </WrapItem>
             <WrapItem>
               <h1>مطمئنی می‌خوای متین رو بلاک کنی؟</h1>
@@ -50,7 +57,8 @@ export const BlockModal = (props:Props)=> {
             </Button>
             <Button
               variant="ghost"
-              className="bg-[#C19008] rounded-[16px] text-[14px] py-[8px] px-[16px] font-normal " color={"white"}
+              className="bg-[#C19008] rounded-[16px] text-[14px] py-[8px] px-[16px] font-normal "
+              color={"white"}
             >
               آره، حتما
             </Button>
