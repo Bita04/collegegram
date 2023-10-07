@@ -1,7 +1,7 @@
 import React from "react";
 import { UserProfile } from "./UserProfile";
 import PublicPage from "../components/Publicc/PublicPage"
-const Block = () => {
+const Public = () => {
   return (
     <UserProfile hasLNavbar={false}>
       <PublicPage data={10} />
@@ -9,4 +9,4 @@ const Block = () => {
   );
 };
 
-export default Block;
+export default Public;

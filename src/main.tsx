@@ -20,6 +20,7 @@ import { Home } from "./pages/Home.tsx";
 import Block from "./pages/Block.tsx"
 import Private from "./pages/Private.tsx";
 import Public from "./pages/Public.tsx"
+import Profile from "./pages/profile/[id].tsx";
 
 const queryClient = new QueryClient()
 
@@ -91,6 +92,10 @@ const router = createBrowserRouter([
     path: "/public",
     element: <PrivateRoute children={<Public />} />,
   },
+  {
+    path: "/profile/:id",
+    element: <PrivateRoute> <Profile /> </PrivateRoute>
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

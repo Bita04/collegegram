@@ -43,10 +43,9 @@ export const setProfile = async (values:FormValues) => {
 
 
 
-  export const getOthersProfile = async () => {
+  export const getOthersProfile = async (username: string) => {
       console.log("hello")
-      const response = await appApi.get(`/user/getUserProfile`,{
-      
+      const response = await appApi.get(`/user/getUserProfile/${username}`,{
       headers:{
         'Authorization':`${localStorage.getItem("accessToken")}`,
         'refresh-token':`${localStorage.getItem("refreshToken")}`,
