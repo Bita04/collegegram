@@ -17,61 +17,139 @@ export const appApi = axios.create({
 //   console.log(res);
 // })
 
-export const getPosts = async (
-  limit: number,
-  nextOffset: number,
-  first: boolean
-) => {
-  if (first) {
-    const response = await appApi.get(`/post/user?limit=${limit}`, {
+export const getPosts = async (limit:number, nextOffset:string, first: boolean ) => {
+  if(first) {
+    const response =  await appApi.get(`/post/user?limit=${limit}`, {
       headers: {
-        authorization: localStorage.getItem("accessToken"),
-        "refresh-token": localStorage.getItem("refreshToken"),
-      },
+        
+        "authorization": localStorage.getItem("accessToken"),
+        "refresh-token" : localStorage.getItem("refreshToken")
+
+
+
+    
+
+      }
     });
     return response.data;
-  } else {
-    const response = await appApi.post(
-      `/post/user?limit=${limit}&startTime=${new Date(nextOffset).getTime()}`
-    );
-    return response.data;
+    
+
   }
+  else{
+    const response = await appApi.get(`/post/user?limit=${limit}&startTime=${nextOffset}`, {
+      headers: {
+        
+        "authorization": localStorage.getItem("accessToken"),
+        "refresh-token" : localStorage.getItem("refreshToken")
 
-  // console.log(new Date(nextOffset).getTime())
-  // if(nextOffset === '0') {
-  //   const response = await appApi.get(`/post/user?limit=${limit}`, {
-  //     headers: {
 
-  //       "authorization": localStorage.getItem("accessToken"),
-  //       "refresh-token" : localStorage.getItem("refreshToken")
 
-  //     }
-  //   });
-  //   return response.data;
+    
 
-  // }
-  // else{
+      }
+    } );
+    return response.data;
 
-  // }
-};
+  }
+    
+  };
 
-export const getByUserName = async (username: string) => {
-  // console.log(username)
-  const response = await appApi.get(`/user/getUserProfile/${username}`, {
-    headers: {
-      authorization: localStorage.getItem("accessToken"),
-      "refresh-token": localStorage.getItem("refreshToken"),
-    },
-  });
-  return response.data;
-};
+  export const getHomePosts = async (limit:number, nextOffset:string, first: boolean ) => {
+    if(first) {
+      const response =  await appApi.get(`/post/home?limit=${limit}`, {
+        headers: {
+          
+          "authorization": localStorage.getItem("accessToken"),
+          "refresh-token" : localStorage.getItem("refreshToken")
+  
+  
+  
+      
+  
+        }
+      });
+      return response.data;
+      
+  
+    }
+    else{
+      const response = await appApi.get(`/post/home?limit=${limit}&startTime=${nextOffset}`, {
+        headers: {
+          
+          "authorization": localStorage.getItem("accessToken"),
+          "refresh-token" : localStorage.getItem("refreshToken")
+  
+  
+  
+      
+  
+        }
+      } );
+      return response.data;
+  
+    }
+      
+    };
 
-export const getInfoUser = async () => {
-  const response = await appApi.get("/user/getUser", {
-    headers: {
-      authorization: localStorage.getItem("accessToken"),
-      "refresh-token": localStorage.getItem("refreshToken"),
-    },
-  });
-  return response.data;
-};
+
+    export const getPost = async (id: number ) => {
+    
+      const response = await appApi.get(`/post/${id}`,{
+        headers: {
+          
+          "authorization": localStorage.getItem("accessToken"),
+          "refresh-token" : localStorage.getItem("refreshToken")
+  
+  
+      
+  
+        }
+      });
+      // console.log(response.data)
+      return response.data;
+      
+  
+    
+
+      
+    };
+
+
+    export const getComments = async (postId:number,limit:number, nextOffset:string, first: boolean ) => {
+      if(first) {
+        const response =  await appApi.get(`/post/${postId}/comments?limit=${limit}`, {
+          headers: {
+            
+            "authorization": localStorage.getItem("accessToken"),
+            "refresh-token" : localStorage.getItem("refreshToken")
+    
+    
+    
+        
+    
+          }
+        });
+        return response.data;
+        
+    
+      }
+      else{
+        const response = await appApi.get(`/post/${postId}/comments?limit=${limit}&startTime=${nextOffset}`, {
+          headers: {
+            
+            "authorization": localStorage.getItem("accessToken"),
+            "refresh-token" : localStorage.getItem("refreshToken")
+    
+    
+    
+        
+    
+          }
+        } );
+        return response.data;
+    
+      }
+        
+      };
+
+      

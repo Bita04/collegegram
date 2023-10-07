@@ -6,10 +6,9 @@ export const editProfile = extendTheme({
 //   borderwidth:'2px',
   colors: {
       gray: {
-        50:'#000',
-        100: '#000',
-        500: '#000',
-        900: '#000',
+        50:'black',
+        100: 'black',
+        900: 'black',
       },
   },
 })

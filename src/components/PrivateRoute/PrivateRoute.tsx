@@ -14,6 +14,7 @@ export const PrivateRoute =  ({  children } : {
     const [isLoading, setIsLoading] = React.useState(true);
     useEffect(()=>{
         // if(localStorage.getItem("accessToken")) {}
+      
         console.log("in effect");
         
         setIsLoading(true);
@@ -32,6 +33,7 @@ export const PrivateRoute =  ({  children } : {
             setIsLoading(false);
         }).catch((err) => {
             setIsLoading(false);
+            // setIsAuthenticated(false)
             
         });
         

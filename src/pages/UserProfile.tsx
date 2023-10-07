@@ -16,7 +16,6 @@ import ButtonText from "../components/ui/button/Button.tsx";
 import logo from "/assets/images/logo.png";
 import { LNavbar } from "../components/LNavbar/LNavbar.tsx";
 import { NewPost } from "../components/NewPost/NewPost.tsx";
-import axios from "axios";
 import { PostContainer } from "../components/PostContainer/PostContainer.tsx";
 import { useQuery } from "react-query";
 import { getInfoUser } from "../api/appApi.ts";

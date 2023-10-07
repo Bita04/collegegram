@@ -23,12 +23,13 @@ import { Switch } from "@chakra-ui/react";
 import ButtonText from "../ui/button/Button";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import axios from "axios";
-import { set } from "lodash";
+import { useMutation, useQueryClient } from 'react-query'
 
 export const NewPost = (props: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [images, setImages] = useState<string[]>([]);
   const [fileImages, setFileImages] = useState<File[]>([]);
+  const queryClient = useQueryClient()
 
   const submitForm = (fd: {
     "post-photos": FileList,
@@ -49,7 +50,7 @@ export const NewPost = (props: Props) => {
     // console.log(formData);
 
     axios
-      .post("https://collegegram-greedy-test.darkube.app/post", formData, {
+      .post("https://collegegramgreedy.darkube.app/post", formData, {
         headers: {
           "content-type": "multipart/form-data",
           authorization: localStorage.getItem("accessToken"),
@@ -57,7 +58,9 @@ export const NewPost = (props: Props) => {
         },
       })
       .then((res) => {
-        console.log(res);
+        // queryClient.fetchInfiniteQuery('posts')
+        queryClient.refetchQueries('posts')
+        onClose()
       });
   };
   const {
@@ -141,7 +144,7 @@ export const NewPost = (props: Props) => {
                   بارگذاری عکس ها
                 </Text>
                 <Controller
-                  name="post-photos" //
+                  name="post-photos" 
                   control={control}
                   render={({ field }) => (
                     <input

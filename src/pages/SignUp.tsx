@@ -61,6 +61,8 @@ function SignUp() {
     {
       onSuccess: (data) => 
       {
+        localStorage.setItem("accessToken", data.accessToken)
+        localStorage.setItem("refresh-token", data['refresh-token']) 
         console.log(data);
       // localStorage.setItem("accessToken", data.accessToken)
       // console.log(localStorage.getItem("accessToken"))
