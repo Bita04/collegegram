@@ -1,21 +1,15 @@
 import axios from "axios";
 
-
-const BASE_URL = 'https://collegegramgreedy.darkube.app';
+const BASE_URL = "https://collegegramgreedy.darkube.app";
 
 export const appApi = axios.create({
   baseURL: BASE_URL,
-
-
 });
 // axios.get("https://collegegram-greedy-test.darkube.app/post", formData, {
 //   headers: {
 //     'content-type': 'multipart/form-data',
 //     "authorization": localStorage.getItem("accessToken"),
 //     "refresh-token" : localStorage.getItem("refreshToken")
-
-
-
 
 //   }
 // }).then((res) => {

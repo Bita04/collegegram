@@ -14,8 +14,8 @@ import { Layout } from "../components/Layout/Layout";
 import { useForm, SubmitHandler, UseFormRegister } from "react-hook-form";
 import { object, string, number, date, InferType } from "yup";
 import useYupValidationResolver from "../hooks/useYupValidationResolver";
-import * as Yup from "yup";
-import axios from "axios";
+// import * as Yup from "yup";
+// import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 // import { useHistory } from "react-router-dom";
