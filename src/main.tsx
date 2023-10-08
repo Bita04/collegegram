@@ -38,7 +38,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/explore",
-    element: <Explore/>
+    element: <Explore />,
   },
   {
     path: "/error",
@@ -66,6 +66,11 @@ const router = createBrowserRouter([
     path: "/home",
 
     element: <Home />,
+  },
+  {
+    path: "/explore",
+
+    element: <Explore/>,
   },
 ]);
 

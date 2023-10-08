@@ -8,7 +8,7 @@ type Props = {
 export const Explore = (props: Props) => {
     return (
         <UserProfile hasLNavbar={false}>
-            <ExploreContainer/>
+            <ExploreContainer firstName={'بیتا'} lastName={'بهادری'} followers={50}/>
             
             
         </UserProfile>
