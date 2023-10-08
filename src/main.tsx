@@ -71,6 +71,7 @@ const router = createBrowserRouter([
     ),
   },
   {
+
     path: "/friend/:username",
 
     element: <PrivateRoute children={<FriendsProfile />} />,
