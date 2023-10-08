@@ -14,7 +14,7 @@ interface Props {
 function Save({isSave, onSave, className, id}: Props) {
   const {
     mutate: savePost,
-  } = useMutation(() =>addBookmark(id), {
+  } = useMutation((id:number) =>addBookmark(id), {
     onSuccess: (data) => {
       console.log(data);
       // localStorage.setItem("accessToken", data.accessToken)
@@ -25,7 +25,7 @@ function Save({isSave, onSave, className, id}: Props) {
     }}
   )
   return (
-    <ButtonText type='button' onClick={onSave} className={`flex items-center content-center ${className}`}>
+    <ButtonText type='button' onClick={() => savePost(id)} className={`flex items-center content-center ${className}`}>
     <Image src={save} w={'24px'}  /> <span className='mr-2 color-primary'>{isSave}</span>
     </ButtonText>
   )

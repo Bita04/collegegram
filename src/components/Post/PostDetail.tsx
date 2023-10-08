@@ -118,7 +118,7 @@ function PostDetail({ likes, saves, tags, id, description }: Props) {
     <>
       <Flex flexDirection={"column"} className="mr-[39px]">
         <Stack spacing={2} direction={"row"} className="items-start">
-          <Like count={likes} onLike={() => console.log("clicked")} />
+          <Like id={id} count={likes} onLike={() => console.log("clicked")} />
           <Save
           id={id}
             className="mr-[16px]"

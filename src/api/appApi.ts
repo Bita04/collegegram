@@ -238,7 +238,19 @@ export const getPosts = async (limit:number, nextOffset:string, first: boolean )
 
       export const addBookmark = async (id:number) => {
         const response = await appApi.post("/post/bookmark",{
-          postId: id
+          id: id
+        } ,{
+          headers: {
+            authorization: localStorage.getItem("accessToken"),
+            "refresh-token": localStorage.getItem("refreshToken"),
+          },
+        });
+        return response.data;
+      };
+
+      export const addLike = async (id:number) => {
+        const response = await appApi.post("/post/like",{
+          id: id
         } ,{
           headers: {
             authorization: localStorage.getItem("accessToken"),

@@ -24,7 +24,7 @@ function index() {
   const [commentData, setCommentData] = useState([])
 
 
-  console.log(data)
+  // console.log(data)
   return (
     <Flex  flexDir={'row'}>
        
