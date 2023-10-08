@@ -99,7 +99,6 @@ export const UserProfile = (props: Props) => {
             
             </Flex>
           </Flex>
-        </Flex>
       </Flex>
     </Layout>
   );

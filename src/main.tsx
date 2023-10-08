@@ -71,15 +71,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-<<<<<<< HEAD
     element: <Home/>
-=======
-    element: <Home />,
-  },
-  {
-    path: "/blocked",
-    element: <PrivateRoute children={<Block />} />,
->>>>>>> 9c87fe8 (fixed error)
   },
   {
     path: "/private",
