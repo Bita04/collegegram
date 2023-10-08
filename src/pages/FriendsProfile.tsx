@@ -29,10 +29,15 @@ export const FriendsProfile = (props: Props) => {
   const { username } = useParams();
   const [userData, setUserData] = React.useState<User>();
   const [hasMore, setHasMore] = React.useState(false);
+  const [followState, setFollowState] = React.useState('')
   const [first, setFirst] = React.useState(true);
   // console.log(username);
   const query = useQuery("anotherUser", async () => await getByUserName(username!), {
     onSuccess: (data) => {
+      if(data.isFollowed === "pending") {
+        setFollowState("pending")
+
+      }
       console.log(data);
       setUserData(data);
     },
@@ -78,7 +83,7 @@ export const FriendsProfile = (props: Props) => {
   } = useMutation((username:string) =>followAction(username), {
     onSuccess: (data) => {
       console.log(data);
-      // queryClient.refetchQueries('post')
+      queryClient.invalidateQueries('anotherUser')
 
       // localStorage.setItem("accessToken", data.accessToken)
       // localStorage.setItem("refresh-token", data['refresh-token']) 
@@ -184,7 +189,9 @@ data?.pages?.map((page, index) => (
           className="w-[91px] px-[10px]   text-[#FFF] text-[14px] font-medium bg-[#C38F00] rounded-[100px] h-[33px]"
           type="button"
         >
-          دنبال کردن
+         {
+          followState=== 'pending' ? 'انتظار' : (followState=== 'accepted' ? 'شما دنبال کرده اید' : ('دنبال کردن'))
+         }
         </ButtonText>
         <Flex className="flex-col items-center justify-center gap-3">
           <Pin />

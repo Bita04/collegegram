@@ -9,6 +9,7 @@ import { getHomePosts } from '../../api/appApi';
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import { useInfiniteQuery } from 'react-query';
+import Save from '../ui/save/Save';
 type Props = {
     postData : []
     
@@ -139,7 +140,14 @@ data?.pages?.map((page, index) => (
 
         </Flex>
         <Flex className='gap-[8px] items-center text-[#C38F00]'>
-           <i><Bookmark/></i>
+           <i>
+           <Save
+          id={post.id}
+            className="mr-[16px]"
+            isSave={false}
+            onSave={() => console.log("saved")}
+          />
+           </i>
            <span className='text-[14px] font-medium'>{post.bookmarkCount}</span>
 
         </Flex>
@@ -179,7 +187,14 @@ data?.pages?.map((page, index) => (
 
         </Flex>
         <Flex className='gap-[8px] items-center text-[#C38F00]'>
-           <i><Bookmark/></i>
+           <i>
+           <Save
+          id={post.id}
+            className="mr-[16px]"
+            isSave={false}
+            onSave={() => console.log("saved")}
+          />
+           </i>
            <span className='text-[14px] font-medium'>{post.bookmarkCount}</span>
 
         </Flex>
