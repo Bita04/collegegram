@@ -18,7 +18,7 @@ export const PostContainer = () => {
   const { status, data, error, isFetching, isLoading, fetchNextPage } =
     useInfiniteQuery(
       "posts",
-      ({ pageParam }) => getPosts(3, pageParam, first),
+      ({ pageParam }) => getPosts(3, pageParam),
       {
         keepPreviousData: true,
         refetchOnWindowFocus: false,

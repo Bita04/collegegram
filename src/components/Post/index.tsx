@@ -24,7 +24,7 @@ function index() {
   const [commentData, setCommentData] = useState([])
 
 
-  // console.log(comments?.pages[comments?.pages.length-1])
+  console.log(data)
   return (
     <Flex  flexDir={'row'}>
        
@@ -33,7 +33,7 @@ function index() {
           
         </Flex>
         
-<PostDetail description={data?.description} likes={0} saves={0} tags={data?.tags} id={+id!} />
+<PostDetail description={data?.description} likes={data?.likeCount} saves={true} tags={data?.tags} id={+id!} />
 
 
     </Flex>

@@ -27,7 +27,7 @@ type tags = {
 
 interface Props {
   likes: number;
-  saves: number;
+  saves: boolean;
   tags: tags[];
   id: number;
   description: string;
@@ -107,8 +107,9 @@ function PostDetail({ likes, saves, tags, id, description }: Props) {
     const res = addComment(id!, watch("comment")).then((res) =>
       {
         console.log ('%%%%%%%%%%%%%%%%%%%%%%%%%%')
-        queryClient.refetchQueries("comments")
         setFirst(true)
+        queryClient.refetchQueries("comments")
+        
       }
     );
   };
@@ -117,10 +118,11 @@ function PostDetail({ likes, saves, tags, id, description }: Props) {
     <>
       <Flex flexDirection={"column"} className="mr-[39px]">
         <Stack spacing={2} direction={"row"} className="items-start">
-          <Like count={60} onLike={() => console.log("clicked")} />
+          <Like count={likes} onLike={() => console.log("clicked")} />
           <Save
+          id={id}
             className="mr-[16px]"
-            isSave={true}
+            isSave={saves}
             onSave={() => console.log("saved")}
           />
         </Stack>

@@ -36,7 +36,7 @@ export const getPosts = async (limit:number, nextOffset:string, first: boolean )
 
   }
   else{
-    const response = await appApi.get(`/post/user?limit=${limit}&startTime=${nextOffset}`, {
+    const response = await appApi.get(`/post/user?limit=${limit}&startTime=${nextOffset ?? new Date}`, {
       headers: {
         
         "authorization": localStorage.getItem("accessToken"),
@@ -134,7 +134,7 @@ export const getPosts = async (limit:number, nextOffset:string, first: boolean )
     
       }
       else{
-        const response = await appApi.get(`/post/${postId}/comments?limit=${limit}&startTime=${nextOffset}`, {
+        const response = await appApi.get(`/post/${postId}/comments?limit=${limit}&startTime=${nextOffset ?? new Date}`, {
           headers: {
             
             "authorization": localStorage.getItem("accessToken"),
@@ -234,4 +234,16 @@ export const getPosts = async (limit:number, nextOffset:string, first: boolean )
       
   
         
+      };
+
+      export const addBookmark = async (id:number) => {
+        const response = await appApi.post("/post/bookmark",{
+          postId: id
+        } ,{
+          headers: {
+            authorization: localStorage.getItem("accessToken"),
+            "refresh-token": localStorage.getItem("refreshToken"),
+          },
+        });
+        return response.data;
       };
