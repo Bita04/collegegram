@@ -17,7 +17,7 @@ const [hasMore, setHasMore] = React.useState(false);
     const { status, data, error, isFetching, isLoading, fetchNextPage } =
     useInfiniteQuery(
       "bookmarks",
-      ({ pageParam }) => getBookmarks(3, pageParam, first),
+      ({ pageParam }) => getBookmarks(4, pageParam, first),
       {
         keepPreviousData: true,
         refetchOnWindowFocus: false,

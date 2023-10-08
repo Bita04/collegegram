@@ -12,7 +12,7 @@ function RightMenu({className} : Props) {
     <List className={className} spacing={3}>
   <ListItem>
     <Image display={'inline-block'} src={overview} />
-    <a className="color-primary mr-3 font-normal" href="#">خانه</a>
+    <a className="color-primary mr-3 font-normal" href="/home">خانه</a>
   </ListItem>
   <ListItem marginTop={'28px!important'}>
     <Image display={'inline-block'} src={people} />
