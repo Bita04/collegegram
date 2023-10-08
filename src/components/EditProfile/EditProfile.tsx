@@ -1,4 +1,3 @@
-
 import gmailSignUp from "/assets/images/gmailSignUp.png";
 import keySignUp from "/assets/images/KeySignUp.svg";
 
@@ -28,8 +27,8 @@ import load from "../../../public/assets/images/load.svg";
 import { Controller, useForm } from "react-hook-form";
 import { useEffect, useRef, useState } from "react";
 import person from "/assets/images/person.svg";
-import { getProfile ,setProfile } from "../../api/profile";
-
+import { getProfile, setProfile } from "../../api/profile";
+import { useQueryClient } from "react-query";
 
 type Props = {
   isOpen: boolean;
@@ -39,7 +38,7 @@ type Props = {
 //   return isOpen(false)
 // }
 export type FormValues = {
-  avatar:FileList,
+  avatar: FileList;
   firstName: string;
   lastName: string;
   email: string;
@@ -49,22 +48,21 @@ export type FormValues = {
   bio: string;
 };
 export const EditProfile = (props: Props) => {
-  const { register, handleSubmit, control} = useForm<FormValues>();
+  const queryClient = useQueryClient();
+  const { register, handleSubmit, control } = useForm<FormValues>();
   const [diplaySelectedAvatar, setDiplaySelectedAvatar] = useState<string>("");
-  const fileInputRef =useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     console.log("Form submitted", data);
-    setProfile(data);
-
+    await setProfile(data);
+    queryClient.invalidateQueries(["user"]);
   };
 
-
-
-const [value, setValue] = useState("");
-useEffect(() => {
-  getProfile().then((response) => setValue(response));
-}, []);
+  const [value, setValue] = useState("");
+  useEffect(() => {
+    getProfile().then((response) => setValue(response));
+  }, []);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files![0];
@@ -120,14 +118,14 @@ useEffect(() => {
                     control={control}
                     render={({ field }) => (
                       <input
-                      ref={fileInputRef}
+                        ref={fileInputRef}
                         type="file"
                         id="profileFileInput"
                         style={{ display: "none" }}
                         // value={field.value}
-                        
+
                         onChange={(e) => {
-                          console.log(field.value)
+                          console.log(field.value);
                           field.onChange(e.target.files![0]);
                           handleImageUpload(e);
                         }}
@@ -139,11 +137,13 @@ useEffect(() => {
                   عکس پروفایل
                 </Text>
 
-                <Text className="flex flex-row justify-center text-[#C19008] pb-6" onClick={()=>{
-                   setDiplaySelectedAvatar(person);
-                  if (fileInputRef.current) fileInputRef.current.value = ""; 
-                }}>
-                  
+                <Text
+                  className="flex flex-row justify-center text-[#C19008] pb-6"
+                  onClick={() => {
+                    setDiplaySelectedAvatar(person);
+                    if (fileInputRef.current) fileInputRef.current.value = "";
+                  }}
+                >
                   <img src={cras} className="pl-2" />
                   حذف تصویر{" "}
                 </Text>
