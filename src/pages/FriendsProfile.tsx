@@ -9,8 +9,8 @@ import { Favorite } from "../icons/Favorite";
 import { Comment } from "../icons/Comment";
 import { Block } from "../icons/Block";
 import { useParams } from "react-router-dom";
-import { useInfiniteQuery, useQuery } from "react-query";
-import { getByUserName, getByUserNamePosts } from "../api/appApi";
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "react-query";
+import { followAction, getByUserName, getByUserNamePosts } from "../api/appApi";
 import InfiniteScroll from "react-infinite-scroll-component";
 type Props = {};
 type User = {
@@ -71,6 +71,22 @@ export const FriendsProfile = (props: Props) => {
     }
   );
   console.log(data)
+  const queryClient = useQueryClient()
+
+  const {
+    mutate: followReq,
+  } = useMutation((username:string) =>followAction(username), {
+    onSuccess: (data) => {
+      console.log(data);
+      // queryClient.refetchQueries('post')
+
+      // localStorage.setItem("accessToken", data.accessToken)
+      // localStorage.setItem("refresh-token", data['refresh-token']) 
+      // console.log(localStorage.getItem("accessToken"))
+      // navigate("/profile");
+      
+    }}
+  )
 
   return (
     <UserProfile Lnavbar={false}>
@@ -84,7 +100,7 @@ className="flex-row max-w-5xl"
         0
     }
 >
-<Flex className="w-[100%] max-w-5xl flex-wrap gap-[24px]   bg-white">
+<Flex className="w-[100%] max-w-5xl flex-wrap gap-[24px]  ">
 {
 
           
@@ -164,6 +180,7 @@ data?.pages?.map((page, index) => (
         </Flex>
 
         <ButtonText
+        onClick={() => followReq(username!)}
           className="w-[91px] px-[10px]   text-[#FFF] text-[14px] font-medium bg-[#C38F00] rounded-[100px] h-[33px]"
           type="button"
         >

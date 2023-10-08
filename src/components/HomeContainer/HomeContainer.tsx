@@ -135,17 +135,17 @@ data?.pages?.map((page, index) => (
 
         <Flex className='gap-[8px] items-center text-[#C38F00]'>
            <i><Like/></i>
-           <span className='text-[14px] font-medium'>۱۳۸</span>
+           <span className='text-[14px] font-medium'>{post.likeCount}</span>
 
         </Flex>
         <Flex className='gap-[8px] items-center text-[#C38F00]'>
            <i><Bookmark/></i>
-           <span className='text-[14px] font-medium'>۱۳۸</span>
+           <span className='text-[14px] font-medium'>{post.bookmarkCount}</span>
 
         </Flex>
         <Flex className='gap-[8px] items-center text-[#C38F00]'>
            <i><Comment/></i>
-           <span className='text-[14px] font-medium'>۱۳۸</span>
+           <span className='text-[14px] font-medium'>{post.commentCount}</span>
 
         </Flex>
 
@@ -175,17 +175,17 @@ data?.pages?.map((page, index) => (
 
         <Flex className='gap-[8px] items-center text-[#C38F00]'>
            <i><Like/></i>
-           <span className='text-[14px] font-medium'>۱۳۸</span>
+           <span className='text-[14px] font-medium'>{post.likeCount }</span>
 
         </Flex>
         <Flex className='gap-[8px] items-center text-[#C38F00]'>
            <i><Bookmark/></i>
-           <span className='text-[14px] font-medium'>۱۳۸</span>
+           <span className='text-[14px] font-medium'>{post.bookmarkCount}</span>
 
         </Flex>
         <Flex className='gap-[8px] items-center text-[#C38F00]'>
            <i><Comment/></i>
-           <span className='text-[14px] font-medium'>۱۳۸</span>
+           <span className='text-[14px] font-medium'>{post.commentCount}</span>
 
         </Flex>
 

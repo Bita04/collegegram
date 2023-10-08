@@ -298,3 +298,15 @@ export const getPosts = async (limit:number, nextOffset:string, first: boolean )
         }
           
         };
+
+        export const followAction = async (userName: string) => {
+          const response = await appApi.post("/user/follow",{
+            userName: userName
+          } ,{
+            headers: {
+              authorization: localStorage.getItem("accessToken"),
+              "refresh-token": localStorage.getItem("refreshToken"),
+            },
+          });
+          return response.data;
+        };
