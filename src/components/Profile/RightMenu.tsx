@@ -16,7 +16,7 @@ function RightMenu({className} : Props) {
   </ListItem>
   <ListItem marginTop={'28px!important'}>
     <Image display={'inline-block'} src={people} />
-    <a className="color-primary mr-3 font-normal" href="#">کالج گرامی‌ها</a>
+    <a className="color-primary mr-3 font-normal" href="/explore">کالج گرامی‌ها</a>
   </ListItem>
   <ListItem marginTop={'28px!important'}>
     <Image display={'inline-block'} src={myCollegegram} />

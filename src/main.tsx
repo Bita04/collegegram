@@ -19,6 +19,7 @@ import { PostContainer } from "./components/PostContainer/PostContainer.tsx";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { HomeContainer } from "./components/HomeContainer/HomeContainer.tsx";
 import { Home } from "./pages/Home.tsx";
+import { Explore } from "./pages/Explore.tsx";
 import { Bookmark } from "./pages/Bookmark.tsx";
 const queryClient = new QueryClient()
 
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login/>,
+    element: <Login />,
   },
   {
     path: "/signup",
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <Home/>
+    element: <Home />,
   },
 
   {
@@ -59,28 +60,47 @@ const router = createBrowserRouter([
   {
     path: "/profile",
 
-    element: <PrivateRoute children={<UserProfile>
-      <PostContainer/>
-    </UserProfile>}  />,
+    element: (
+      <PrivateRoute
+        children={
+          <UserProfile>
+            <PostContainer />
+          </UserProfile>
+        }
+      />
+    ),
   },
   {
     path: "/friend/:username",
 
-    element: <PrivateRoute children={<FriendsProfile />}  />,
+    element: <PrivateRoute children={<FriendsProfile />} />,
   },
   {
     path: "/profile",
 
-    element: <PrivateRoute children={<UserProfile Lnavbar={true}>
-      <PostContainer/>
-    </UserProfile>} />,
+    element: (
+      <PrivateRoute
+        children={
+          <UserProfile Lnavbar={true}>
+            <PostContainer />
+          </UserProfile>
+        }
+      />
+    ),
   },
   {
     path: "/post/:id",
-    element: <UserProfile Lnavbar={false}>
-      <Post />
-    </UserProfile>,
+    element: (
+      <UserProfile Lnavbar={false}>
+        <Post />
+      </UserProfile>
+    ),
   },
+  {
+    path: "/explore",
+    element: <Explore />,
+  },
+
   {
     path: "/bookmarks",
     element: <UserProfile Lnavbar={false}>
