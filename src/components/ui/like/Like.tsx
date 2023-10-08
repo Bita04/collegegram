@@ -1,7 +1,7 @@
 import {Image, NumberInputFieldProps} from '@chakra-ui/react'
 import heart from "/assets/images/heart.svg";
 import ButtonText from '../button/Button';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { addBookmark, addLike } from '../../../api/appApi';
 
 interface Props {
@@ -13,11 +13,16 @@ interface Props {
 
 function Like({count, onLike, className, id}: Props) {
 
+  const queryClient = useQueryClient()
+
+
   const {
     mutate: likoPost,
   } = useMutation((id:number) =>addLike(id), {
     onSuccess: (data) => {
       console.log(data);
+      queryClient.refetchQueries('post')
+
       // localStorage.setItem("accessToken", data.accessToken)
       // localStorage.setItem("refresh-token", data['refresh-token']) 
       // console.log(localStorage.getItem("accessToken"))

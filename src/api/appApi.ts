@@ -259,3 +259,42 @@ export const getPosts = async (limit:number, nextOffset:string, first: boolean )
         });
         return response.data;
       };
+
+
+      export const getBookmarks = async (limit:number, nextOffset:string, first: boolean ) => {
+        console.log("bookmarks")
+        if(first) {
+          const response =  await appApi.get(`/post/bookmarks?limit=${limit}`, {
+            headers: {
+              
+              "authorization": localStorage.getItem("accessToken"),
+              "refresh-token" : localStorage.getItem("refreshToken")
+      
+      
+      
+          
+      
+            }
+          });
+          return response.data;
+          
+      
+        }
+        else{
+          const response = await appApi.get(`/post/bookmarks?limit=${limit}&startTime=${nextOffset ?? new Date}`, {
+            headers: {
+              
+              "authorization": localStorage.getItem("accessToken"),
+              "refresh-token" : localStorage.getItem("refreshToken")
+      
+      
+      
+          
+      
+            }
+          } );
+          return response.data;
+      
+        }
+          
+        };
